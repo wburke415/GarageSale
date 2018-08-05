@@ -30,6 +30,15 @@ class User < ApplicationRecord
     user
   end
 
+
+  def reset_session_token!
+    self.session_token = generate_unique_session_token
+    self.save
+    self.session_token
+  end
+
+  private
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
@@ -39,20 +48,15 @@ class User < ApplicationRecord
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 
-  # def generate_unique_session_token
-  #
-  # end
-
   def ensure_session_token
-    #after generate_unique_session_token is set up replace token generation in this method with it
-    self.session_token ||= SecureRandom.urlsafe_base64(16)
+    self.session_token ||= generate_unique_session_token
   end
 
-  def reset_session_token!
-    #after generate_unique_session_token is set up replace token generation in this method with it
-    self.session_token = SecureRandom.urlsafe_base64(16)
-    self.save
-    self.session_token
+  def generate_unique_session_token
+    loop do
+      token = SecureRandom.urlsafe_base64(16)
+      return token if User.where(session_token: token).length == 0
+    end
   end
 
 end
