@@ -1,5 +1,42 @@
 {
   "name": "GarageSale",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "lodash": "^4.17.10",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0"
+  },
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "version": "0.0.1",
+  "main": "webpack.config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "start": "webpack --watch --mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wburke415/GarageSale.git"
+  },
+  "keywords": [],
+  "author": "Whitman Burke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wburke415/GarageSale/issues"
+  },
+  "homepage": "https://github.com/wburke415/GarageSale#readme"
 }
