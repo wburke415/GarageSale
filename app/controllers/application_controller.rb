@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def login(user)
     @current_user = user
-    user.session_token = user.reset_session_token!
+    session[:session_token] = user.reset_session_token!
   end
 
   def logout
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   def ensure_correct_current_user(user)
     unless current_user && current_user.id == user.id
       render json: ["Invalid credentials"], status: 401   #make sure to check this later on
-    end 
+    end
   end
-  
+
 end
