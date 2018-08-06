@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_correct_current_user(user)
-    unless current_user.id == user.id
+    unless current_user && current_user.id == user.id
       render json: ["Invalid credentials"], status: 401   #make sure to check this later on
     end 
   end
