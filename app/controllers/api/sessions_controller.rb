@@ -7,7 +7,7 @@ class Api::SessionsController < ApplicationController
         )
         if @user
             login(user)
-            #render users show page or the homepage
+            #render homepage
         else
             render json: ["Invalid username or password"], status: 401
         end 
@@ -17,7 +17,7 @@ class Api::SessionsController < ApplicationController
         @user = current_user
         if @user
             logout
-            # possibly render home page? - gotta render something here
+            # render homepage
         else
             render json: ["No users are signed in"], status: 404
         end 
