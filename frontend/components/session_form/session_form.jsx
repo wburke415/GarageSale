@@ -1,16 +1,10 @@
 import React from 'react';
 
-export default class SigninForm extends React.Component {
+export default class SessionForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      firstname: "",
-      lastname: "",
-      email: "",
-      business: false,
-      password: ""
-    };
+    this.state = props.userInfo;
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -32,38 +26,44 @@ export default class SigninForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.createUser(this.state); // use .then to push onto history
+    this.props.action(this.state).then(this.props.history.push("/")); // use .then to push onto history
   }
 
-  render() {
-    return (
-      <div>
-        <h1>Register</h1>
+  businessButtons() {
+    if(this.props.formType === "Register") {
+      return (
+        <span className="business-buttons">
 
-
-        <form className="signup-form" onSubmit={this.handleSubmit}>
-
-          <span className="business-buttons">
-
-            <label>
-              <input
-                id="personal-button"
-                type="radio"
-                value={false}
-                checked={this.state.business === false}
-                onChange={this.handleOptionChange()}/>
+          <label>
+            <input
+              id="personal-button"
+              type="radio"
+              value={false}
+              checked={this.state.business === false}
+              onChange={this.handleOptionChange()} />
             Personal Account</label>
 
-            <label>
-              <input
-                id="business-button"
-                type="radio"
-                value={true}
-                checked={this.state.business === true}
-                onChange={this.handleOptionChange()}/>
+          <label>
+            <input
+              id="business-button"
+              type="radio"
+              value={true}
+              checked={this.state.business === true}
+              onChange={this.handleOptionChange()} />
             Business Account</label>
-          </span>
 
+        </span>
+      );
+    }
+    else {
+      return null;
+    }
+  }
+
+  nameInputs() {
+    if(this.props.formType === "Register") {
+      return (
+        <div>
           <div className="name-labels">
             <label htmlFor="firstname">First name</label>
             <label htmlFor="lastname">Last name</label>
@@ -82,13 +82,48 @@ export default class SigninForm extends React.Component {
               value={this.state.lastname}
               onChange={this.handleInput('lastname')} />
           </div>
+        </div>
+      );
+    }
+    else {
+      return null;
+    }
+  }
 
+  emailOrUsernameInput() {
+    if(this.props.formType === "Register") {
+      return (
+        <div>
           <label htmlFor="email">Email address</label>
           <input
             id="email"
             type="text"
             value={this.state.email}
             onChange={this.handleInput('email')} />
+        </div>
+      );
+    }
+    else {
+      return (
+        <input
+          type="text"
+          placeholder="Email or username"
+          value={this.state.email}
+          onChange={this.handleInput('emailOrUsername')} />
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <form className="session-form" onSubmit={this.handleSubmit}>
+
+          {this.businessButtons()}
+
+          {this.nameInputs()}
+
+          {this.emailOrUsernameInput()}
 
           <label htmlFor="password">Password</label>
             <input
@@ -100,7 +135,7 @@ export default class SigninForm extends React.Component {
           <input
             id="submit"
             type="submit"
-            value="Register" />
+            value={this.props.formType} />
 
         </form>
       </div>
