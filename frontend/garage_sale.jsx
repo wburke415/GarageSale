@@ -10,7 +10,21 @@ import { login, logout, createUser } from './actions/session_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
-  const store = configureStore();
+  let store;
+
+  if (window.currentUser) {
+    const preloadedState = {
+      entities: { 
+        users: { [window.currentUser.id]: window.currentUser }
+      },
+      session: { id: window.currentUser.id }
+    };
+    store = configureStore(preloadedState);
+    delete window.currentUser;
+  }
+  else {
+    store = configureStore();
+  }
 
   // Functions put on the window for testing purposes only -----------
   window.getState = store.getState;
