@@ -1,0 +1,39 @@
+.signup-form {
+
+  // display: flex;
+  // flex-direction: column;
+  width: 396px;
+  border: 1px solid lightgrey;
+  align-items: center;
+  margin: 0 auto;
+
+  .business-buttons {
+    display: flex;
+    justify-content: space-between;
+
+    label {
+      margin: 10px;
+    }
+  }
+
+  #firstname {
+    width: 167px;
+    height: 38px;
+    margin-right: 8px;
+  }
+  #lastname {
+    width: 174px;
+    height: 38px;
+    margin-left: 8px;
+  }
+  #email, #password {
+    width: 362px;
+    height: 38px;
+  }
+
+  #submit {
+
+  }
+
+
+}

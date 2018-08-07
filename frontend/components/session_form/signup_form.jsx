@@ -37,57 +37,68 @@ export default class SigninForm extends React.Component {
 
   render() {
     return (
-      <div className="signup-form">
+      <div>
         <h1>Register</h1>
 
-        <span className="business-buttons">
-          <label>Personal Account
-            <input
-              type="radio"
-              value={false}
-              checked={this.state.business === false}
-              onChange={this.handleOptionChange()}/>
-          </label>
 
-          <label>Business Account
-            <input
-              type="radio"
-              value={true}
-              checked={this.state.business === true}
-              onChange={this.handleOptionChange()}/>
-          </label>
-        </span>
+        <form className="signup-form" onSubmit={this.handleSubmit}>
 
-        <form onSubmit={this.handleSubmit}>
-          <label>First name
+          <span className="business-buttons">
+
+            <label>
+              <input
+                id="personal-button"
+                type="radio"
+                value={false}
+                checked={this.state.business === false}
+                onChange={this.handleOptionChange()}/>
+            Personal Account</label>
+
+            <label>
+              <input
+                id="business-button"
+                type="radio"
+                value={true}
+                checked={this.state.business === true}
+                onChange={this.handleOptionChange()}/>
+            Business Account</label>
+          </span>
+
+          <div className="name-labels">
+            <label htmlFor="firstname">First name</label>
+            <label htmlFor="lastname">Last name</label>
+          </div>
+
+          <div className="name-inputs">
             <input
+              id="firstname"
               type="text"
               value={this.state.firstname}
               onChange={this.handleInput('firstname')} />
-          </label>
 
-          <label>Last name
             <input
+              id="lastname"
               type="text"
               value={this.state.lastname}
               onChange={this.handleInput('lastname')} />
-          </label>
+          </div>
 
-          <label>Email address
-            <input
-              type="text"
-              value={this.state.email}
-              onChange={this.handleInput('email')} />
-          </label>
+          <label htmlFor="email">Email address</label>
+          <input
+            id="email"
+            type="text"
+            value={this.state.email}
+            onChange={this.handleInput('email')} />
 
-          <label>Password
+          <label htmlFor="password">Password</label>
             <input
+              id="password"
               type="password"
               value={this.state.password}
               onChange={this.handleInput('password')} />
-          </label>
 
           <input
+            id="submit"
             type="submit"
             value="Register" />
 

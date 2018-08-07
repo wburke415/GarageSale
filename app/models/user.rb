@@ -20,12 +20,12 @@ class User < ApplicationRecord
   validates :business, inclusion: { in: [true, false] }
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  after_initialize :ensure_session_token
+  after_initialize :ensure_session_token, :ensure_username
 
   attr_reader :password
 
-  def self.find_by_credentials(email, password)
-    user = User.find_by(email: email)
+  def self.find_by_credentials(emailOrUsername, password)
+    user = (User.find_by(email: emailOrUsername) || User.find_by(username: emailOrUsername))
     return nil unless user && user.valid_password?(password)
     user
   end
@@ -49,12 +49,26 @@ class User < ApplicationRecord
     self.session_token
   end
 
+  def ensure_username
+    self.username ||= generate_unique_username
+  end
+
   private
+
+  def generate_unique_username
+    prefix = self.firstname.slice(0,3).downcase + self.lastname.slice(0,3).downcase
+
+    loop do
+      suffix = rand(10 ** 4).to_s
+      username = prefix + suffix
+      return username if User.where(username: self.username).empty?
+    end
+  end
 
   def generate_unique_session_token
     loop do
       token = SecureRandom.urlsafe_base64(16)
-      return token if User.where(session_token: token).length == 0
+      return token if User.where(session_token: token).empty?
     end
   end
 
