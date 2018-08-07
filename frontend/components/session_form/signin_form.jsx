@@ -1,10 +1,13 @@
 import React from 'react';
 
-class SessionForm extends React.Component {
+export default class SigninForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = this.props.user;
+    this.state = {
+      emailOrUsername: "",
+      password: ""
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -15,20 +18,20 @@ class SessionForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.action(this.state); // use .then to push onto history
+    this.props.login(this.state); // use .then to push onto history
   }
 
   render() {
     return (
-      <div className="session-form">
-        <h1>Sign In</h1>
+      <div className="signin-form">
+        <h1>Sign in</h1>
 
-        <form className="signin-form" onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            placeholder="Email"
+            placeholder="Email or username"
             value={this.state.email}
-            onChange={this.handleInput('email')} />
+            onChange={this.handleInput('emailOrUsername')} />
 
           <input
             type="password"
@@ -38,12 +41,10 @@ class SessionForm extends React.Component {
 
           <input
             type="submit"
-            value="Sign In" />
+            value="Sign in" />
 
         </form>
       </div>
     );
   }
 }
-
-export default SessionForm;

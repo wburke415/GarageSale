@@ -9,11 +9,13 @@ import {
 } from 'react-router-dom';
 
 import SigninFormContainer from './session_form/signin_form_container';
+import SignupFormContainer from './session_form/signup_form_container';
 
 const App = () => (
   <div>
     <h1>Welcome to GarageSale</h1>
-    <SigninFormContainer />
+    <Route exact path="/login" component={SigninFormContainer} />
+    <Route exact path="/register" component={SignupFormContainer} />
   </div>
 );
 
