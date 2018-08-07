@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>GarageSale</title>
+
+    <% if logged_in? %>
+      <script type="text/javascript">
+        window.currentUser =<%= render("api/users/user.json.jbuilder", user: current_user).html_safe  %>
+      </script>
+    <% end %>
+
   </head>
   <body>
     <main id="root">React broke :(</main>
