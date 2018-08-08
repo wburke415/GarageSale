@@ -1,0 +1,17 @@
+.navbar {
+    list-style-type: none;
+    font-size: 12px;
+    font-family: "Helvetica neue", Helvetica, Arial, Sans-serif;
+    color: #333;
+    display: flex;
+    height: 30px;
+
+    a {
+        text-decoration: none;
+        color: #0654ba;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+}

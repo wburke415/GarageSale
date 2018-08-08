@@ -60,6 +60,8 @@
         #firstname, #lastname {
             width: 47.5%;
             height: 36px;
+            padding: 2px 11px;
+            font-size: 16px;
         }
     
         .name-labels {
@@ -74,6 +76,7 @@
         .name-inputs {
             display: flex;
             justify-content: space-between;
+            box-sizing: border-box;
         }
     
         .business-buttons {

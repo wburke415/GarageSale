@@ -11,11 +11,15 @@ import {
 import { AuthRoute } from '../utils/route_util';
 import SigninFormContainer from './session_form/signin_form_container';
 import SignupFormContainer from './session_form/signup_form_container';
+import NavBarContainer from './nav_bar/nav_bar_container';
 
 const App = () => (
   <div>
-    <AuthRoute exact path="/login" component={SigninFormContainer} />
-    <AuthRoute exact path="/register" component={SignupFormContainer} />
+    <Switch>
+      <AuthRoute exact path="/login" component={SigninFormContainer} />
+      <AuthRoute exact path="/register" component={SignupFormContainer} />
+      <Route path="/" component={NavBarContainer} />
+    </Switch>
   </div>
 );
 
