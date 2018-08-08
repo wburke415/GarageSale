@@ -9,6 +9,9 @@
         window.currentUser =<%= render("api/users/user.json.jbuilder", user: current_user).html_safe  %>
       </script>
     <% end %>
+    <script type="text/javascript">
+      window.logo = "<%= image_url('logo.png') %>"
+    </script>
 
   </head>
   <body>
