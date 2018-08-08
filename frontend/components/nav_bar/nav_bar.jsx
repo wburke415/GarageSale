@@ -27,11 +27,23 @@ export default class NavBar extends React.Component {
         }
     }
 
+//    this is a temporary sign out button. make sure to improve on it later
+    signOutButton() {
+        if(this.state) {
+            return (
+            <li>
+                <button onClick={this.props.logout}>Sign out</button> 
+            </li>
+            );
+        }
+    }
+
     render() {
         return (
 
             <ul className="navbar">
                 {this.greeting()}
+                {this.signOutButton()}
             </ul>
 
         );
