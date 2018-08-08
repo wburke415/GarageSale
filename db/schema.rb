@@ -10,10 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_064352) do
+ActiveRecord::Schema.define(version: 2018_08_08_162105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "products", force: :cascade do |t|
+    t.integer "seller_id", null: false
+    t.integer "category_id", null: false
+    t.integer "payment_policy_id", null: false
+    t.integer "shipping_policy_id", null: false
+    t.integer "return_policy_id", null: false
+    t.integer "location_id", null: false
+    t.string "title", null: false
+    t.string "subtitle"
+    t.string "sku"
+    t.integer "condition", null: false
+    t.string "condition_description"
+    t.boolean "auction", default: true, null: false
+    t.integer "duration", default: 7, null: false
+    t.float "starting_price", null: false
+    t.float "bin_price"
+    t.float "reserve_price"
+    t.integer "quantity", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["location_id"], name: "index_products_on_location_id"
+    t.index ["payment_policy_id"], name: "index_products_on_payment_policy_id"
+    t.index ["return_policy_id"], name: "index_products_on_return_policy_id"
+    t.index ["seller_id"], name: "index_products_on_seller_id"
+    t.index ["shipping_policy_id"], name: "index_products_on_shipping_policy_id"
+    t.index ["title"], name: "index_products_on_title"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "firstname", null: false

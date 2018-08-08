@@ -72,12 +72,14 @@ export default class SessionForm extends React.Component {
             <input
               id="firstname"
               type="text"
+              required
               value={this.state.firstname}
               onChange={this.handleInput('firstname')} />
 
             <input
               id="lastname"
               type="text"
+              required
               value={this.state.lastname}
               onChange={this.handleInput('lastname')} />
           </div>
@@ -94,6 +96,9 @@ export default class SessionForm extends React.Component {
           <input
             id="email"
             type="text"
+            required
+            // the below regex code is attributed to Sara Cope in her article at https://css-tricks.com/almanac/selectors/r/required/
+            pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
             value={this.state.email}
             onChange={this.handleInput('email')} />
         </div>
@@ -119,6 +124,8 @@ export default class SessionForm extends React.Component {
           <input
             id="password"
             type="password"
+            required
+            pattern="^[a-zA-Z]\w{5,14}$"
             value={this.state.password}
             onChange={this.handleInput('password')} />
         </div>
@@ -165,6 +172,20 @@ export default class SessionForm extends React.Component {
         </span>
       );
     }
+  }
+
+  validateForm() {
+    const userInfo = this.state;
+    if(this.props.formType === "Register") {
+      if(userInfo.firstname === "" && userInfo.lastname === "" && userInfo.email === "" && userInfo.password === "") {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
+    return false;
   }
 
   render() {

@@ -87,6 +87,24 @@
             padding: 2px 11px;
             font-size: 16px;
         }
+
+        input:required:focus {
+            border: 1px solid red;
+            outline: none;
+        }
+
+        #firstname:valid {
+            border: 1px solid #CCC;
+        }
+        #lastname:valid {
+            border: 1px solid #CCC;
+        }
+        #email:valid {
+            border: 1px solid #CCC;
+        }
+        #password:valid {
+            border: 1px solid #CCC;
+        }
         
         .name-labels {
             display: flex;
@@ -108,9 +126,6 @@
             
             input {
                 margin-right: 10px;
-                // height: 20px;
-                // width: 20px;
-                // box-sizing: border-box;
             }
             
             label:first-of-type {
