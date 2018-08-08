@@ -8,6 +8,7 @@ export default class SessionForm extends React.Component {
     this.state = props.userInfo;
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemoLogin = this.handleDemoLogin.bind(this);
   }
 
   handleInput(field) {
@@ -56,9 +57,6 @@ export default class SessionForm extends React.Component {
         </div>
       );
     }
-    else {
-      return null;
-    }
   }
 
   nameInputs() {
@@ -85,9 +83,6 @@ export default class SessionForm extends React.Component {
           </div>
         </div>
       );
-    }
-    else {
-      return null;
     }
   }
 
@@ -141,6 +136,22 @@ export default class SessionForm extends React.Component {
     }
   }
 
+  demoLogin() {
+    if (this.props.formType === "Sign in") {
+      return (
+        <button
+          id="demo-login"
+          onClick={this.handleDemoLogin}>Demo Login</button>
+      );
+    }
+  }
+
+  handleDemoLogin(event) {
+    event.preventDefault();
+    this.props.action({emailOrUsername: 'wburke415', password: 'password'})
+    .then(() => this.props.history.push("/"));
+  }
+
   errors() {
     const { errors } = this.props;
 
@@ -187,9 +198,11 @@ export default class SessionForm extends React.Component {
                 value={this.props.formType} />
 
             </form>
-          </div>
 
+          </div>
         </div>
+        
+          {this.demoLogin()}
       </div>
     );
   }
