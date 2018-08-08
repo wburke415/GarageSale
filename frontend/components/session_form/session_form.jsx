@@ -145,7 +145,7 @@ export default class SessionForm extends React.Component {
     return (
       <div className="session-form-wrapper">
         <Link to="/">
-          <img src="/assets/logo.png"/>
+          <img src={window.logo}/>
         </Link>
 
         <div className="session-form">
