@@ -5,6 +5,8 @@ export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = props.user;
+
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
     greeting() {
@@ -27,16 +29,24 @@ export default class NavBar extends React.Component {
         }
     }
 
-//    this is a temporary sign out button. make sure to improve on it later
+//    this is a temporary sign out button. make sure to improve on it later -----------------------------
+
+    handleLogout(e) {
+        e.preventDefault();
+        this.props.logout().then(() => this.props.history.push("/login"));
+    }
+
     signOutButton() {
         if(this.state) {
             return (
             <li>
-                <button onClick={this.props.logout}>Sign out</button> 
+                <button onClick={this.handleLogout}>Sign out</button> 
             </li>
             );
         }
     }
+
+//  ------------------------------------------------------------------------------------------------------
 
     render() {
         return (
