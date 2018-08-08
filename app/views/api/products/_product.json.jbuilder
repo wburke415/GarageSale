@@ -1,0 +1,2 @@
+json.extract! product, :id, :title, :subtitle, :sku, :condition, :condition_description, :auction, :duration, :starting_price, :bin_price, :reserve_price, :quantity
+# will need to add foreign keys of other tables in the future
