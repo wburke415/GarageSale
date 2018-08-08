@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_08_162105) do
+ActiveRecord::Schema.define(version: 2018_08_08_184510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_162105) do
     t.string "title", null: false
     t.string "subtitle"
     t.string "sku"
-    t.integer "condition", null: false
+    t.string "condition", null: false
     t.string "condition_description"
     t.boolean "auction", default: true, null: false
     t.integer "duration", default: 7, null: false

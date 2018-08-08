@@ -12,7 +12,7 @@
 #  title                 :string           not null
 #  subtitle              :string
 #  sku                   :string
-#  condition             :integer          not null
+#  condition             :string           not null
 #  condition_description :string
 #  auction               :boolean          default(TRUE), not null
 #  duration              :integer          default(7), not null
