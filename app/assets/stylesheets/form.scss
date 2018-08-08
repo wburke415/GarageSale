@@ -7,20 +7,27 @@
         padding: 30px 0 30px 0;
     }
 
-    #demo-login {
-        display: block;
+    .demo-login {
+        padding: 10px;
+        border: 1px solid #CCC;
+        width: 400px;
         margin: 0 auto;
-        margin-top: 20px;
-        width: 372px;
-        background: linear-gradient(#0079bc, #00509d);
-        color: #fff;
-        font-size: 16px;
-        border: 1px solid transparent;
-        padding: 8px 20px;
-        border-radius: 3px;
-        zoom: 1;
-        line-height: 19px;
-        font-weight: bold;
+        margin-top: 150px;
+        
+        button {
+            display: block;
+            margin: 0 auto;
+            width: 372px;
+            background: linear-gradient(#0079bc, #00509d);
+            color: #fff;
+            font-size: 16px;
+            border: 1px solid transparent;
+            padding: 8px 20px;
+            border-radius: 3px;
+            zoom: 1;
+            line-height: 19px;
+            font-weight: bold;
+        }
     }
 
     .session-form {

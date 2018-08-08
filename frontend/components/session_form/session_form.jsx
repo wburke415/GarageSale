@@ -139,9 +139,11 @@ export default class SessionForm extends React.Component {
   demoLogin() {
     if (this.props.formType === "Sign in") {
       return (
-        <button
-          id="demo-login"
-          onClick={this.handleDemoLogin}>Demo Login</button>
+        <div className="demo-login">
+          <button
+            id="demo-login-button"
+            onClick={this.handleDemoLogin}>Demo Login</button>
+        </div>
       );
     }
   }
