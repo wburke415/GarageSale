@@ -27,7 +27,7 @@ export default class SessionForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.action(this.state).then(this.props.history.push("/")); // use .then to push onto history
+    this.props.action(this.state).then(() => this.props.history.push("/"));
   }
 
   businessButtons() {
@@ -144,8 +144,9 @@ export default class SessionForm extends React.Component {
   render() {
     return (
       <div className="session-form-wrapper">
-
-        <img src="/assets/logo.png"/>
+        <Link to="/">
+          <img src="/assets/logo.png"/>
+        </Link>
 
         <div className="session-form">
 

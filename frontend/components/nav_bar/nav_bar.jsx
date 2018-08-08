@@ -11,7 +11,7 @@ export default class NavBar extends React.Component {
         if (this.state) {
             return (
                 <li className="greeting">
-                    Hi {this.state.firstname}!
+                    Hi <span className="greeting-firstname">{this.state.firstname}!</span>
                 </li>
             );
         }
