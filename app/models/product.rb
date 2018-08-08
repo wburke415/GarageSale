@@ -52,4 +52,8 @@ class Product < ApplicationRecord
     #     foreign_key: :location_id,
     #     class_name: :Location
 
+    has_many :product_images,
+        foreign_key: :product_id,
+        class_name: :ProductImage
+
 end

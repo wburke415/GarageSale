@@ -12,6 +12,7 @@ import { AuthRoute } from '../utils/route_util';
 import SigninFormContainer from './session_form/signin_form_container';
 import SignupFormContainer from './session_form/signup_form_container';
 import NavBarContainer from './nav_bar/nav_bar_container';
+import ProductShowContainer from './product/product_show_container';
 
 const App = () => (
   <div>
@@ -20,6 +21,7 @@ const App = () => (
       <AuthRoute exact path="/register" component={SignupFormContainer} />
       <Route path="/" component={NavBarContainer} />
     </Switch>
+      <Route path="/products/:id" component={ProductShowContainer} />
   </div>
 );
 
