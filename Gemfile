@@ -30,6 +30,7 @@ gem 'bcrypt', '~> 3.1.7'
 #self added gems
 gem 'sass', '~> 3.5.7'
 gem 'jquery-rails'
+gem 'rails_12factor'
 #-----------------------------------
 
 # Use ActiveStorage variant
