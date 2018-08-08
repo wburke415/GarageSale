@@ -22,11 +22,13 @@ export const receiveSessionErrors = errors => ({
 export const createUser = user => dispatch => (
   APIUtil.createUser(user)
     .then(currentUser => dispatch(receiveCurrentUser(currentUser)))
+    .fail(errors => dispatch(receiveSessionErrors(errors)))
 );
 
 export const login = user => dispatch => (
   APIUtil.login(user)
     .then(currentUser => dispatch(receiveCurrentUser(currentUser)))
+    .fail(errors => dispatch(receiveSessionErrors(errors)))
 );
 
 export const logout = () => dispatch => (

@@ -141,6 +141,19 @@ export default class SessionForm extends React.Component {
     }
   }
 
+  errors() {
+    const { errors } = this.props;
+
+    if (errors && errors.status === 401) {
+      return (
+        <span className="signin-error">
+          <i className="fas fa-exclamation-circle"></i>
+          <p>{this.props.errors.responseJSON[0]}</p>
+        </span>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="session-form-wrapper">
@@ -161,6 +174,8 @@ export default class SessionForm extends React.Component {
               {this.businessButtons()}
 
               {this.nameInputs()}
+
+              {this.errors()}
 
               {this.emailOrUsernameInput()}
 

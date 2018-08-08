@@ -11,7 +11,8 @@ const mapStateToProps = (state, ownProps) => ({
     business: false,
     password: "" 
   },
-  formType: "Register"
+  formType: "Register",
+  errors: state.errors.session
 });
 
 const mapDispatchToProps = dispatch => ({
