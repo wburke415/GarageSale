@@ -17,3 +17,5 @@ ProductImage.create(product_id: 1, image_url: "https://cdn02.nintendo-europe.com
 ProductImage.create(product_id: 1, image_url: "https://vignette.wikia.nocookie.net/deathbattlefanon/images/0/01/BanjoKazooieTooie7.png/revision/latest?cb=20160508182152")
 ProductImage.create(product_id: 1, image_url: "https://vignette.wikia.nocookie.net/allstar-royale/images/1/1d/Banjo-Kazooie.png/revision/latest?cb=20160101110450")
 ProductImage.create(product_id: 1, image_url: "https://static.giantbomb.com/uploads/square_small/2/25329/1784022-gnawty.png")
+Bid.create(product_id: 1, buyer_id: 2, bid: 9.99)
+Bid.create(product_id: 1, buyer_id: 2, bid: 10.00)
