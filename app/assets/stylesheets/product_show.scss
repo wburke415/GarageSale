@@ -35,6 +35,7 @@
         padding-top: 15px;
         border-top: 1px dotted #CCC;
         margin: 10px;
+        font-family: "Helvetica neue", Helvetica, Verdana, Sans-serif;
 
         i {
             color: lightgreen;
@@ -48,6 +49,17 @@
         button {
             width: 92px;
             height: 32px;
+            font-weight: 700;
+            background: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#f8f8f8));
+            border: 1px solid #ddd;
+            color: #0654ba;
+            font-size: 14px;
+            padding: 7px 17px 7px 17px;
+            vertical-align: baseline;
+            text-align: center;
+            cursor: pointer;
+            display: inline-block;
+            white-space: nowrap;
         }
     }
 }

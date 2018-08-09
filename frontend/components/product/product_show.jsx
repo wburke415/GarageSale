@@ -20,7 +20,6 @@ export default class ProductShow extends React.Component {
     }
 
     render() {
-        // debugger;
         if (!this.props.product) {return null;}
         return (
             <div>
