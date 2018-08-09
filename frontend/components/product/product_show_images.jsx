@@ -5,39 +5,26 @@ export default class ProductShowImages extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentMain: 0,
-            currentChildren: Object.keys(props.productImages).slice(1)
+            mainImage: props.productImages[0],
+            childImages: Object.values(props.productImages).slice(1)
         };
 
         this.switchMainImage = this.switchMainImage.bind(this);
-
     }
 
     switchMainImage(e) {
-        let tempMain = this.state.currentMain;
-        let newChildren = this.state.currentChildren;
-        newChildren[e.target.id] = tempMain;
+        let newChildren = this.state.childImages;
+        newChildren[parseInt(e.target.id)] = this.state.mainImage;
 
-        this.setState({currentMain: e.target.id});
-        this.setState({currentChildren: newChildren});
+        this.setState({mainImage: e.target.id});
+        this.setState({childImages: newChildren});
     }
 
 
     render() {
-        const {productImages} = this.props;
-        const {currentMain} = this.state;
-        const mainImage = <img className="main-image" src={productImages[currentMain].imageUrl} />;
-        let childImages = [];
-        
-        for (let i = 0; i < productImages.length; i++) {
-            if (i === currentMain) continue;
-            childImages.push(
-            <li key={i}>
-                    <img id={i} onClick={this.switchMainImage} className="child-image" src={productImages[i].imageUrl} />
-            </li>
-            );
-        }
-        
+        const mainImage = <img className="main-image" src={this.state.mainImage.imageUrl} />;
+        const childImages = this.state.childImages.map((childImage, idx) => <li><img key={idx} className="child-image" src={childImage.imageUrl} /></li>);
+
         return (
             <div className="product-images-wrapper">
                 {mainImage}
