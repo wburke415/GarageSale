@@ -78,9 +78,18 @@
                 input {
                     margin-left: 123px;
                     margin-top: 10px;
-                    margin-bottom: 10px;
+                    margin-bottom: 5px;
                     width: 107px;
                     height: 22px;
+                }
+
+                .highest-bid {
+                    align-self: center;
+                    margin-bottom: 10px;
+                    font-family: Verdana;
+                    font-size: 10px;
+                    padding-left: 87px;
+                    color: black;
                 }
             }
 
@@ -108,6 +117,33 @@
                 .auction-buttons {
                     display: flex;
                     flex-direction: column;
+
+                    .bid-count {
+                        display: flex;
+                        align-items: baseline;
+                        margin-bottom: 15px;
+                        font-size: 12px;
+                        text-align: left;
+
+                        p {
+                            width: 5px;
+                            padding: 0px;
+                            color: black;
+                        }
+
+                        a {
+                            width: 40px;
+                            display: inline;
+                            text-align: center;
+                            color: blue;
+                            text-decoration: none;
+                        }
+
+                        a:hover {
+                            text-decoration: underline;
+                        }
+                    }
+
                     div {
                         height: 10px;
                     }

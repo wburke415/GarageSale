@@ -56,4 +56,8 @@ class Product < ApplicationRecord
         foreign_key: :product_id,
         class_name: :ProductImage
 
+    has_many :bids,
+        foreign_key: :product_id,
+        class_name: :Bid
+
 end

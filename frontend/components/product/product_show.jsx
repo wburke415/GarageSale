@@ -35,6 +35,7 @@ export default class ProductShow extends React.Component {
                         <button className="price-button">Add to cart</button>
                         <div></div>
                         <button className="watch-list-button">Add to watch list</button>
+                        <div></div>
                     </div>
                 </div>
             );
@@ -46,17 +47,23 @@ export default class ProductShow extends React.Component {
     }
 
     auctionPrice() {
+        const highestBid = this.props.bids[this.props.product.bidIds.slice(-1)[0]].bid || this.props.product.startingPrice;
+        // debugger;
+
         if (this.props.product.auction) {
             return (
                 <div className="product-price auction-field">
                     <div className="auction-bid-container">
                         <div className="current-bid">
                             <p>Starting bid:</p>
-                            <span>US ${this.props.product.startingPrice}</span>
+                            <span>US ${highestBid}</span>
                         </div>
                         <input onChange={this.changeBid()} value={this.state.bid}/>
+                        <p className="highest-bid">Enter US ${highestBid} or more</p>
                     </div>
+
                     <div className="auction-buttons">
+                        <div className="bid-count"><p>[</p><a href="">{this.props.product.bidIds.length} bids</a><p>]</p></div>
                         <button className="price-button">Place bid</button>
                         <div></div>
                     </div>

@@ -6,7 +6,8 @@ export const RECEIVE_PRODUCTS = "RECEIVE_PRODUCTS";
 export const receiveProduct = payload => ({
     type: RECEIVE_PRODUCT,
     product: payload.product,
-    productImages: payload.productImages
+    productImages: payload.productImages,
+    bids: payload.bids
 });
 
 export const receiveProducts = products => ({

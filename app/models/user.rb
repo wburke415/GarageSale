@@ -24,6 +24,18 @@ class User < ApplicationRecord
 
   attr_reader :password
 
+  has_many :bids,
+    foreign_key: :buyer_id,
+    class_name: :Bid
+
+  has_many :listed_products,
+    foreign_key: :seller_id,
+    class_name: :Product
+
+  has_many :bidded_products,
+    through: :bids,
+    source: :product
+
   def self.find_by_credentials(emailOrUsername, password)
     user = (User.find_by(email: emailOrUsername) || User.find_by(username: emailOrUsername))
     return nil unless user && user.valid_password?(password)

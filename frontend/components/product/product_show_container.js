@@ -15,7 +15,10 @@ const mapStateToProps = (state, ownProps) => {
     if (product && state.entities.productImages) {
         productImages = product.productImageIds.map(id => state.entities.productImages[id]) || _nullProductImage;
     }
-    return { product, productImages };
+
+    let bids = state.entities.bids;
+
+    return { product, productImages, bids };
 };
 
 const mapDispatchToProps = dispatch => ({
