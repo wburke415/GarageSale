@@ -8,11 +8,18 @@ const mapStateToProps = (state, ownProps) => {
     const _nullSeller = null;
     let product;
     let seller;
+    let bids;
+    let shippingPolicy;
+    let location;
+
     if (state.entities.products) {
         product = state.entities.products[ownProps.match.params.id] || _nullProduct;
 
         if (product) {
             seller = state.entities.users[product.sellerId] || _nullSeller;
+            bids = state.entities.bids;
+            shippingPolicy = state.entities.shippingPolicies[product.shippingPolicyId];
+            location = state.entities.locations[shippingPolicy.locationId];
         }
     }
 
@@ -22,11 +29,9 @@ const mapStateToProps = (state, ownProps) => {
         productImages = product.productImageIds.map(id => state.entities.productImages[id]) || _nullProductImage;
     }
 
-    let bids = state.entities.bids;
-
     let currentUser = state.session.id;
 
-    return { product, seller, productImages, bids, currentUser };
+    return { product, seller, productImages, bids, currentUser, shippingPolicy, location };
 };
 
 const mapDispatchToProps = dispatch => ({

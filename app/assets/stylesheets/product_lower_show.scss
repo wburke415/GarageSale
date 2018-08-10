@@ -1,0 +1,42 @@
+.lower-show-page-container {
+    width: 98%;
+    margin: 0 auto;
+    margin-top: 50px;
+
+    .lower-show-tabs-container {
+        display: flex;
+        margin: 0 auto;
+        
+        .lower-show-tab {
+            padding: 8px 20px 8px 20px;
+            border: 1px solid #CCC;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+
+        .selected {
+            background-color: white;
+            border-bottom: none;
+        }
+
+        .lower-show-tab:not(.selected):hover {
+            cursor: pointer;
+        }
+        
+        .tab-spacer {
+            border-bottom: 1px solid #CCC;
+            flex-grow: 1;
+        }
+    }
+    
+    .lower-show-content {
+        background-color: white;
+        min-height: 200px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #CCC;
+        border-top: none;
+        border-bottom-left-radius: none;
+        border-bottom-right-radius: none;
+    }
+}

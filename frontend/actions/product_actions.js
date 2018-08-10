@@ -8,7 +8,9 @@ export const receiveProduct = payload => ({
     product: payload.product,
     productImages: payload.productImages,
     bids: payload.bids,
-    seller: payload.seller
+    seller: payload.seller,
+    shippingPolicy: payload.shippingPolicy,
+    location: payload.location
 });
 
 export const receiveProducts = products => ({

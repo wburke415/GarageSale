@@ -8,7 +8,6 @@
 #  payment_policy_id     :integer          not null
 #  shipping_policy_id    :integer          not null
 #  return_policy_id      :integer          not null
-#  location_id           :integer          not null
 #  title                 :string           not null
 #  subtitle              :string
 #  sku                   :string

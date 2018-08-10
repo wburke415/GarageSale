@@ -8,7 +8,6 @@
 #  payment_policy_id     :integer          not null
 #  shipping_policy_id    :integer          not null
 #  return_policy_id      :integer          not null
-#  location_id           :integer          not null
 #  title                 :string           not null
 #  subtitle              :string
 #  sku                   :string
@@ -32,6 +31,10 @@ class Product < ApplicationRecord
         foreign_key: :seller_id,
         class_name: :User
 
+    belongs_to :buyer,
+        foreign_key: :buyer_id,
+        class_name: :User
+
     # belongs_to :category,
     #     foreign_key: :category_id,
     #     class_name: :Category
@@ -40,17 +43,17 @@ class Product < ApplicationRecord
     #     foreign_key: :payment_policy_id,
     #     class_name: :PaymentPolicy
 
-    # belongs_to :shipping_policy,
-    #     foreign_key: :shipping_policy_id,
-    #     class_name: :ShippingPolicy
+    belongs_to :shipping_policy,
+        foreign_key: :shipping_policy_id,
+        class_name: :ShippingPolicy
 
     # belongs_to :return_policy,
     #     foreign_key: :return_policy_id,
     #     class_name: :ReturnPolicy
 
-    # belongs_to :location,
-    #     foreign_key: :location_id,
-    #     class_name: :Location
+    has_one :location,
+        through: :shipping_policy,
+        source: :location
 
     has_many :product_images,
         foreign_key: :product_id,

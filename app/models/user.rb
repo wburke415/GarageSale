@@ -32,6 +32,18 @@ class User < ApplicationRecord
     foreign_key: :seller_id,
     class_name: :Product
 
+  has_many :purchased_products,
+    foreign_key: :buyer_id,
+    class_name: :Product
+
+  has_many :shipping_policies,
+    foreign_key: :user_id,
+    class_name: :ShippingPolicy
+
+  has_many :locations,
+    foreign_key: :user_id,
+    class_name: :Location
+
   has_many :bidded_products,
     through: :bids,
     source: :product

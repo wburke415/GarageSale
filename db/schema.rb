@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_204912) do
+ActiveRecord::Schema.define(version: 2018_08_10_211339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 2018_08_09_204912) do
     t.integer "buyer_id", null: false
     t.index ["buyer_id"], name: "index_bids_on_buyer_id"
     t.index ["product_id"], name: "index_bids_on_product_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "country", default: "United States", null: false
+    t.string "state", default: "California", null: false
+    t.string "city", default: "San Francisco", null: false
+    t.string "address", default: "422 Not A Real Avenue", null: false
+    t.string "zip_code", default: "94111", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
   create_table "product_images", force: :cascade do |t|
@@ -39,7 +51,6 @@ ActiveRecord::Schema.define(version: 2018_08_09_204912) do
     t.integer "payment_policy_id", null: false
     t.integer "shipping_policy_id", null: false
     t.integer "return_policy_id", null: false
-    t.integer "location_id", null: false
     t.string "title", null: false
     t.string "subtitle"
     t.string "sku"
@@ -53,13 +64,28 @@ ActiveRecord::Schema.define(version: 2018_08_09_204912) do
     t.integer "quantity", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description", null: false
+    t.boolean "sold", default: false, null: false
+    t.integer "buyer_id"
+    t.index ["buyer_id"], name: "index_products_on_buyer_id"
     t.index ["category_id"], name: "index_products_on_category_id"
-    t.index ["location_id"], name: "index_products_on_location_id"
     t.index ["payment_policy_id"], name: "index_products_on_payment_policy_id"
     t.index ["return_policy_id"], name: "index_products_on_return_policy_id"
     t.index ["seller_id"], name: "index_products_on_seller_id"
     t.index ["shipping_policy_id"], name: "index_products_on_shipping_policy_id"
+    t.index ["sold"], name: "index_products_on_sold"
     t.index ["title"], name: "index_products_on_title"
+  end
+
+  create_table "shipping_policies", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "location_id", null: false
+    t.float "shipping_cost", default: 3.5, null: false
+    t.string "service", default: "Standard Shipping", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_shipping_policies_on_location_id"
+    t.index ["user_id"], name: "index_shipping_policies_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

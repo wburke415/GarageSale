@@ -8,9 +8,12 @@ export default class ProductShow extends React.Component {
         super(props);
 
         this.state = {
-            bid: ""
+            bid: "",
+            selectedTab: "Description"
         };
+
         this.submitBid = this.submitBid.bind(this);
+        this.switchTabs = this.switchTabs.bind(this);
     }
     
     componentDidMount() {
@@ -52,10 +55,14 @@ export default class ProductShow extends React.Component {
         event.preventDefault();
         const bid = { product_id: this.props.product.id, buyer_id: this.props.currentUser, bid: this.state.bid };
         this.props.createBid(bid);
+        this.setState({bid: ""});
     } 
     
     auctionPrice() {
-        const bid = this.props.bids[this.props.product.bidIds.slice(-1)[0]].bid || this.props.product.startingPrice;
+        let bid = this.props.product.startingPrice;
+        if (Object.keys(this.props.bids).length !== 0) {
+            bid = this.props.bids[this.props.product.bidIds.slice(-1)[0]].bid || this.props.product.startingPrice;
+        }
         const highestBid = bid.toFixed(2);
         
         if (this.props.product.auction) {
@@ -132,19 +139,75 @@ export default class ProductShow extends React.Component {
         for (let i = 0; i < keys.length; i++) {
             if (timeStrings[keys[i]] === "0") continue;
             if (timeLeft.length === 2) continue;
-            listItem = <li key={i}>{timeStrings[keys[i]]}{keys[i].slice(0,1)}</li>;
+            listItem = timeStrings[keys[i]] + keys[i].slice(0,1);
             timeLeft.push(listItem);
         }
 
         return (
             <ul className="product-show-time-string">
-                {timeLeft.map(li => li)}
+                <li className="product-show-time-left">Time left:</li>
+                <li>{timeLeft.join(" ")}</li>
             </ul>
         );
     }
 
-    endTime(endDate) {
+    endTime() {
+        let createdAt = new Date(this.props.product.createdAt);
+        let currentDate = new Date();
+        let endDate = new Date(createdAt.setDate(createdAt.getDate() + this.props.product.duration));
 
+        // Make sure to come back and finish this
+
+    }
+
+    policies() {
+        const {shippingPolicy, location} = this.props;
+        let currentDate = new Date();
+        let deliveryDate = new Date(currentDate.setDate(currentDate.getDate() + 5)).toUTCString();
+        let deliveryString = deliveryDate.slice(0, 3) + ". " + deliveryDate.slice(8, 11) + ". " + deliveryDate.slice(5, 7);
+
+        return (
+            <div className="product-show-policies">
+                <span className="product-show-shipping-policy">
+                    <div className="shipping-service">
+                        <p className="product-show-policy-label">Shipping:</p> 
+                        <span>${shippingPolicy.shippingCost.toFixed(2)}</span> 
+                        <div>{shippingPolicy.service} | <a href='/placeholder'>See details</a></div>
+                    </div>
+                    <div className="item-location">Item location: {location.city}, {location.state}, {location.country}</div>
+                    <div className="ships-to">Ships to: United States</div>
+                </span>
+
+                <div className="delivery-estimate">
+                    <p className="product-show-policy-label">Delivery:</p> 
+                    <span>Estimated on or before <p className="delivery-string">{deliveryString}</p></span> 
+                </div>
+
+                <div className="return-policy">
+                    <p className="product-show-policy-label">Returns:</p> 
+                    <span>Placeholder does not accept returns | <a href='/placeholder'>See details</a></span>
+                </div>
+            </div>
+        );
+    }
+
+    switchTabs(event) {
+        this.setState({selectedTab: event.target.textContent});
+    }
+
+    lowerPageTabs() {
+        let descriptionClass;
+        let shippingClass;
+
+        this.state.selectedTab === "Description" ? descriptionClass = "lower-show-tab selected" : descriptionClass = "lower-show-tab";
+        this.state.selectedTab !== "Description" ? shippingClass = "lower-show-tab selected" : shippingClass = "lower-show-tab";
+        return (
+            <div className="lower-show-tabs-container">
+                <div onClick={this.switchTabs} className={descriptionClass}>Description</div>
+                <div onClick={this.switchTabs} className={shippingClass}>Shipping and payments</div>
+                <div className="tab-spacer"></div>
+            </div>
+        );
     }
     
     render() {
@@ -153,30 +216,45 @@ export default class ProductShow extends React.Component {
 
         return (
             <div className="product-show-page">
-                <ProductShowImages productImages={this.props.productImages}/>
-                <div className="show-page-content">
-                    <h1 className="product-show-title">{this.props.product.title}</h1>
-                    <h2 className="product-show-subtitle">{this.props.product.subtitle}</h2>
-                    {/* <h1>{this.props.product.sku}</h1> */}
-                    <div className="product-condition"><p>Condition:</p> <span>{this.props.product.condition}</span></div>
-                    <div className="condition-description"><p>“</p><span>{this.props.product.conditionDescription}</span><p>”</p></div>
-                    
-                    <div className="time-left">
-                        <span>Time left:</span>
-                        {this.timeLeft(timeStrings)}
-                        {this.endTime()}
-                    </div>
 
-                    <div className="product-bid-container"> 
-                        {this.auctionPrice()}
-                        {/* <h1>{this.props.product.startingPrice}</h1> */}
-                        {this.binPrice()}
-                        <h1>{this.props.product.reservePrice}</h1>
-                    </div>
+                <div className="upper-show-page">
+                    <ProductShowImages productImages={this.props.productImages}/>
+                    <div className="show-page-content">
+                        <h1 className="product-show-title">{this.props.product.title}</h1>
+                        <h2 className="product-show-subtitle">{this.props.product.subtitle}</h2>
+                        <div className="product-condition"><p>Condition:</p> <span>{this.props.product.condition}</span></div>
+                        <div className="condition-description"><p>“</p><span>{this.props.product.conditionDescription}</span><p>”</p></div>
+                        
+                        <div className="time-left">
+                            {this.timeLeft(timeStrings)}
+                            {this.endTime()}
+                        </div>
 
-                    {/* <h1>{this.props.product.quantity}</h1> */}
-                </div>
+                        <div className="product-bid-container"> 
+                            {this.auctionPrice()}
+                            {/* <h1>{this.props.product.startingPrice}</h1> */}
+                            {this.binPrice()}
+                            <h1>{this.props.product.reservePrice}</h1>
+                        </div>
+
+                        {this.policies()}
+
+                        {/* <h1>{this.props.product.quantity}</h1> */}
+                    </div>
                     {this.sellerInfo()}
+                </div>
+
+                <div className="lower-show-page-container">
+
+                    {this.lowerPageTabs()}
+
+                    <div className="lower-show-content">
+                        <div className="lower-show-description">
+                            {this.props.product.description}
+                        </div>
+                    </div>
+
+                </div>
             </div>
         );
     }

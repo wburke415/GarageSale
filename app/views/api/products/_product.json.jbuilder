@@ -1,6 +1,6 @@
 
 json.product do
-    json.extract! product, :id, :seller_id, :title, :subtitle, :sku, :condition, :condition_description, :auction, :duration, :starting_price, :bin_price, :reserve_price, :quantity, :created_at
+    json.extract! product, :id, :seller_id, :buyer_id, :sold, :shipping_policy_id, :title, :subtitle, :sku, :condition, :condition_description, :auction, :duration, :starting_price, :bin_price, :reserve_price, :quantity, :description, :created_at
     product_image_ids = []
     product.product_images.each do |image|
         product_image_ids.push(image.id)
@@ -35,4 +35,12 @@ end
 
 json.seller do
     json.extract! product.seller, :id, :username
+end 
+
+json.shippingPolicy do
+    json.extract! product.shipping_policy, :id, :user_id, :location_id, :shipping_cost, :service
+end 
+
+json.location do
+    json.extract! product.location, :id, :user_id, :country, :state, :city, :address, :zip_code
 end 

@@ -1,4 +1,4 @@
-.product-show-page {
+.upper-show-page {
     background-color: rgb(245, 245, 245);
     font-family: "Helvetica neue", Helvetica, Verdana, Sans-serif;
     display: flex;
@@ -6,6 +6,98 @@
 
     .show-page-content {
         width: 930;
+
+        .product-show-policies {
+            margin-top: 30px;
+
+            .return-policy {
+                display: flex;
+                margin-top: 5px;
+                font-size: 13px;
+            }
+
+            .delivery-estimate {
+                display: flex;
+                font-size: 13px;
+                margin-top: 5px;
+                
+                span {
+                    padding: 5px 0 5px 0;
+                    border-top: 1px dashed #333;
+                    border-bottom: 1px dashed #333;
+                    width: 425px;
+                }
+
+                .delivery-string {
+                    font-weight: bold;
+                    display: inline;
+                }
+
+                .product-show-policy-label {
+                    padding-top: 5px;
+                }
+
+            }
+            .product-show-shipping-policy {
+                display: flex;
+                flex-direction: column;
+                font-size: 13px;
+                font-weight: normal;
+
+
+                .item-location {
+                    text-align: center;
+                    padding-right: 30px;
+                    margin-top: 5px;
+                    font-size: 11px;
+                    color: #555;
+                }
+
+                .ships-to {
+                    text-align: center;
+                    padding-right: 180px;
+                    margin-top: 5px;
+                    font-size: 11px;
+                    color: #555;
+                }
+
+                .shipping-service {
+                    display: flex;
+
+                    span {
+                        font-weight: bold;
+                        padding-right: 5px;
+                    }
+                }
+            }
+
+            .product-show-policy-label {
+                padding-right: 13px;
+                color: #666;
+                font-size: 13px;
+                width: 21%;
+                text-align: right;
+            }
+
+            a {
+                color: #555;
+                text-decoration: underline;
+                font-size: 11px;
+            }
+        }
+
+        .product-show-time-string {
+            display: flex;
+            font-size: 13px;
+            margin-left: 70px;
+            margin-top: 10px;
+            width: 30%;
+
+            .product-show-time-left {
+                padding-right: 13px;
+                color: #666;
+            }
+        }
         
         .product-show-title {
             display: block;

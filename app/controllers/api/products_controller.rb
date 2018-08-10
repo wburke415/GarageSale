@@ -1,7 +1,7 @@
 class Api::ProductsController < ApplicationController
 
     def show
-        @product = Product.includes(:product_images, :bids, :seller).find_by(id: params[:id])
+        @product = Product.includes(:product_images, :bids, :seller, :shipping_policy, :location).find_by(id: params[:id])
     end
 
     def index
