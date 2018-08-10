@@ -9,20 +9,21 @@ export default class ProductShow extends React.Component {
         this.state = {
             bid: ""
         };
-    }
 
+    }
+    
     componentDidMount() {
         if (!this.props.product) {
             this.props.fetchProduct(this.props.match.params.id);
         }
     }
-
+    
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.id !== nextProps.match.params.id) {
             this.props.fetchProduct(nextProps.match.params.id);
         }
     }
-
+    
     binPrice() {
         if (this.props.product.binPrice) {
             return (
@@ -41,15 +42,15 @@ export default class ProductShow extends React.Component {
             );
         }
     }
-
+    
     changeBid() {
         return e => this.setState({bid: e.target.value});
     }
-
+    
     auctionPrice() {
         const highestBid = this.props.bids[this.props.product.bidIds.slice(-1)[0]].bid || this.props.product.startingPrice;
         // debugger;
-
+        
         if (this.props.product.auction) {
             return (
                 <div className="product-price auction-field">
@@ -63,7 +64,7 @@ export default class ProductShow extends React.Component {
                     </div>
 
                     <div className="auction-buttons">
-                        <div className="bid-count"><p>[</p><a href="">{this.props.product.bidIds.length} bids</a><p>]</p></div>
+                        <div className="bid-count"><p>[</p><a href="/placeholder">{this.props.product.bidIds.length} bids</a><p>]</p></div>
                         <button className="price-button">Place bid</button>
                         <div></div>
                     </div>
@@ -71,11 +72,31 @@ export default class ProductShow extends React.Component {
             );
         }
     }
+    
+    sellerInfo() {
+        return (
+            <div className="seller-info-wrapper">
+                <div className="seller-info-box">
+                    <div>Seller information</div>
+                    <div className="username-container">
+                        <div className="product-show-seller-username">{this.props.seller.username}</div>
+                        <div className="product-show-seller-feedback"><span>(</span><a>placeholder</a><span>)</span></div>
+                    </div>
+                    <div className="product-show-feedback-percentage">100% placeholder feedback</div>
 
+                    <a href="/placeholder" className="save-this-seller">
+                        <i class="far fa-heart"></i>
+                        <div>Save this Seller</div>
+                    </a>
+                </div>
+            </div>
+        );
+    }
+    
     timeLeft() {
         const timeLeft = new Date() - new Date(this.props.product.createdAt);
     }
-
+    
     render() {
         if (!this.props.product) {return null;}
         return (
@@ -98,6 +119,7 @@ export default class ProductShow extends React.Component {
 
                     {/* <h1>{this.props.product.quantity}</h1> */}
                 </div>
+                    {this.sellerInfo()}
             </div>
         );
     }

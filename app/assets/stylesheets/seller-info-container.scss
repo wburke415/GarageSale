@@ -1,0 +1,77 @@
+.seller-info-wrapper {
+    position: relative;
+    border-top: 1px solid #CCC;
+    width: 100%;
+    top: 60px;
+
+    .seller-info-box {
+        width: 300px;
+        height: 147px;
+        background-color: white;
+        border-radius: 3px;
+        margin: 0 auto;
+        margin-top: 10px;
+        border: 1px solid #CCC;
+        padding: 9px 11px 11px 11px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+
+        .username-container {
+            display: flex;
+            align-items: center;
+
+            .product-show-seller-username {
+                color: #0654ba;
+                font-weight: bold;
+                white-space: normal;
+                font-size: 13px;
+                margin-top: 5px;
+                padding-right: 5px;
+            }
+
+            .product-show-seller-feedback {
+                font-size: 13px;
+                font-weight: normal;
+
+                a {
+                    padding: 0 2px 0 2px;
+                    color: blue;
+                    text-decoration: none;
+                }
+
+                a:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .product-show-feedback-percentage {
+            font-weight: normal;
+            font-size: 12px;
+            margin-top: 11px;
+            padding-bottom: 10px;
+            border-bottom: 2px dotted #999;
+        }
+
+        .save-this-seller {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            color: blue;
+            font-weight: normal;
+            margin-top: 10px;
+            text-decoration: none;
+
+            i {
+                font-size: 16px;
+                margin-right: 5px;
+            }
+
+            div:hover {
+                text-decoration: underline;
+            }
+        }
+
+    }
+}

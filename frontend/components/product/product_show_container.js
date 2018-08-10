@@ -5,9 +5,15 @@ import { fetchProduct } from '../../actions/product_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const _nullProduct = null;
+    const _nullSeller = null;
     let product;
+    let seller;
     if (state.entities.products) {
         product = state.entities.products[ownProps.match.params.id] || _nullProduct;
+
+        if (product) {
+            seller = state.entities.users[product.sellerId] || _nullSeller;
+        }
     }
 
     const _nullProductImage = null;
@@ -18,7 +24,7 @@ const mapStateToProps = (state, ownProps) => {
 
     let bids = state.entities.bids;
 
-    return { product, productImages, bids };
+    return { product, seller, productImages, bids };
 };
 
 const mapDispatchToProps = dispatch => ({
