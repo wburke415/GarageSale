@@ -35,3 +35,18 @@ export const deleteProduct = id => (
         url: `api/products/${id}`
     })
 );
+
+export const createBid = bid => (
+    $.ajax({
+        method: 'POST',
+        url: 'api/bids',
+        data: { bid }
+    })
+);
+
+export const deleteBid = id => (
+    $.ajax({
+        method: 'POST',
+        url: `api/bids/${id}`
+    })
+);

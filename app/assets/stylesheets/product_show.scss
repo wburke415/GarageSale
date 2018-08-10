@@ -17,6 +17,10 @@
         .product-show-subtitle {
             padding-bottom: 26px;
             border-bottom: 1px solid #CCC;
+            font-size: 13px;
+            padding-top: 5px;
+            font-weight: normal;
+            color: #555;
         }
 
         .product-condition {
@@ -90,6 +94,7 @@
                     font-size: 10px;
                     padding-left: 87px;
                     color: black;
+                    white-space: nowrap;
                 }
             }
 

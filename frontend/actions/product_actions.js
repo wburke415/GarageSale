@@ -25,3 +25,13 @@ export const fetchProducts = search => dispatch => (
     APIUtil.fetchProducts(search)
         .then(products => dispatch(receiveProducts(products)))
 );
+
+export const createBid = bid => dispatch => (
+    APIUtil.createBid(bid)
+        .then(product => dispatch(receiveProduct(product)))
+);
+
+export const deleteBid = id => dispatch => (
+    APIUtil.deleteBid(id)
+        .then(product => dispatch(receiveProduct(product)))
+);

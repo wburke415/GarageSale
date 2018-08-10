@@ -2,15 +2,15 @@
     position: relative;
     border-top: 1px solid #CCC;
     width: 100%;
-    top: 60px;
+    top: 62px;
 
     .seller-info-box {
         width: 300px;
-        height: 147px;
         background-color: white;
         border-radius: 3px;
         margin: 0 auto;
         margin-top: 10px;
+        margin-left: 20px;
         border: 1px solid #CCC;
         padding: 9px 11px 11px 11px;
         font-size: 16px;
@@ -72,6 +72,31 @@
                 text-decoration: underline;
             }
         }
+        
+        .contact-seller {
+            display: block;
+            font-size: 13px;
+            color: blue;
+            font-weight: normal;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+        
+        .contact-seller:hover {
+            text-decoration: underline;
+        }
 
+        .see-other-items {
+            display: block;
+            font-size: 13px;
+            color: blue;
+            font-weight: normal;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+        
+        .see-other-items:hover {
+            text-decoration: underline;
+        }
     }
 }
