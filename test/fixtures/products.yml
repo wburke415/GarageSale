@@ -21,6 +21,9 @@
 #  quantity              :integer          default(1), not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  description           :text             not null
+#  sold                  :boolean          default(FALSE), not null
+#  buyer_id              :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

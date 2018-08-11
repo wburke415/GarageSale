@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import ProductShow from './product_show';
-import { fetchProduct, createBid } from '../../actions/product_actions';
+import { fetchProduct, createBid, updateProduct } from '../../actions/product_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const _nullProduct = null;
@@ -36,6 +36,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
     fetchProduct: id => dispatch(fetchProduct(id)),
+    buyProduct: product => dispatch(updateProduct(product)),
     createBid: bid => dispatch(createBid(bid))
 });
 

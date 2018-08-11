@@ -9,11 +9,13 @@ export default class ProductShow extends React.Component {
 
         this.state = {
             bid: "",
-            selectedTab: "Description"
+            selectedTab: "Description",
+            errors: ""
         };
 
         this.submitBid = this.submitBid.bind(this);
         this.switchTabs = this.switchTabs.bind(this);
+        this.handlePurchase = this.handlePurchase.bind(this);
     }
     
     componentDidMount() {
@@ -27,15 +29,37 @@ export default class ProductShow extends React.Component {
             this.props.fetchProduct(nextProps.match.params.id);
         }
     }
+
+    handlePurchase(event) {
+        event.preventDefault();
+        if (!this.props.currentUser) {
+            this.props.history.push('/login');
+        } 
+        else if (this.props.currentUser === this.props.product.sellerId) {
+            this.setState({errors: "You can't purchase your own product."});
+        }
+        else {
+            let { product } = this.props;
+            product.sold = true;
+            product.buyerId = this.props.currentUser;
+    
+            this.props.buyProduct(product);
+        }
+    }
     
     binPrice() {
+        let error;
+
+        if (this.state.errors === "You can't purchase your own product.") error = <div className="bin-error">{this.state.errors}</div>;
+
         if (this.props.product.binPrice) {
             return (
                 <div className="product-price">
                     <p>Price:</p>
                     <span>US ${this.props.product.binPrice}</span>
                     <div className="auction-buttons">
-                        <button className="price-button">Buy It Now</button>
+                        <button onClick={this.handlePurchase} className="price-button">Buy It Now</button>
+                        {error}
                         <div></div>
                         <button className="price-button">Add to cart</button>
                         <div></div>
@@ -53,17 +77,30 @@ export default class ProductShow extends React.Component {
 
     submitBid(event) {
         event.preventDefault();
-        const bid = { product_id: this.props.product.id, buyer_id: this.props.currentUser, bid: this.state.bid };
-        this.props.createBid(bid);
-        this.setState({bid: ""});
+        if (!this.props.currentUser) {
+            this.props.history.push('/login');
+        }
+        else if (this.props.currentUser === this.props.product.sellerId) {
+            this.setState({errors: "You can't bid on your own product."});
+        }
+        else {
+            const bid = { product_id: this.props.product.id, buyer_id: this.props.currentUser, bid: this.state.bid };
+            this.props.createBid(bid);
+            this.setState({bid: ""});
+        }
     } 
     
     auctionPrice() {
         let bid = this.props.product.startingPrice;
-        if (Object.keys(this.props.bids).length !== 0) {
+        if (Object.keys(this.props.bids).length !== 0 && this.props.bids[this.props.product.bidIds.slice(-1)[0]]) {
             bid = this.props.bids[this.props.product.bidIds.slice(-1)[0]].bid || this.props.product.startingPrice;
         }
         const highestBid = bid.toFixed(2);
+
+        let error;
+
+        if (this.state.errors === "You can't bid on your own product.") error = this.state.errors;
+
         
         if (this.props.product.auction) {
             return (
@@ -81,6 +118,7 @@ export default class ProductShow extends React.Component {
                         <div className="bid-count"><p>[</p><a href="/placeholder">{this.props.product.bidIds.length} bids</a><p>]</p></div>
                         <button onClick={this.submitBid} className="price-button">Place bid</button>
                         <div></div>
+                        <div className="bid-error">{error}</div>
                     </div>
                 </div>
             );
@@ -192,6 +230,7 @@ export default class ProductShow extends React.Component {
     }
 
     switchTabs(event) {
+        debugger;
         this.setState({selectedTab: event.target.textContent});
     }
 
@@ -209,6 +248,20 @@ export default class ProductShow extends React.Component {
             </div>
         );
     }
+
+    itemSoldBanner() {
+        let soldMessage;
+
+        this.props.product.sold ? soldMessage = 'This listing has ended.' : '';
+
+        if (this.props.product.sold) {
+            return (
+                <div className="item-sold-banner-active">{soldMessage}</div>
+            );
+        }
+
+        return <div className="item-sold-banner">{soldMessage}</div>;
+    }
     
     render() {
         if (!this.props.product) {return null;}
@@ -216,7 +269,7 @@ export default class ProductShow extends React.Component {
 
         return (
             <div className="product-show-page">
-
+                {this.itemSoldBanner()}
                 <div className="upper-show-page">
                     <ProductShowImages productImages={this.props.productImages}/>
                     <div className="show-page-content">

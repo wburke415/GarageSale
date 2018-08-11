@@ -21,6 +21,9 @@
 #  quantity              :integer          default(1), not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  description           :text             not null
+#  sold                  :boolean          default(FALSE), not null
+#  buyer_id              :integer
 #
 
 class Product < ApplicationRecord
@@ -31,9 +34,9 @@ class Product < ApplicationRecord
         foreign_key: :seller_id,
         class_name: :User
 
-    belongs_to :buyer,
-        foreign_key: :buyer_id,
-        class_name: :User
+    # belongs_to :buyer,
+    #     foreign_key: :buyer_id,
+    #     class_name: :User
 
     # belongs_to :category,
     #     foreign_key: :category_id,

@@ -40,11 +40,12 @@ class Api::ProductsController < ApplicationController
     def product_params
         params.require(:product).permit(
             :seller_id, 
+            :buyer_id,
             :category_id, 
             :payment_policy_id, 
             :shipping_policy_id, 
             :return_policy_id, 
-            :location_id, 
+            :sold,
             :title, 
             :subtitle, 
             :sku, 
@@ -55,7 +56,8 @@ class Api::ProductsController < ApplicationController
             :starting_price, 
             :bin_price, 
             :reserve_price, 
-            :quantity
+            :quantity,
+            :description
             )
     end 
 

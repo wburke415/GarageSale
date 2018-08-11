@@ -23,6 +23,11 @@ export const fetchProduct = id => dispatch => (
         .then(product => dispatch(receiveProduct(product)))
 );
 
+export const updateProduct = product => dispatch => (
+    APIUtil.updateProduct(product)
+    .then(updatedProduct => dispatch(receiveProduct(updatedProduct)))
+);
+
 export const fetchProducts = search => dispatch => (
     APIUtil.fetchProducts(search)
         .then(products => dispatch(receiveProducts(products)))
