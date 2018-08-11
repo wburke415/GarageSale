@@ -132,9 +132,9 @@ export default class ProductShow extends React.Component {
                     <div>Seller information</div>
                     <div className="username-container">
                         <div className="product-show-seller-username">{this.props.seller.username}</div>
-                        <div className="product-show-seller-feedback"><span>(</span><a>placeholder</a><span>)</span></div>
+                        <div className="product-show-seller-feedback"><span>(</span><a>162</a><span>)</span></div>
                     </div>
-                    <div className="product-show-feedback-percentage">100% placeholder feedback</div>
+                    <div className="product-show-feedback-percentage">100% positive feedback</div>
 
                     <a href="/placeholder" className="save-this-seller">
                         <i className="far fa-heart"></i>
@@ -223,7 +223,7 @@ export default class ProductShow extends React.Component {
 
                 <div className="return-policy">
                     <p className="product-show-policy-label">Returns:</p> 
-                    <span>Placeholder does not accept returns | <a href='/placeholder'>See details</a></span>
+                    <span>Seller does not accept returns | <a href='/placeholder'>See details</a></span>
                 </div>
             </div>
         );
