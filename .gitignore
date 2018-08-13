@@ -30,3 +30,6 @@ bundle.map.js
 .byebug_history
 .DS_store
 npm-debug.log
+.env
+
+aws.rb

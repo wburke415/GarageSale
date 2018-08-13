@@ -24,6 +24,8 @@ class User < ApplicationRecord
 
   attr_reader :password
 
+  has_one_attached :photo
+
   has_many :bids,
     foreign_key: :buyer_id,
     class_name: :Bid

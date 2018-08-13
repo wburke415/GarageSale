@@ -31,6 +31,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'sass', '~> 3.5.7'
 gem 'jquery-rails'
 gem 'rails_12factor'
+gem "aws-sdk-s3"
 #-----------------------------------
 
 # Use ActiveStorage variant

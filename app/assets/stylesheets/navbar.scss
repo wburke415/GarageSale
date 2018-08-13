@@ -6,25 +6,47 @@
     display: flex;
     justify-content: space-between;
     height: 30px;
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid #ccc;
+    background-color: white;
+    padding: 0 10px 0 10px;
+    box-shadow: 2px 2px 3px #ccc;
 
-    .greeting {
-        padding: 10px 5px 5px 10px;
-
-        .greeting-firstname {
-            font-weight: 700;
-        }
+    ul {
+        display: flex;
+        align-items: center;
 
         a {
-            text-decoration: none;
-            color: #0654ba;
+            padding: 0 5px 0 5px;
         }
 
-        a:hover {
-            text-decoration: underline;
+        i {
+            padding: 0 20px 0 20px;
+            font-size: 16px;
         }
 
+        .fa-bell {
+            padding-left: 30px;
+        }
 
+        .greeting {
+            padding-right: 5px;
+    
+            .greeting-firstname {
+                font-weight: 700;
+            }
+    
+            a {
+                text-decoration: none;
+                color: #0654ba;
+            }
+    
+            a:hover {
+                text-decoration: underline;
+            }
+    
+    
+        }
     }
+
  
 }

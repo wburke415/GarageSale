@@ -13,15 +13,17 @@ import SigninFormContainer from './session_form/signin_form_container';
 import SignupFormContainer from './session_form/signup_form_container';
 import NavBarContainer from './nav_bar/nav_bar_container';
 import ProductShowContainer from './product/product_show_container';
+import CreateProductFormContainer from './product/create_product_form_container';
 
 const App = () => (
   <div>
     <Switch>
       <AuthRoute exact path="/login" component={SigninFormContainer} />
       <AuthRoute exact path="/register" component={SignupFormContainer} />
+      <Route path="/products/new" component={CreateProductFormContainer} />
       <Route path="/" component={NavBarContainer} />
     </Switch>
-      <Route path="/products/:id" component={ProductShowContainer} />
+      {/* <Route exact path="/products/:id" component={ProductShowContainer} /> */}
   </div>
 );
 
