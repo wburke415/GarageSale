@@ -17,7 +17,7 @@ const mapStateToProps = (state, ownProps) => {
 
         if (product) {
             seller = state.entities.users[product.sellerId] || _nullSeller;
-            bids = state.entities.bids;
+            bids = product.bidIds.map(id => state.entities.bids[id]);
             shippingPolicy = state.entities.shippingPolicies[product.shippingPolicyId];
             location = state.entities.locations[shippingPolicy.locationId];
         }

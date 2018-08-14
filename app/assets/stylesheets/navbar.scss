@@ -17,6 +17,12 @@
 
         a {
             padding: 0 5px 0 5px;
+            text-decoration: none;
+            color: #0654ba;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
 
         i {
@@ -34,19 +40,10 @@
             .greeting-firstname {
                 font-weight: 700;
             }
-    
+
             a {
-                text-decoration: none;
-                color: #0654ba;
+                padding: 0px;
             }
-    
-            a:hover {
-                text-decoration: underline;
-            }
-    
-    
         }
     }
-
- 
 }

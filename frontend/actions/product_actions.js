@@ -5,17 +5,22 @@ export const RECEIVE_PRODUCTS = "RECEIVE_PRODUCTS";
 
 export const receiveProduct = payload => ({
     type: RECEIVE_PRODUCT,
-    product: payload.product,
+    products: payload.products,
     productImages: payload.productImages,
     bids: payload.bids,
-    seller: payload.seller,
-    shippingPolicy: payload.shippingPolicy,
-    location: payload.location
+    sellers: payload.sellers,
+    shippingPolicies: payload.shippingPolicies,
+    locations: payload.locations
 });
 
-export const receiveProducts = products => ({
+export const receiveProducts = payload => ({
     type: RECEIVE_PRODUCTS,
-    products
+    products: payload.products,
+    productImages: payload.productImages,
+    bids: payload.bids,
+    sellers: payload.sellers,
+    shippingPolicies: payload.shippingPolicies,
+    locations: payload.locations
 });
 
 export const fetchProduct = id => dispatch => (
@@ -23,13 +28,24 @@ export const fetchProduct = id => dispatch => (
         .then(product => dispatch(receiveProduct(product)))
 );
 
+export const createProduct = product => dispatch => (
+    APIUtil.createProduct(product)
+    .then(newProduct => dispatch(receiveProduct(newProduct)))
+);
+
 export const updateProduct = product => dispatch => (
     APIUtil.updateProduct(product)
     .then(updatedProduct => dispatch(receiveProduct(updatedProduct)))
 );
 
-export const fetchProducts = search => dispatch => (
-    APIUtil.fetchProducts(search)
+// export const fetchProducts = search => dispatch => (
+//     APIUtil.fetchProducts(search)
+//         .then(products => dispatch(receiveProducts(products)))
+// );
+
+// delete this one and comment back in the above method once you have set up sorting
+export const fetchProducts = () => dispatch => (
+    APIUtil.fetchProducts()
         .then(products => dispatch(receiveProducts(products)))
 );
 

@@ -1,15 +1,20 @@
 class Api::ProductsController < ApplicationController
 
     def show
-        @product = Product.includes(:product_images, :bids, :seller, :shipping_policy, :location).find_by(id: params[:id])
+        @product = Product.includes(:bids, :seller, :shipping_policy, :location).find_by(id: params[:id])
     end
 
     def index
-        
+        @products = Product.includes(:bids, :seller).all
     end
 
     def create
         @product = Product.new(product_params)
+        
+        params[:photos].each_with_index do |photo, idx|
+            @product.photos.attach(io: photo, filename: "product_photo_#{idx}.jpg")
+        end
+
         if @product.save
             render "api/products/show"
         else
@@ -38,6 +43,7 @@ class Api::ProductsController < ApplicationController
     private
 
     def product_params
+        debugger
         params.require(:product).permit(
             :seller_id, 
             :buyer_id,
@@ -57,7 +63,7 @@ class Api::ProductsController < ApplicationController
             :bin_price, 
             :reserve_price, 
             :quantity,
-            :description
+            :description,
             )
     end 
 

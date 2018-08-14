@@ -1,13 +1,14 @@
 import merge from 'lodash/merge';
 
-import { RECEIVE_PRODUCT } from '../actions/product_actions';
+import { RECEIVE_PRODUCT, RECEIVE_PRODUCTS } from '../actions/product_actions';
 
 const productImagesReducer = (state = {}, action) => {
-    // debugger;
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_PRODUCT:
             return merge({}, state, action.productImages);
+        case RECEIVE_PRODUCTS:
+            return merge({}, action.productImages);
     
         default:
             return state;

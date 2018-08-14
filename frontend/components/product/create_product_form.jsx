@@ -14,11 +14,11 @@ export default class CreateProductForm extends React.Component {
                 title: "",
                 subtitle: "",
                 sku: "",
-                condition: "",
+                condition: 'New',
                 conditionDescription: "",
                 description: "",
                 auction: true,
-                duration: "",
+                duration: 7,
                 startingPrice: "",
                 binPrice: "",
                 reservePrice: "",
@@ -26,7 +26,7 @@ export default class CreateProductForm extends React.Component {
             },
             images: {
                 imageUrl: [],
-                imageFile: ""
+                imageFile: []
             }
         };
 
@@ -37,9 +37,42 @@ export default class CreateProductForm extends React.Component {
     }
 
     handleSubmit(event) {
-        debugger;
+        // debugger;
         event.preventDefault();
-        this.props.createProduct(this.state.product);
+
+        const formData = new FormData();
+        formData.append('product[sellerId]', this.state.product.sellerId);
+        formData.append('product[paymentPolicyId]', this.state.product.paymentPolicyId);
+        formData.append('product[returnPolicyId]', this.state.product.returnPolicyId);
+        formData.append('product[categoryId]', this.state.product.categoryId);
+        formData.append('product[shippingPolicyId]', this.state.product.shippingPolicyId);
+        formData.append('product[title]', this.state.product.title);
+        formData.append('product[subtitle]', this.state.product.subtitle);
+        formData.append('product[sku]', this.state.product.sku);
+        formData.append('product[condition]', this.state.product.condition);
+        formData.append('product[conditionDescription]', this.state.product.conditionDescription);
+        formData.append('product[description]', this.state.product.description);
+        formData.append('product[auction]', this.state.product.auction);
+        formData.append('product[duration]', this.state.product.duration);
+        formData.append('product[startingPrice]', this.state.product.startingPrice);
+        formData.append('product[binPrice]', this.state.product.binPrice);
+        formData.append('product[reservePrice]', this.state.product.reservePrice);
+        formData.append('product[quantity]', this.state.product.quantity);
+        
+        if (this.state.images.imageFile) {
+            this.state.images.imageFile.forEach(file => formData.append('photos[]', file));
+            // formData.append('product[photos]', this.state.images.imageFile);
+        }
+        
+        this.props.createProduct(formData);
+        
+        // $.ajax({
+        //     url: '/api/products',
+        //     method: 'POST',
+        //     data: formData,
+        //     contentType: false,
+        //     processData: false
+        // });
     }
 
     imagePreview(e) {
@@ -48,15 +81,17 @@ export default class CreateProductForm extends React.Component {
         let that = this;
 
         reader.onloadend = () => {
-            let oldState = that.state.images.imageUrl.slice(0);
-            let newState = oldState.concat(reader.result);
-            that.setState({images: { imageUrl: newState, imageFile: file }});
+            let newState = Object.assign(that.state.images);
+            newState.imageUrl = newState.imageUrl.concat(reader.result);
+            newState.imageFile = newState.imageFile.concat(file);
+
+            that.setState({images: newState});
         };
 
         if (file) {
             reader.readAsDataURL(file);
         } else {
-            this.setState({images: { imageUrl: [], imageFile: null }});
+            // this.setState({images: { imageUrl: [], imageFile: null }});
         }
     }
 
@@ -201,7 +236,7 @@ export default class CreateProductForm extends React.Component {
                             <div className="create-product-condition">
                                 <label>Condition</label>
                                 <select onChange={this.handleChange('condition')} value={this.state.product.condition}> 
-                                    <option value="New">New</option>
+                                    <option defaultValue value="New">New</option>
                                     <option value="New other (see details)">New other (see details)</option>
                                     <option value="Manufacturer refurbished">Manufacturer refurbished</option>
                                     <option value="Seller refurbished">Seller refurbished</option>
@@ -250,7 +285,7 @@ export default class CreateProductForm extends React.Component {
                                     <option value={1}>1 day</option>
                                     <option value={3}>3 days</option>
                                     <option value={5}>5 days</option>
-                                    <option value={7}>7 days</option>
+                                    <option defaultValue value={7}>7 days</option>
                                     <option value={10}>10 days</option>
                                 </select>
                             </div>

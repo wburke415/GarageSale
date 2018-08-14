@@ -30,6 +30,8 @@ class Product < ApplicationRecord
     validates :title, :condition, :duration, :starting_price, :quantity, presence: true
     validates :auction, inclusion: { in: [true, false] }
 
+    has_many_attached :photos
+
     belongs_to :seller,
         foreign_key: :seller_id,
         class_name: :User

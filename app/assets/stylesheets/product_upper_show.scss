@@ -178,9 +178,15 @@
             border: 1px solid #ddd;
             border-radius: 3px;
 
+            .auction-bin-divider {
+                border-bottom: 1px solid white;
+                margin-bottom: 10px;
+            }
+            
             .auction-bid-container {
                 display: flex;
                 flex-direction: column;
+
 
                 .current-bid {
                     display: flex;
@@ -203,11 +209,6 @@
                     color: black;
                     white-space: nowrap;
                 }
-            }
-
-            .auction-field {
-                border-bottom: 1px solid white;
-                margin-bottom: 10px;
             }
 
             .product-price {

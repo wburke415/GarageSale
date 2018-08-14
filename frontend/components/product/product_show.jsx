@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ProductShowImages from './product_show_images';
+import ProductShowImages from './product_show_components/images';
+import sellerInfo from './product_show_components/seller_info';
+import * as timeUtils from '../../utils/time_util';
 
 export default class ProductShow extends React.Component {
     constructor(props) {
@@ -102,6 +104,7 @@ export default class ProductShow extends React.Component {
         if (this.state.errors === "You can't bid on your own product.") error = this.state.errors;
 
         
+        
         if (this.props.product.auction) {
             return (
                 <div className="product-price auction-field">
@@ -124,78 +127,9 @@ export default class ProductShow extends React.Component {
             );
         }
     }
-    
-    sellerInfo() {
-        return (
-            <div className="seller-info-wrapper">
-                <div className="seller-info-box">
-                    <div>Seller information</div>
-                    <div className="username-container">
-                        <div className="product-show-seller-username">{this.props.seller.username}</div>
-                        <div className="product-show-seller-feedback"><span>(</span><a>162</a><span>)</span></div>
-                    </div>
-                    <div className="product-show-feedback-percentage">100% positive feedback</div>
 
-                    <a href="/placeholder" className="save-this-seller">
-                        <i className="far fa-heart"></i>
-                        <div>Save this Seller</div>
-                    </a>
-
-                    <a href="/placeholder" className="contact-seller">Contact seller</a>
-
-                    <a href="/placeholder" className="see-other-items">See other items</a>
-                </div>
-            </div>
-        );
-    }
-    
-    timeStrings() {
-        let createdAt = new Date(this.props.product.createdAt);
-        let currentDate = new Date();
-        let endDate = new Date(createdAt.setDate(createdAt.getDate() + this.props.product.duration));
-
-        let timeLeft = new Date(endDate - currentDate);
-
-        let days;
-        let hours;
-        let minutes;
-        let seconds;
-
-        timeLeft.toUTCString().slice(5, 7)[0] === "0" ? days = timeLeft.toUTCString().slice(6, 7) : days = timeLeft.toUTCString().slice(5, 7);
-        timeLeft.toUTCString().slice(17, 19)[0] === "0" ? hours = timeLeft.toUTCString().slice(18, 19) : hours = timeLeft.toUTCString().slice(17, 19);
-        timeLeft.toUTCString().slice(20, 22)[0] === "0" ? minutes = timeLeft.toUTCString().slice(21, 22) : minutes = timeLeft.toUTCString().slice(20, 22);
-        timeLeft.toUTCString().slice(23, 25)[0] === "0" ? seconds = timeLeft.toUTCString().slice(24, 25) : seconds = timeLeft.toUTCString().slice(23, 25);
-
-        return {days, hours, minutes, seconds};
-    }
-
-    timeLeft(timeStrings) {
-        let keys = Object.keys(timeStrings);
-        let timeLeft = [];
-        let listItem;
-
-        for (let i = 0; i < keys.length; i++) {
-            if (timeStrings[keys[i]] === "0") continue;
-            if (timeLeft.length === 2) continue;
-            listItem = timeStrings[keys[i]] + keys[i].slice(0,1);
-            timeLeft.push(listItem);
-        }
-
-        return (
-            <ul className="product-show-time-string">
-                <li className="product-show-time-left">Time left:</li>
-                <li>{timeLeft.join(" ")}</li>
-            </ul>
-        );
-    }
-
-    endTime() {
-        let createdAt = new Date(this.props.product.createdAt);
-        let currentDate = new Date();
-        let endDate = new Date(createdAt.setDate(createdAt.getDate() + this.props.product.duration));
-
-        // Make sure to come back and finish this
-
+    auctionBinDivider() {
+        if (this.props.product.binPrice) return <div className="auction-bin-divider"></div>
     }
 
     policies() {
@@ -230,7 +164,6 @@ export default class ProductShow extends React.Component {
     }
 
     switchTabs(event) {
-        debugger;
         this.setState({selectedTab: event.target.textContent});
     }
 
@@ -265,7 +198,7 @@ export default class ProductShow extends React.Component {
     
     render() {
         if (!this.props.product) {return null;}
-        let timeStrings = this.timeStrings();
+        let timeStrings = timeUtils.timeStrings(this.props.product);
 
         return (
             <div className="product-show-page">
@@ -279,22 +212,20 @@ export default class ProductShow extends React.Component {
                         <div className="condition-description"><p>“</p><span>{this.props.product.conditionDescription}</span><p>”</p></div>
                         
                         <div className="time-left">
-                            {this.timeLeft(timeStrings)}
-                            {this.endTime()}
+                            {timeUtils.timeLeft(timeStrings)}
+                            {timeUtils.endTime(this.props.product)}
                         </div>
 
                         <div className="product-bid-container"> 
                             {this.auctionPrice()}
-                            {/* <h1>{this.props.product.startingPrice}</h1> */}
+                            {this.auctionBinDivider()}
                             {this.binPrice()}
-                            <h1>{this.props.product.reservePrice}</h1>
                         </div>
 
                         {this.policies()}
 
-                        {/* <h1>{this.props.product.quantity}</h1> */}
                     </div>
-                    {this.sellerInfo()}
+                    {sellerInfo(this.props.seller)}
                 </div>
 
                 <div className="lower-show-page-container">

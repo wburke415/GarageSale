@@ -59,14 +59,14 @@ export default class NavBar extends React.Component {
                 </ul>
 
                 <ul>
-                    <li><a>Sell</a>|</li>
+                    <li><a href="/#/products/new">Sell</a>|</li>
                     <li><a>My Garage</a></li>
                     <li><i className="fas fa-bell"></i></li>
                     <li><i className="fas fa-shopping-cart"></i></li>
                 </ul>
+                {this.signOutButton()}
             </div>
 
-                // {this.signOutButton()}
 
         );
     }
