@@ -5,28 +5,41 @@ export default class CreateProductForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "",
-            subtitle: "",
-            sku: "",
-            condition: "",
-            conditionDescription: "",
-            description: "",
-            auction: true,
-            duration: "",
-            startingPrice: "",
-            quantity: 1,
-            location: "",
-            imageUrl: [],
-            imageFile: "",
-            paymentPolicyId: 1,
-            shippingPolicyId: 1,
-            returnPolicyId: 1,
-
+            product: {
+                sellerId: this.props.currentUser,
+                paymentPolicyId: 1,
+                shippingPolicyId: 1,
+                returnPolicyId: 1,
+                categoryId: 1,
+                title: "",
+                subtitle: "",
+                sku: "",
+                condition: "",
+                conditionDescription: "",
+                description: "",
+                auction: true,
+                duration: "",
+                startingPrice: "",
+                binPrice: "",
+                reservePrice: "",
+                quantity: 1
+            },
+            images: {
+                imageUrl: [],
+                imageFile: ""
+            }
         };
 
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.imagePreview = this.imagePreview.bind(this);
         this.displayImage = this.displayImage.bind(this);
         this.productImages = this.productImages.bind(this);
+    }
+
+    handleSubmit(event) {
+        debugger;
+        event.preventDefault();
+        this.props.createProduct(this.state.product);
     }
 
     imagePreview(e) {
@@ -35,25 +48,29 @@ export default class CreateProductForm extends React.Component {
         let that = this;
 
         reader.onloadend = () => {
-            let oldState = that.state.imageUrl.slice(0);
+            let oldState = that.state.images.imageUrl.slice(0);
             let newState = oldState.concat(reader.result);
-            that.setState({ imageUrl: newState, imageFile: file });
+            that.setState({images: { imageUrl: newState, imageFile: file }});
         };
 
         if (file) {
             reader.readAsDataURL(file);
         } else {
-            this.setState({ imageUrl: [], imageFile: null });
+            this.setState({images: { imageUrl: [], imageFile: null }});
         }
     }
 
     handleChange(property) {
-        return e => this.setState({[property]: e.target.value});
+        return e => {
+            let newState = Object.assign({}, this.state.product);
+            newState[property] = e.target.value;
+            this.setState({product: newState});
+        };
     }
 
     displayImage(idx) {
-        if (this.state.imageUrl[idx]) {
-            return <img src={this.state.imageUrl[idx]} />;
+        if (this.state.images.imageUrl[idx]) {
+            return <img src={this.state.images.imageUrl[idx]} />;
         }
         else {
             return <i className="far fa-image"></i>;
@@ -108,32 +125,41 @@ export default class CreateProductForm extends React.Component {
 
     changeAuctionType() {
         return e => {
-            if (e.target.value === "Auction-style") this.setState({auction: true});
-            if (e.target.value === "Fixed price") this.setState({auction: false});
+            let newState = Object.assign({}, this.state.product);
+            if (e.target.value === "Auction-style") {
+                newState.auction = true;
+                this.setState({product: newState});
+            }
+            else {
+                newState.auction = false;
+                this.setState({ product: newState });
+            }
         };
     }
 
     changeDuration() {
         return e => {
-            if (e.target.value === "1 day") this.setState({duration: 1});
-            if (e.target.value === "3 days") this.setState({duration: 3});
-            if (e.target.value === "5 days") this.setState({duration: 5});
-            if (e.target.value === "7 days") this.setState({duration: 7});
-            if (e.target.value === "10 days") this.setState({duration: 10});
+            let newState = Object.assign({}, this.state.product);
+            if (e.target.value === "1 day") newState.duration = 1;
+            if (e.target.value === "3 days") newState.duration = 3;
+            if (e.target.value === "5 days") newState.duration = 5;
+            if (e.target.value === "7 days") newState.duration = 7;
+            if (e.target.value === "10 days") newState.duration = 10;
+            this.setState({product: newState});
         };
     }
 
     auctionType() {
-        if (this.state.auction === true) return 'Auction-style';
+        if (this.state.product.auction === true) return 'Auction-style';
         return 'Fixed price';
     }
 
     duration() {
-        if (this.state.duration === 1) return '1 day';
-        if (this.state.duration === 3) return '3 days';
-        if (this.state.duration === 5) return '5 days';
-        if (this.state.duration === 7) return '7 day';
-        if (this.state.duration === 10) return '10 days';
+        if (this.state.product.duration === 1) return '1 day';
+        if (this.state.product.duration === 3) return '3 days';
+        if (this.state.product.duration === 5) return '5 days';
+        if (this.state.product.duration === 7) return '7 day';
+        if (this.state.product.duration === 10) return '10 days';
     }
 
     render() {
@@ -159,22 +185,22 @@ export default class CreateProductForm extends React.Component {
                         
                             <div className="create-product-input">
                                 <label>Title</label>
-                                <input onChange={this.handleChange('title')} value={this.state.title}/>
+                                <input onChange={this.handleChange('title')} value={this.state.product.title}/>
                             </div>
 
                             <div className="create-product-input">
                                 <label>Subtitle</label>
-                                <input onChange={this.handleChange('subtitle')} value={this.state.subtitle}/>
+                                <input onChange={this.handleChange('subtitle')} value={this.state.product.subtitle}/>
                             </div>
 
                             <div className="create-product-sku">
                                 <label>Custom Label</label>
-                                <input onChange={this.handleChange('sku')} value={this.state.sku}/>
+                                <input onChange={this.handleChange('sku')} value={this.state.product.sku}/>
                             </div>
                             
                             <div className="create-product-condition">
                                 <label>Condition</label>
-                                <select onChange={this.handleChange('condition')} value={this.state.condition}> 
+                                <select onChange={this.handleChange('condition')} value={this.state.product.condition}> 
                                     <option value="New">New</option>
                                     <option value="New other (see details)">New other (see details)</option>
                                     <option value="Manufacturer refurbished">Manufacturer refurbished</option>
@@ -186,14 +212,14 @@ export default class CreateProductForm extends React.Component {
 
                             <div className="create-product-input">
                                 <label>Condition description</label>
-                                <textarea onChange={this.handleChange('conditionDescription')} value={this.state.conditionDescription}/>
+                                <textarea onChange={this.handleChange('conditionDescription')} value={this.state.product.conditionDescription}/>
                             </div>
                             
                             {this.productImages()}
 
                             <div className="create-product-item-description">
                                 <label>Item description</label>
-                                <textarea onChange={this.handleChange('description')} className="create-product-item-description" value={this.state.description}/>
+                                <textarea onChange={this.handleChange('description')} className="create-product-item-description" value={this.state.product.description}/>
                             </div>
 
                         </div>
@@ -238,16 +264,16 @@ export default class CreateProductForm extends React.Component {
                                         <label>Reserve price</label>
                                     </span>
                                     <span className="product-price-inputs">
-                                        <span>$<input onChange={this.handleChange('startingPrice')} value={this.state.startingPrice} /></span>
-                                        <span>$<input onChange={this.handleChange('startingPrice')} value={this.state.startingPrice} /></span>
-                                        <span>$<input onChange={this.handleChange('startingPrice')} value={this.state.startingPrice} /></span>
+                                        <span>$<input onChange={this.handleChange('startingPrice')} value={this.state.product.startingPrice} /></span>
+                                        <span>$<input onChange={this.handleChange('binPrice')} value={this.state.product.binPrice} /></span>
+                                        <span>$<input onChange={this.handleChange('reservePrice')} value={this.state.product.reservePrice} /></span>
                                     </span>
                                 </div>
                             </div>
 
                             <div className="create-product-quantity">
                                 <label>Quantity</label>
-                                <input onChange={this.handleChange('quantity')} value={this.state.quantity} />
+                                <input onChange={this.handleChange('quantity')} value={this.state.product.quantity} />
                             </div>
 
 
