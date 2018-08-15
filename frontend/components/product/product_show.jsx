@@ -79,11 +79,21 @@ export default class ProductShow extends React.Component {
 
     submitBid(event) {
         event.preventDefault();
+
+        let prevBid = this.props.product.startingPrice;
+        if (this.props.bids.length !== 0) {
+            prevBid = this.props.bids.slice(-1)[0].bid || this.props.product.startingPrice;
+        }
+        const highestBid = prevBid.toFixed(2);
+
         if (!this.props.currentUser) {
             this.props.history.push('/login');
         }
         else if (this.props.currentUser === this.props.product.sellerId) {
             this.setState({errors: "You can't bid on your own product."});
+        }
+        else if (this.state.bid < highestBid) {
+            this.setState({errors: 'Your bid must be greater than the previous bid.'});
         }
         else {
             const bid = { product_id: this.props.product.id, buyer_id: this.props.currentUser, bid: this.state.bid };
@@ -94,14 +104,14 @@ export default class ProductShow extends React.Component {
     
     auctionPrice() {
         let bid = this.props.product.startingPrice;
-        if (Object.keys(this.props.bids).length !== 0 && this.props.bids[this.props.product.bidIds.slice(-1)[0]]) {
-            bid = this.props.bids[this.props.product.bidIds.slice(-1)[0]].bid || this.props.product.startingPrice;
+        if (this.props.bids.length !== 0) {
+            bid = this.props.bids.slice(-1)[0].bid || this.props.product.startingPrice;
         }
         const highestBid = bid.toFixed(2);
 
         let error;
 
-        if (this.state.errors === "You can't bid on your own product.") error = this.state.errors;
+        if (this.state.errors === "You can't bid on your own product." || this.state.errors === 'Your bid must be greater than the previous bid.') error = this.state.errors;
 
         
         
@@ -110,7 +120,7 @@ export default class ProductShow extends React.Component {
                 <div className="product-price auction-field">
                     <div className="auction-bid-container">
                         <div className="current-bid">
-                            <p>Starting bid:</p>
+                            <p>Current bid:</p>
                             <span>US ${highestBid}</span>
                         </div>
                         <input onChange={this.changeBid()} value={this.state.bid}/>
@@ -129,7 +139,7 @@ export default class ProductShow extends React.Component {
     }
 
     auctionBinDivider() {
-        if (this.props.product.binPrice) return <div className="auction-bin-divider"></div>
+        if (this.props.product.binPrice) return <div className="auction-bin-divider"></div>;
     }
 
     policies() {
@@ -204,7 +214,7 @@ export default class ProductShow extends React.Component {
             <div className="product-show-page">
                 {this.itemSoldBanner()}
                 <div className="upper-show-page">
-                    <ProductShowImages productImages={this.props.productImages}/>
+                    <ProductShowImages history={this.props.history} productImages={this.props.productImages}/>
                     <div className="show-page-content">
                         <h1 className="product-show-title">{this.props.product.title}</h1>
                         <h2 className="product-show-subtitle">{this.props.product.subtitle}</h2>

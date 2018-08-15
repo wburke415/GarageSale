@@ -1,26 +1,75 @@
 import React from 'react';
+import * as timeUtils from '../../utils/time_util';
 
 export default class ProductListItem extends React.Component {
     constructor(props) {
         super(props);
     }
 
+    auctionPrice() {
+        const { product } = this.props;
+        const { bids } = this.props;
+
+        if (product.startingPrice) {
+            return (
+                <div className="list-item-auction-price">
+                    <span>${product.startingPrice}</span>
+                    <div>{bids.length} bids</div>
+                </div>
+            );
+        }
+    }
+
+    binPrice() {
+        const { product } = this.props;
+        if (product.binPrice) {
+            return (
+                <div className="list-item-bin-price">
+                    <span>${product.binPrice}</span>
+                    <div>Buy It Now</div>
+                </div>
+            );
+        }
+    }
+
+    shipping () {
+        const { shippingPolicy } = this.props;
+
+        return (
+            <div className="list-item-shipping">
+                <span>+ ${shippingPolicy.shippingCost.toFixed(2)} shipping</span>
+            </div>
+        );
+    }
+
     render() {
         const { product } = this.props;
         const { image } = this.props;
 
+        const timeStrings = timeUtils.timeStrings(product);
+
         return (
             <li className="product-list-item">
                 <div className="image-container">
-                    <img src={image.imageUrl} />
+                    <a href={`/#/products/${product.id}`}><img src={image.imageUrl} /></a>
                 </div>
 
                 <div className="list-item-content">
                     <a href={`/#/products/${product.id}`}><h1>{product.title}</h1></a>
                     <h2>{product.subtitle}</h2>
-                    <h3>{product.condition}</h3>
-                    <h3>{product.startingPrice}</h3>
-                    <h3>{product.binPrice}</h3>    
+                    <h2>{product.condition}</h2>
+
+                    <div className="list-item-details">
+                        <div className="list-item-price">
+                            {this.auctionPrice()}
+                            {this.binPrice()}
+                            {this.shipping()}
+                        </div>
+                        <div className="list-item-end">
+                            {timeUtils.timeLeft(timeStrings)}
+                            {timeUtils.endTime(product)}
+                        </div>
+                    </div>
                 </div>
             </li>
         );

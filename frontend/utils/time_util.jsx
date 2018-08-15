@@ -34,7 +34,7 @@ export const timeLeft = (timeStrings) => {
     return (
         <ul className="product-show-time-string">
             <li className="product-show-time-left">Time left:</li>
-            <li>{timeLeft.join(" ")}</li>
+            <span>{timeLeft.join(" ")}</span>
         </ul>
     );
 };
@@ -44,6 +44,18 @@ export const endTime = (product) => {
     let currentDate = new Date();
     let endDate = new Date(createdAt.setDate(createdAt.getDate() + product.duration));
 
-    // Make sure to come back and finish this
+    let day; 
 
+    if (currentDate.getDay() === endDate.getDay()) {
+        day = 'Today';
+    } else if ((currentDate.getDay() + 7) < endDate) {
+        day = endDate.toLocaleString().slice(0, 4);
+    }
+    else {
+        day = endDate.toUTCString().slice(0, 3);
+    }
+    
+    let time = endDate.toLocaleTimeString();
+
+    return <span className="item-end-time">({day} {time})</span>;
 };

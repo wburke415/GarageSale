@@ -5,7 +5,7 @@ class Api::ProductsController < ApplicationController
     end
 
     def index
-        @products = Product.includes(:bids, :seller).all
+        @products = Product.includes(:bids, :seller, :shipping_policy).all
     end
 
     def create
@@ -43,7 +43,6 @@ class Api::ProductsController < ApplicationController
     private
 
     def product_params
-        debugger
         params.require(:product).permit(
             :seller_id, 
             :buyer_id,

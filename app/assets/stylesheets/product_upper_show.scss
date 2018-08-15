@@ -100,19 +100,29 @@
                 font-size: 11px;
             }
         }
-
-        .product-show-time-string {
+        
+        .time-left {
             display: flex;
-            font-size: 13px;
-            margin-left: 70px;
-            margin-top: 10px;
-            width: 30%;
+            align-items: baseline;
 
-            .product-show-time-left {
-                padding-right: 13px;
-                color: #666;
+            .product-show-time-string {
+                display: flex;
+                font-size: 13px;
+                margin-left: 70px;
+                margin-top: 10px;
+                width: 22%;
+    
+                .product-show-time-left {
+                    padding-right: 13px;
+                    color: #666;
+                }
+            }
+
+            .item-end-time {
+                font-size: 13px;
             }
         }
+
         
         .product-show-title {
             display: block;

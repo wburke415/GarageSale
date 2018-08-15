@@ -8,12 +8,14 @@ const mapStateToProps = (state, ownProps) => {
     let bids = state.entities.bids;
     let productImages =  state.entities.productImages;
     let currentUser = state.session.id;
+    let shippingPolicies = state.entities.shippingPolicies;
 
     return {
         products,
         productImages,
         bids,
         currentUser,
+        shippingPolicies
     };
 };
 

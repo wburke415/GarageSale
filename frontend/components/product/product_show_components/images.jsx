@@ -10,11 +10,17 @@ export default class ProductShowImages extends React.Component {
         };
 
         this.switchCurrentMainImage = this.switchCurrentMainImage.bind(this);
+        this.pushToNew = this.pushToNew.bind(this);
     }
 
     switchCurrentMainImage(e) {
         this.setState({currentMainImage: e.target.id});
         this.setState({selected: true});
+    }
+
+    pushToNew(e) {
+        e.preventDefault();
+        this.props.history.push("/products/new");
     }
 
 
@@ -54,7 +60,7 @@ export default class ProductShowImages extends React.Component {
                 <span className="product-sell-button">
                     <i className="fas fa-dollar-sign"></i>
                     <p>Have one to sell?</p>
-                    <button>Sell now</button>
+                    <button onClick={this.pushToNew}>Sell now</button>
                 </span>
             </div>
         );

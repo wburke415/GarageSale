@@ -18,6 +18,96 @@
             img {
                 height: 140px;
                 width: 225px;
+                border: 1px solid #ccc;
+            }
+        }
+
+        .list-item-content {
+            padding-left: 10px;
+            display: flex;
+            flex-direction: column;
+
+            a {
+                text-decoration: none;
+                color: #0654ba;
+                
+                h1 {
+                    font-size: 16px;
+                    font-weight: 400;
+                    word-wrap: break-word;
+                }
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            h2 {
+                margin-top: 10px;
+                font-size: 14px;
+                color: #767676;
+            }
+
+            .list-item-details {
+                display: flex;
+                margin-top: 30px;
+                justify-content: space-between;
+                width: 450px;
+
+                .list-item-price {
+
+                    span {
+                        font-size: 20px;
+                        font-weight: 700;
+                        color: black;
+                    }
+                    
+                    div {
+                        font-size: 13px;
+                        color: #767676;
+                        margin-top: 5px;
+                    }
+
+                    .list-item-auction-price {
+                        margin-top: 0px;
+                    }
+
+                    .list-item-bin-price {
+                        margin-top: 10px;
+                    }
+
+
+                    .list-item-shipping {
+                        margin-top: 5px;
+
+                        span {
+                            font-size: 13px;
+                            font-weight: 400;
+                            color: #767676;
+                        }
+                    }
+                }
+
+                .list-item-end {
+                    display: flex;
+
+                    .product-show-time-string {
+                        display: flex;
+                        color: #767676;
+                        font-size: 13px;
+                        font-weight: 400;
+    
+                        li:first-of-type {
+                            padding-right: 5px;
+                        }
+                    }
+
+                    .item-end-time {
+                        font-size: 13px;
+                        color: #767676;
+                        padding-left: 5px;
+                    }
+                }
             }
         }
     }

@@ -20,12 +20,25 @@ export default class ProductIndex extends React.Component {
     listItems() {
         const products = Object.values(this.props.products);
         const { productImages } = this.props;
+        const { bids } = this.props;
+        const { shippingPolicies } = this.props;
+
         let indexItems = [];
 
         for(let i = 0; i < products.length; i++) {
             let product = products[i];
             let image = productImages[product.productImageIds[0]];
-            indexItems.push(<ProductListItem key={i} image={image} product={product} />);
+
+            let productBids = [];
+
+            for(let j = 0; j < product.bidIds.length; j++) {
+                let bidId = product.bidIds[i];
+                productBids.push(bids[bidId]);
+            }
+
+            let shippingPolicy = shippingPolicies[product.shippingPolicyId];
+
+            indexItems.push(<ProductListItem key={i} shippingPolicy={shippingPolicy} image={image} bids={productBids} product={product} />);
         }
 
         return indexItems;
@@ -33,6 +46,7 @@ export default class ProductIndex extends React.Component {
 
     render() {
         if (!this.props.products) { return null; }
+
         let listItems = this.listItems();
         return (
             <div className="product-index-container">
