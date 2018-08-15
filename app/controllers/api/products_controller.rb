@@ -5,7 +5,31 @@ class Api::ProductsController < ApplicationController
     end
 
     def index
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
         @products = Product.includes(:bids, :seller, :shipping_policy).all
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
+        debugger
     end
 
     def create

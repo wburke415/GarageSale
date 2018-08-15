@@ -38,14 +38,8 @@ export const updateProduct = product => dispatch => (
     .then(updatedProduct => dispatch(receiveProduct(updatedProduct)))
 );
 
-// export const fetchProducts = search => dispatch => (
-//     APIUtil.fetchProducts(search)
-//         .then(products => dispatch(receiveProducts(products)))
-// );
-
-// delete this one and comment back in the above method once you have set up sorting
-export const fetchProducts = () => dispatch => (
-    APIUtil.fetchProducts()
+export const fetchProducts = search => dispatch => (
+    APIUtil.fetchProducts(search)
         .then(products => dispatch(receiveProducts(products)))
 );
 

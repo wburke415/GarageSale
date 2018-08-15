@@ -61,18 +61,9 @@ export default class CreateProductForm extends React.Component {
         
         if (this.state.images.imageFile) {
             this.state.images.imageFile.forEach(file => formData.append('photos[]', file));
-            // formData.append('product[photos]', this.state.images.imageFile);
         }
         
         this.props.createProduct(formData);
-        
-        // $.ajax({
-        //     url: '/api/products',
-        //     method: 'POST',
-        //     data: formData,
-        //     contentType: false,
-        //     processData: false
-        // });
     }
 
     imagePreview(e) {
