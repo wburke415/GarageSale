@@ -52,7 +52,7 @@ export default class NavBar extends React.Component {
             pathname: '/products',
             search: `?${this.state.search}`
         });
-
+        this.toggleResults("hide");
     }
 
     setSearch(e) {

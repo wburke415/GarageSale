@@ -161,7 +161,8 @@ export default class SessionForm extends React.Component {
 
   handleDemoLogin(event) {
     event.preventDefault();
-    this.props.action({emailOrUsername: 'wburke415', password: 'password'})
+    let randNum = Math.floor(Math.random() * 100) + 1;
+    this.props.action({emailOrUsername: `guest${randNum}`, password: 'password'})
     .then(() => this.props.history.push("/"));
   }
 

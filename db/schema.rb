@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_15_163307) do
+ActiveRecord::Schema.define(version: 2018_08_16_190754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2018_08_15_163307) do
     t.string "condition_description"
     t.boolean "auction", default: true, null: false
     t.integer "duration", default: 7, null: false
-    t.float "starting_price", null: false
+    t.float "starting_price"
     t.float "bin_price"
     t.float "reserve_price"
     t.integer "quantity", default: 1, null: false

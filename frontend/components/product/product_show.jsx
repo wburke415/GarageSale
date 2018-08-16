@@ -62,8 +62,8 @@ export default class ProductShow extends React.Component {
                     <div className="auction-buttons">
                         <button onClick={this.handlePurchase} className="price-button">Buy It Now</button>
                         {error}
-                        <div></div>
-                        <button className="price-button">Add to cart</button>
+                        {/* <div></div>
+                        <button className="price-button">Add to cart</button> */}
                         <div></div>
                         <button className="watch-list-button">Add to watch list</button>
                         <div></div>
@@ -103,19 +103,19 @@ export default class ProductShow extends React.Component {
     } 
     
     auctionPrice() {
-        let bid = this.props.product.startingPrice;
-        if (this.props.bids.length !== 0) {
-            bid = this.props.bids.slice(-1)[0].bid || this.props.product.startingPrice;
-        }
-        const highestBid = bid.toFixed(2);
-
-        let error;
-
-        if (this.state.errors === "You can't bid on your own product." || this.state.errors === 'Your bid must be greater than the previous bid.') error = this.state.errors;
-
-        
-        
         if (this.props.product.auction) {
+            let bid = this.props.product.startingPrice;
+            if (this.props.bids.length !== 0) {
+                bid = this.props.bids.slice(-1)[0].bid || this.props.product.startingPrice;
+            }
+            const highestBid = bid.toFixed(2);
+
+            let error;
+
+            if (this.state.errors === "You can't bid on your own product." || this.state.errors === 'Your bid must be greater than the previous bid.') error = this.state.errors;
+
+        
+        
             return (
                 <div className="product-price auction-field">
                     <div className="auction-bid-container">
@@ -205,6 +205,10 @@ export default class ProductShow extends React.Component {
 
         return <div className="item-sold-banner">{soldMessage}</div>;
     }
+
+    conditionDescription() {
+        if(this.props.product.conditionDescription) return <div className="condition-description"><p>“</p><span>{this.props.product.conditionDescription}</span><p>”</p></div>;
+    }
     
     render() {
         if (!this.props.product) {return null;}
@@ -219,7 +223,7 @@ export default class ProductShow extends React.Component {
                         <h1 className="product-show-title">{this.props.product.title}</h1>
                         <h2 className="product-show-subtitle">{this.props.product.subtitle}</h2>
                         <div className="product-condition"><p>Condition:</p> <span>{this.props.product.condition}</span></div>
-                        <div className="condition-description"><p>“</p><span>{this.props.product.conditionDescription}</span><p>”</p></div>
+                        {this.conditionDescription()}
                         
                         <div className="time-left">
                             {timeUtils.timeLeft(timeStrings)}

@@ -4,6 +4,23 @@ import * as timeUtils from '../../utils/time_util';
 export default class ProductListItem extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            class: ""
+        };
+
+        this.myImg = React.createRef();
+    }
+
+    componentDidMount() {
+        const width = this.myImg.current.offsetWidth;
+        const height = this.myImg.current.offsetHeight;
+
+        if (width > height) {
+            this.setState({class: "landscape"})
+        }
+        else {
+            this.setState({class: "portrait"})
+        }
     }
 
     auctionPrice() {
@@ -42,21 +59,26 @@ export default class ProductListItem extends React.Component {
         );
     }
 
+    subtitle() {
+        let {product} = this.props;
+        if (product.subtitle) return <h2>{product.subtitle}</h2>;
+    }
+
     render() {
         const { product } = this.props;
         const { image } = this.props;
 
         const timeStrings = timeUtils.timeStrings(product);
-
+    
         return (
             <li className="product-list-item">
                 <div className="image-container">
-                    <a href={`/#/products/${product.id}`}><img src={image.imageUrl} /></a>
+                    <a ref={this.myImg} href={`/#/products/${product.id}`}><img className={this.state.class} src={image.imageUrl} /></a>
                 </div>
 
                 <div className="list-item-content">
                     <a href={`/#/products/${product.id}`}><h1>{product.title}</h1></a>
-                    <h2>{product.subtitle}</h2>
+                    {this.subtitle()}
                     <h2>{product.condition}</h2>
 
                     <div className="list-item-details">

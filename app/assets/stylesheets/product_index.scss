@@ -15,11 +15,21 @@
         display: flex;
 
         .image-container {
+            height: 225px;
+            width: 225px;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-            img {
-                height: 140px;
-                width: 225px;
-                border: 1px solid #ccc;
+            .landscape {
+                width: 223px;
+                height: auto;
+            }
+
+            .portrait {
+                width: auto;
+                height: 223px;
             }
         }
 

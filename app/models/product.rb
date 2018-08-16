@@ -28,8 +28,9 @@
 #
 
 class Product < ApplicationRecord
-    validates :title, :condition, :duration, :starting_price, :quantity, presence: true
+    validates :title, :condition, :duration, :quantity, presence: true
     validates :auction, inclusion: { in: [true, false] }
+    validate :ensure_valid_price
 
     after_initialize :ensure_downcased_search_string
 
@@ -70,5 +71,13 @@ class Product < ApplicationRecord
     def ensure_downcased_search_string
         self.search_string ||= self.title.downcase
     end
+
+    def ensure_valid_price
+        if (self.auction) 
+            errors.add('Auctions must have a starting price') unless self.starting_price
+        else
+            errors.add('Listing must have a price') unless self.bin_price
+        end 
+    end 
 
 end
