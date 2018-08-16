@@ -1,5 +1,6 @@
 .product-index-container {
-    width: calc(100% - 400px);
+    width: 70%;
+    min-width: 400px;
     background-color: white;
     margin: 0 auto;
     margin-top: 40px;
@@ -52,7 +53,7 @@
                 display: flex;
                 margin-top: 30px;
                 justify-content: space-between;
-                width: 450px;
+                // width: 450px;
 
                 .list-item-price {
 

@@ -13,7 +13,8 @@ const productsReducer = (state = {}, action) => {
             return merge({}, state, action.products);
 
         case RECEIVE_PRODUCTS:
-            return action.products;
+            if (action.products) return action.products;
+            return state;
 
         default:
             return state;

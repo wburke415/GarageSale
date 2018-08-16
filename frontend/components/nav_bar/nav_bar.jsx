@@ -1,16 +1,20 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Link } from 'react-router-dom';
 
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: ""
+            search: "",
+            showResults: false,
+            sendQuery: true
         };
 
         this.handleLogout = this.handleLogout.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.setSearch = this.setSearch.bind(this);
     }
 
     greeting() {
@@ -34,7 +38,12 @@ export default class NavBar extends React.Component {
     }
 
     handleInput(e) {
-        this.setState({search: e.target.value});
+        this.setState({search: e.target.value}, () => {
+            if(this.state.sendQuery) {
+                this.setState({sendQuery: false}, () => this.props.fetchProducts(this.state.search));
+            } 
+            if(this.state.search === "") this.setState({sendQuery: true});
+        });
     }
 
     handleSubmit(e) {
@@ -43,6 +52,37 @@ export default class NavBar extends React.Component {
             pathname: '/products',
             search: `?${this.state.search}`
         });
+
+    }
+
+    setSearch(e) {
+        e.preventDefault();
+        this.setState({search: e.target.innerText});
+        this.props.history.push({
+            pathname: '/products',
+            search: `?${e.target.innerText}`
+        });
+    }
+
+    searchResults() {
+        let searchResults = Object.values(this.props.products)
+            .filter(product => product.searchString.includes(this.state.search.toLowerCase()))
+            .map(product => product.title);
+
+        if (this.state.search && this.state.showResults) {
+            return (
+                <ul className="search-results">
+                    {searchResults.map((title, idx) => <li onClick={this.setSearch} key={idx}>{title}</li>)}
+                </ul>
+            );
+        }
+    }
+
+    toggleResults(action) {
+        return e => {
+            if (action === "show") this.setState({showResults: true});
+            if (action === "hide") this.setState({showResults: false});
+        };
     }
 
 //    this is a temporary sign out button. make sure to improve on it later -----------------------------
@@ -89,7 +129,22 @@ export default class NavBar extends React.Component {
                         <img src={window.logo} />
                     </Link>
                     <form onSubmit={this.handleSubmit} className="search-form">
-                        <input className="searchbar" onChange={this.handleInput} value={this.state.search} placeholder="Search for anything"/>
+
+                        <div className="navbar-search">
+                            <ReactCSSTransitionGroup
+                                transitionName="example"
+                                transitionEnterTimeout={500}
+                                transitionLeaveTimeout={300}>
+                                <input 
+                                    className="searchbar" 
+                                    onChange={this.handleInput} 
+                                    onFocus={this.toggleResults("show")}
+                                    onBlur={this.toggleResults("hide")}
+                                    value={this.state.search} 
+                                    placeholder="Search for anything"/>
+                                {this.searchResults()}
+                            </ReactCSSTransitionGroup>
+                        </div>
                         <input type="submit" className="search-button" />
                     </form>
                 </div>

@@ -13,7 +13,8 @@ const usersReducer = (state = {}, action) => {
       return merge({}, state, action.sellers);
 
     case RECEIVE_PRODUCTS: 
-      return action.sellers;
+      if (action.sellers) return merge({}, state, action.sellers);
+      return state;
 
     default:
       return state;

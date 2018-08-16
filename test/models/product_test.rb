@@ -24,6 +24,7 @@
 #  description           :text             not null
 #  sold                  :boolean          default(FALSE), not null
 #  buyer_id              :integer
+#  search_string         :string           not null
 #
 
 require 'test_helper'

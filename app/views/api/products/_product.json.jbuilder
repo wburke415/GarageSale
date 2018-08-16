@@ -1,7 +1,7 @@
 
 json.products do
     json.set! product.id do 
-        json.extract! product, :id, :seller_id, :buyer_id, :sold, :shipping_policy_id, :title, :subtitle, :sku, :condition, :condition_description, :auction, :duration, :starting_price, :bin_price, :reserve_price, :quantity, :description, :created_at
+        json.extract! product, :id, :seller_id, :buyer_id, :sold, :shipping_policy_id, :title, :search_string, :subtitle, :sku, :condition, :condition_description, :auction, :duration, :starting_price, :bin_price, :reserve_price, :quantity, :description, :created_at
 
         product_image_ids = []
     
@@ -20,7 +20,6 @@ json.products do
             json.bidIds bid_ids
         end 
     end 
-    # will need to add foreign keys of other tables in the future
 end 
 
 if product.photos
@@ -44,14 +43,6 @@ if product.bids
     end 
 end 
 
-if product.seller
-    json.sellers do
-        json.set! product.seller.id do 
-            json.extract! product.seller, :id, :username
-        end 
-    end 
-end 
-
 if product.shipping_policy 
     json.shippingPolicies do
         json.set! product.shipping_policy.id do
@@ -60,8 +51,19 @@ if product.shipping_policy
     end 
 end 
 
+if product.seller
+    json.sellers do
+        json.set! product.seller.id do 
+            json.extract! product.seller, :id, :username
+        end 
+    end 
+end 
+
+
 if product.location 
     json.locations do
-        json.extract! product.location, :id, :user_id, :country, :state, :city, :address, :zip_code
+        json.set! product.location.id do
+            json.extract! product.location, :id, :user_id, :country, :state, :city, :address, :zip_code
+        end 
     end 
 end

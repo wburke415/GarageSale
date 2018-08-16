@@ -6,9 +6,10 @@ const locationsReducer = (state = {}, action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_PRODUCT:
-            return merge({}, state, { [action.locations.id]: action.locations });
+            return merge({}, state, action.locations);
         case RECEIVE_PRODUCTS:
-            return merge({}, { [action.locations.id]: action.locations });
+            if (action.locations) return action.locations;
+            return state;
 
         default:
             return state;

@@ -8,8 +8,9 @@ const productImagesReducer = (state = {}, action) => {
         case RECEIVE_PRODUCT:
             return merge({}, state, action.productImages);
         case RECEIVE_PRODUCTS:
-            return merge({}, action.productImages);
-    
+            if (action.productImages) return merge({}, action.productImages);
+            return state;
+            
         default:
             return state;
     }

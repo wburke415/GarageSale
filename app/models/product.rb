@@ -24,21 +24,20 @@
 #  description           :text             not null
 #  sold                  :boolean          default(FALSE), not null
 #  buyer_id              :integer
+#  search_string         :string           not null
 #
 
 class Product < ApplicationRecord
     validates :title, :condition, :duration, :starting_price, :quantity, presence: true
     validates :auction, inclusion: { in: [true, false] }
 
+    after_initialize :ensure_downcased_search_string
+
     has_many_attached :photos
 
     belongs_to :seller,
         foreign_key: :seller_id,
         class_name: :User
-
-    # belongs_to :buyer,
-    #     foreign_key: :buyer_id,
-    #     class_name: :User
 
     # belongs_to :category,
     #     foreign_key: :category_id,
@@ -67,5 +66,9 @@ class Product < ApplicationRecord
     has_many :bids,
         foreign_key: :product_id,
         class_name: :Bid
+
+    def ensure_downcased_search_string
+        self.search_string ||= self.title.downcase
+    end
 
 end

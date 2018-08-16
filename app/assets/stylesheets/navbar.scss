@@ -1,3 +1,69 @@
+.search-form {
+    width: 60%;
+    display: flex;
+    
+    .navbar-search {
+        width: calc(100% - 100px);
+        font-size: 16px;
+        color: black;
+
+        span {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+
+            .searchbar {
+                flex: 1;
+                margin-left: 30px;
+                height: 18px;
+                padding: 10px 0 9px 8px;
+                border-radius: 3px;
+                border: 1px solid #ddd;
+                font-size: 16px;
+                position: relative;
+            }
+
+            .searchbar:focus {
+                outline: none;
+            }
+
+            .search-results {
+                position: absolute;
+                top: 79px;
+                width: calc(60% - 160px);
+                margin-left: 30px;
+                background-color: white;
+                border: 1px solid #ddd;
+                border-bottom-left-radius: 3px;
+                border-bottom-right-radius: 3px;
+
+                li {
+                    padding: 10px;
+                }
+
+                li:hover {
+                    background-color: #ccc;
+                }
+            }
+        }
+    }
+
+    .search-button {
+        width: 100px;
+        height: 38px;
+        font-size: 16px;
+        font-weight: 500;
+        box-sizing: border-box;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+        color: white;
+        white-space: nowrap;
+        background: -webkit-gradient(linear, left top, left bottom, from(#0079bc), to(#00509d));
+        border-radius: 3px;
+        margin-left: 5px;
+    }
+}
+
+
 .navbar-container {
     font-family: "Helvetica neue", Helvetica, Arial, Sans-serif;
 
@@ -49,38 +115,6 @@
 
         img {
             height: 40px;
-        }
-
-        .search-form {
-            width: 50%;
-            display: flex;
-            align-items: stretch;
-            
-            .searchbar {
-                flex: 1;
-                margin-left: 30px;
-                height: 18px;
-                padding: 10px 0 9px 8px;
-                border-radius: 3px;
-                border: 1px solid #ccc;
-                font-size: 16px;
-                color: black;
-            }
-    
-            .search-button {
-                width: 100px;
-                height: 38px;
-                padding: 8px 19px;
-                font-size: 16px;
-                font-weight: 500;
-                box-sizing: border-box;
-                text-shadow: 0 1px 0 rgba(0, 0, 0, .2);
-                color: white;
-                white-space: nowrap;
-                background: -webkit-gradient(linear, left top, left bottom, from(#0079bc), to(#00509d));
-                border-radius: 3px;
-                margin-left: 5px;
-            }
         }
     }
 }

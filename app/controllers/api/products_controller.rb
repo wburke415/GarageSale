@@ -5,31 +5,10 @@ class Api::ProductsController < ApplicationController
     end
 
     def index
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        @products = Product.includes(:bids, :seller, :shipping_policy).all
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
-        debugger
+        search = params[:search].include?('%20') ? params[:search].delete("?").split("%20").join(" ") : params[:search].delete("?")
+        search = "%#{search}%".downcase
+
+        @products = Product.includes(:bids, :seller, :shipping_policy, :location).where("search_string LIKE ?", search)
     end
 
     def create

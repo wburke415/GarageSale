@@ -5,7 +5,8 @@ import { logout } from '../../actions/session_actions';
 import { fetchProducts } from '../../actions/product_actions';
 
 const mapStateToProps = (state, ownProps) => ({
-    user: state.entities.users[state.session.id]
+    user: state.entities.users[state.session.id],
+    products: state.entities.products
 });
 
 const mapDispatchToProps = dispatch => ({
