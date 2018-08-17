@@ -29,6 +29,7 @@
 
             .search-results {
                 position: absolute;
+                z-index: 1;
                 top: 79px;
                 width: calc(60% - 160px);
                 margin-left: 30px;
@@ -88,6 +89,7 @@
             }
             a:hover {
                 text-decoration: underline;
+                cursor: pointer;
             }
             i {
                 padding: 0 20px 0 20px;
@@ -100,6 +102,10 @@
                 padding-right: 5px;
                 .greeting-firstname {
                     font-weight: 700;
+
+                    .fa-sort-down {
+                        padding: 0 5px;
+                    }
                 }
                 a {
                     padding: 0px;
@@ -116,5 +122,54 @@
         img {
             height: 40px;
         }
+    }
+
+    .sign-out-container {
+        z-index: 1;
+        position: absolute;
+        top: 30px;
+        width: 150px;
+        height: 80px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+
+        .upper-container {
+            display: flex;
+            justify-content: space-between;
+
+            .fa-user {
+                font-size: 50px;
+                padding: 0;
+            }
+
+            .user-info {
+                display: flex;
+                flex-direction: column;
+
+                span {
+                    font-size: 15px;
+                }
+
+                div {
+                    padding-top: 10px;
+                    font-size: 13px;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .sign-out-button {
+            margin-top: 15px;
+        }
+    }
+
+    .rest-of-page {
+        position: absolute;
+        width: 100%;
+        height: 100%;
     }
 }

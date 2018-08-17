@@ -51,25 +51,26 @@ export default class ProductShow extends React.Component {
     
     binPrice() {
         let error;
-
-        if (this.state.errors === "You can't purchase your own product.") error = <div className="bin-error">{this.state.errors}</div>;
-
-        if (this.props.product.binPrice) {
-            return (
-                <div className="product-price">
-                    <p>Price:</p>
-                    <span>US ${this.props.product.binPrice}</span>
-                    <div className="auction-buttons">
-                        <button onClick={this.handlePurchase} className="price-button">Buy It Now</button>
-                        {error}
-                        {/* <div></div>
-                        <button className="price-button">Add to cart</button> */}
-                        <div></div>
-                        <button className="watch-list-button">Add to watch list</button>
-                        <div></div>
+        if(!this.props.product.sold) {
+            if (this.state.errors === "You can't purchase your own product.") error = <div className="bin-error">{this.state.errors}</div>;
+    
+            if (this.props.product.binPrice) {
+                return (
+                    <div className="product-price">
+                        <p>Price:</p>
+                        <span>US ${this.props.product.binPrice}</span>
+                        <div className="auction-buttons">
+                            <button onClick={this.handlePurchase} className="price-button">Buy It Now</button>
+                            {error}
+                            {/* <div></div>
+                            <button className="price-button">Add to cart</button> */}
+                            <div></div>
+                            <button className="watch-list-button">Add to watch list</button>
+                            <div></div>
+                        </div>
                     </div>
-                </div>
-            );
+                );
+            }
         }
     }
     
@@ -98,43 +99,46 @@ export default class ProductShow extends React.Component {
         else {
             const bid = { product_id: this.props.product.id, buyer_id: this.props.currentUser, bid: this.state.bid };
             this.props.createBid(bid);
-            this.setState({bid: ""});
+            this.setState({bid: "", errors: ""});
         }
     } 
     
     auctionPrice() {
-        if (this.props.product.auction) {
-            let bid = this.props.product.startingPrice;
-            if (this.props.bids.length !== 0) {
-                bid = this.props.bids.slice(-1)[0].bid || this.props.product.startingPrice;
-            }
-            const highestBid = bid.toFixed(2);
 
-            let error;
-
-            if (this.state.errors === "You can't bid on your own product." || this.state.errors === 'Your bid must be greater than the previous bid.') error = this.state.errors;
-
-        
-        
-            return (
-                <div className="product-price auction-field">
-                    <div className="auction-bid-container">
-                        <div className="current-bid">
-                            <p>Current bid:</p>
-                            <span>US ${highestBid}</span>
+        if(!this.props.product.sold) {
+            if (this.props.product.auction) {
+                let bid = this.props.product.startingPrice;
+                if (this.props.bids.length !== 0) {
+                    bid = this.props.bids.slice(-1)[0].bid || this.props.product.startingPrice;
+                }
+                const highestBid = bid.toFixed(2);
+    
+                let error;
+    
+                if (this.state.errors === "You can't bid on your own product." || this.state.errors === 'Your bid must be greater than the previous bid.') error = this.state.errors;
+    
+            
+            
+                return (
+                    <div className="product-price auction-field">
+                        <div className="auction-bid-container">
+                            <div className="current-bid">
+                                <p>Current bid:</p>
+                                <span>US ${highestBid}</span>
+                            </div>
+                            <input onChange={this.changeBid()} value={this.state.bid}/>
+                            <p className="highest-bid">Enter US ${highestBid} or more</p>
                         </div>
-                        <input onChange={this.changeBid()} value={this.state.bid}/>
-                        <p className="highest-bid">Enter US ${highestBid} or more</p>
+    
+                        <div className="auction-buttons">
+                            <div className="bid-count"><p>[</p><a>{this.props.product.bidIds.length} bids</a><p>]</p></div>
+                            <button onClick={this.submitBid} className="price-button">Place bid</button>
+                            <div></div>
+                            <div className="bid-error">{error}</div>
+                        </div>
                     </div>
-
-                    <div className="auction-buttons">
-                        <div className="bid-count"><p>[</p><a>{this.props.product.bidIds.length} bids</a><p>]</p></div>
-                        <button onClick={this.submitBid} className="price-button">Place bid</button>
-                        <div></div>
-                        <div className="bid-error">{error}</div>
-                    </div>
-                </div>
-            );
+                );
+            }
         }
     }
 
@@ -186,7 +190,7 @@ export default class ProductShow extends React.Component {
         return (
             <div className="lower-show-tabs-container">
                 <div onClick={this.switchTabs} className={descriptionClass}>Description</div>
-                <div onClick={this.switchTabs} className={shippingClass}>Shipping and payments</div>
+                {/* <div onClick={this.switchTabs} className={shippingClass}>Shipping and payments</div> */}
                 <div className="tab-spacer"></div>
             </div>
         );

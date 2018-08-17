@@ -29,7 +29,7 @@ const App = () => (
     <Switch>
       <Route exact path="/products/" component={ProductIndexContainer} />
       <Route exact path="/products/:id" component={ProductShowContainer} />
-      <Route path="/" component={SplashPageContainer} />
+      <Route exact path="/" component={SplashPageContainer} />
     </Switch>
   </div>
 );

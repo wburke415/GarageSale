@@ -1,7 +1,7 @@
 
 json.products do
     json.set! product.id do 
-        json.extract! product, :id, :seller_id, :buyer_id, :sold, :shipping_policy_id, :title, :search_string, :subtitle, :sku, :condition, :condition_description, :auction, :duration, :starting_price, :bin_price, :reserve_price, :quantity, :description, :created_at
+        json.extract! product, :id, :seller_id, :buyer_id, :sold, :shipping_policy_id, :category_id, :title, :search_string, :subtitle, :sku, :condition, :condition_description, :auction, :duration, :starting_price, :bin_price, :reserve_price, :quantity, :description, :created_at
 
         product_image_ids = []
     

@@ -37,7 +37,6 @@ export default class CreateProductForm extends React.Component {
     }
 
     handleSubmit(event) {
-        // debugger;
         event.preventDefault();
 
         const formData = new FormData();
@@ -63,7 +62,11 @@ export default class CreateProductForm extends React.Component {
             this.state.images.imageFile.forEach(file => formData.append('photos[]', file));
         }
         
-        this.props.createProduct(formData);
+        this.props.createProduct(formData)
+            .then(payload => {
+                // debugger;
+                this.props.history.push(`/products/${Object.values(payload.products)[0].id}`);
+            });
     }
 
     imagePreview(e) {

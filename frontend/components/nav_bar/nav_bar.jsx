@@ -8,20 +8,29 @@ export default class NavBar extends React.Component {
         this.state = {
             search: "",
             showResults: false,
-            sendQuery: true
+            sendQuery: true,
+            signoutActive: false
         };
 
         this.handleLogout = this.handleLogout.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.setSearch = this.setSearch.bind(this);
+        this.directToDailyDeals = this.directToDailyDeals.bind(this);
+        this.toggleSignoutButton = this.toggleSignoutButton.bind(this);
     }
 
     greeting() {
         if (this.props.user) {
             return (
                 <li className="greeting">
-                    Hi <span className="greeting-firstname">{this.props.user.firstname}!</span>
+                    Hi <span 
+                    onClick={this.toggleSignoutButton} 
+                    className="greeting-firstname">
+                        {this.props.user.firstname}!
+                        <i class="fas fa-sort-down"></i>
+                    </span>
+                    {this.signOutButton()}
                 </li>
             );
         }
@@ -35,6 +44,11 @@ export default class NavBar extends React.Component {
                 </li>
             );
         }
+    }
+
+    toggleSignoutButton(action) {
+        if(this.state.signoutActive === false) this.setState({signoutActive: true});
+        if (this.state.signoutActive === true) this.setState({signoutActive: false}); 
     }
 
     handleInput(e) {
@@ -64,6 +78,14 @@ export default class NavBar extends React.Component {
         });
     }
 
+    directToDailyDeals(e) {
+        e.preventDefault();
+        this.props.history.push({
+            pathname: '/products',
+            search: `dailydeals`
+        });
+    }
+
     searchResults() {
         let searchResults = Object.values(this.props.products)
             .filter(product => product.searchString.includes(this.state.search.toLowerCase()))
@@ -86,24 +108,30 @@ export default class NavBar extends React.Component {
         };
     }
 
-//    this is a temporary sign out button. make sure to improve on it later -----------------------------
-
     handleLogout(e) {
         e.preventDefault();
         this.props.logout().then(() => this.props.history.push("/login"));
     }
 
     signOutButton() {
-        if(this.props.user) {
+        if(this.props.user && this.state.signoutActive) {
             return (
-            <li>
-                <button onClick={this.handleLogout}>Sign out</button> 
-            </li>
+            <div>
+                <div onClick={this.toggleSignoutButton} className="rest-of-page"></div>
+                <div className="sign-out-container">
+                    <div className="upper-container">
+                        <i className="fas fa-user"></i>
+                        <div className="user-info">
+                            <span>{this.props.user.firstname} {this.props.user.lastname}</span>
+                            <div>{this.props.user.username}</div>
+                        </div>
+                    </div>
+                    <a onClick={this.handleLogout} className="sign-out-button">Sign out</a> 
+                </div>
+            </div>
             );
         }
     }
-
-//  ------------------------------------------------------------------------------------------------------
 
     render() {
         return (
@@ -111,9 +139,7 @@ export default class NavBar extends React.Component {
                 <header className="navbar-header">
                     <ul>
                         {this.greeting()}
-                        <li>|<a>Daily Deals</a>|</li>
-                        <li><a>Gift Cards</a>|</li>
-                        <li><a>Help & Contact</a></li>
+                        <li>|<a onClick={this.directToDailyDeals}>Daily Deals</a></li>
                     </ul>
 
                     <ul>
@@ -122,7 +148,6 @@ export default class NavBar extends React.Component {
                         <li><i className="fas fa-bell"></i></li>
                         <li><i className="fas fa-shopping-cart"></i></li>
                     </ul>
-                    {this.signOutButton()}
                 </header>
 
                 <div className="lower-navbar">

@@ -25,6 +25,11 @@
             transition: all 500ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
             color: rgb(251, 205, 37);
             background-color: maroon;
+            cursor: pointer;
+        }
+
+        a:hover {
+            cursor: pointer;
         }
     }
 
