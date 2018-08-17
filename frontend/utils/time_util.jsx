@@ -46,9 +46,9 @@ export const endTime = (product) => {
 
     let day; 
 
-    if (currentDate.getDay() === endDate.getDay()) {
+    if (currentDate.getDate() === endDate.getDate()) {
         day = 'Today';
-    } else if ((currentDate.getDay() + 7) < endDate) {
+    } else if ((currentDate.getDate() + 7) < endDate) {
         day = endDate.toLocaleString().slice(0, 4);
     }
     else {

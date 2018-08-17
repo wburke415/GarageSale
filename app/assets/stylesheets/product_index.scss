@@ -17,6 +17,7 @@
         .image-container {
             max-height: 140px;
             width: 225px;
+            min-width: 225px;
             border: 1px solid #ccc;
             display: flex;
             justify-content: center;
@@ -27,7 +28,8 @@
             }
 
             .portrait {
-                max-width: 100%;
+                width: auto;
+                max-width: 223px;
                 height: 138px;
             }
         }
@@ -62,7 +64,7 @@
                 display: flex;
                 margin-top: 30px;
                 justify-content: space-between;
-                // width: 450px;
+                width: 350px;
 
                 .list-item-price {
 
