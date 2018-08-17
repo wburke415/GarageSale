@@ -14,6 +14,7 @@ User.create(firstname: 'Jim', lastname: 'Burke', username: 'EnglishCompanion', e
 User.create(firstname: 'Susan', lastname: 'Burke', username: 'SuperSusan', email: 'susan-burke@comcast.net', business: false, password: 'password')
 User.create(firstname: 'Gamer', lastname: 'Gamer', username: 'Gamer2Gamer', email: 'gamer2gamer@gmail.com', business: true, password: 'password')
 User.create(firstname: "Book", lastname: "Seller", username: "TheBookSeller", email: 'thebookseller@gmail.com', business: true, password: 'password')
+User.create(firstname: "Pet Toy", lastname: "Seller", username: "DoggoToysDeluxe", email: 'doggotoysdeluxe@gmail.com', business: true, password: 'password')
 
 (1..100).each do |i|
     User.create(firstname: 'Guest', lastname: 'user', username: "guest#{i}", email: "guest#{i}@gmail.com", business: false, password: 'password')
@@ -54,14 +55,14 @@ product.photos.attach(io: file, filename: "cod4image4.jpg")
 
 # ---------------------
 
-# product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+# product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
 #     title: ,
-#     condition: ,
-#     auction: ,
+#     condition: 'New',
+#     auction: true,
 #     starting_price: ,
 #     bin_price: ,
 #     quantity: 1,
-#     description: 
+#     description: 'The best pet toy ever made!'
 # )
 
 # file = File.open("app/assets/images/.jpg")
@@ -532,3 +533,315 @@ product = Product.create(seller_id: 5, category_id: 1, payment_policy_id: 1, shi
 
 file = File.open("app/assets/images/reddeadredemption1.jpg")
 product.photos.attach(io: file, filename: "reddeadredemption1.jpg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Tennis Ball Squeaker Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 0.99,
+    bin_price: 1.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/tennisballdogtoy.jpeg")
+product.photos.attach(io: file, filename: "tennisballdogtoy.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Plus Ring Chew Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 4.99,
+    bin_price: 7.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/plusringchew.jpeg")
+product.photos.attach(io: file, filename: "plusringchew.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Crackle Squeeze Bone Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 4.99,
+    bin_price: 7.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/squeezebonedogtoy.jpeg")
+product.photos.attach(io: file, filename: "squeezebonedogtoy.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Spike Ball Dog Toy - Squeaker',
+    condition: 'New',
+    auction: true,
+    starting_price: 1.99,
+    bin_price: 4.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/spikeball.jpeg")
+product.photos.attach(io: file, filename: "spikeball.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Treat Dispensing Puppy Toy (Color Varies)',
+    condition: 'New',
+    auction: true,
+    starting_price: 6.95,
+    bin_price: 9.95,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/colortoys.jpeg")
+product.photos.attach(io: file, filename: "colortoys.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Baltimore Ravens NFL Flattie Crinkle Football Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 9.99,
+    bin_price: 11.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/ravens.jpeg")
+product.photos.attach(io: file, filename: "ravens.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Extreme Dog Toy - Treat Dispensing',
+    condition: 'New',
+    auction: true,
+    starting_price: 8.95,
+    bin_price: 11.95,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/extremetoy.jpeg")
+product.photos.attach(io: file, filename: "extremetoy.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Puppy Ring Chew Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 3.99,
+    bin_price: 6.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/puppyring.jpeg")
+product.photos.attach(io: file, filename: "puppyring.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Happy Birthday Tennis Ball Set',
+    condition: 'New',
+    auction: true,
+    starting_price: 2.99,
+    bin_price: 4.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/bdaytennis.jpeg")
+product.photos.attach(io: file, filename: "bdaytennis.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Rosie The Rhino Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 3.99,
+    bin_price: 4.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/rhino.jpeg")
+product.photos.attach(io: file, filename: "rhino.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Beaver Dog Toy - Stuffing Free',
+    condition: 'New',
+    auction: true,
+    starting_price: 2.89,
+    bin_price: 4.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/beaver.jpeg")
+product.photos.attach(io: file, filename: "beaver.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Double Bond Chew Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 4.98,
+    bin_price: 9.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/doublebone.jpeg")
+product.photos.attach(io: file, filename: "doublebone.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Flying Disc Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 0.99,
+    bin_price: 2.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/frisby.jpeg")
+product.photos.attach(io: file, filename: "frisby.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Teddy Bear Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 1.99,
+    bin_price: 4.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/teddybear.jpeg")
+product.photos.attach(io: file, filename: "teddybear.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Squeeze Stick Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 4.99,
+    bin_price: 7.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/squeezestick.jpeg")
+product.photos.attach(io: file, filename: "squeezestick.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Squeeze Ball Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 2.99,
+    bin_price: 4.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/squeezeball.jpeg")
+product.photos.attach(io: file, filename: "squeezeball.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Puppy Chew Dental Dog Bone',
+    condition: 'New',
+    auction: true,
+    starting_price: 2.65,
+    bin_price: 2.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/dentalbone.jpeg")
+product.photos.attach(io: file, filename: "dentalbones.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Ali The Alligator Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 4.58,
+    bin_price: 5.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/alligator.jpeg")
+product.photos.attach(io: file, filename: "alligator.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Duck Dog Toy Plush Squeaker',
+    condition: 'New',
+    auction: true,
+    starting_price: 1.99,
+    bin_price: 3.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/duckdogtoy.jpeg")
+product.photos.attach(io: file, filename: "duckdogtoy.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Tennis Ball Set Squeaker Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 1.99,
+    bin_price: 4.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/tennisballs.jpeg")
+product.photos.attach(io: file, filename: "tennisballs.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Elmer The Elephant Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 2.99,
+    bin_price: 5.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/elmer.jpeg")
+product.photos.attach(io: file, filename: "elmer.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Cozie Spunky Monkey Dog Toy',
+    condition: 'New',
+    auction: true,
+    starting_price: 4.99,
+    bin_price: 7.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/coziespunky.jpeg")
+product.photos.attach(io: file, filename: "coziespunky.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'CLassic Dog Toy-Treat Dispensor',
+    condition: 'New',
+    auction: true,
+    starting_price: 7.49,
+    bin_price: 19.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/treatdispensor.jpeg")
+product.photos.attach(io: file, filename: "treatdispensor.jpeg")
+
+product = Product.create(seller_id: 7, category_id: 3, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: 'Folding Toy Box',
+    condition: 'New',
+    auction: true,
+    starting_price: 2.99,
+    bin_price: 4.99,
+    quantity: 1,
+    description: 'The best pet toy ever made!'
+)
+
+file = File.open("app/assets/images/foldingtoybox.jpeg")
+product.photos.attach(io: file, filename: "foldingtoybox.jpeg")

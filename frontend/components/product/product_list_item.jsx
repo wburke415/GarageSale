@@ -4,6 +4,9 @@ import * as timeUtils from '../../utils/time_util';
 export default class ProductListItem extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            orientation: 'portrait'
+        };
 
         this.myImg = React.createRef();
     }
@@ -11,14 +14,12 @@ export default class ProductListItem extends React.Component {
     componentDidMount() {
         const width = this.myImg.current.offsetWidth;
         const height = this.myImg.current.offsetHeight;
-        if (width === 0) {
-            this.myImg.current.setAttribute("class", "distorted");
-        }
-        else if (width > height) {
-            this.myImg.current.setAttribute("class", "landscape");
+
+        if (width > height) {
+            this.setState({orientation: "landscape"});
         }
         else {
-            this.myImg.current.setAttribute("class", "portrait");
+            this.setState({orientation: "portrait"});
         }
     }
 
@@ -29,7 +30,7 @@ export default class ProductListItem extends React.Component {
         if (product.startingPrice) {
             return (
                 <div className="list-item-auction-price">
-                    <span>${product.startingPrice}</span>
+                    <span>${product.startingPrice.toFixed(2)}</span>
                     <div>{bids.length} bids</div>
                 </div>
             );
@@ -41,7 +42,7 @@ export default class ProductListItem extends React.Component {
         if (product.binPrice) {
             return (
                 <div className="list-item-bin-price">
-                    <span>${product.binPrice}</span>
+                    <span>${product.binPrice.toFixed(2)}</span>
                     <div>Buy It Now</div>
                 </div>
             );
@@ -72,7 +73,7 @@ export default class ProductListItem extends React.Component {
         return (
             <li className="product-list-item">
                 <div className="image-container">
-                    <a href={`/#/products/${product.id}`}><img ref={this.myImg} src={image.imageUrl} /></a>
+                    <a href={`/#/products/${product.id}`}><img ref={this.myImg} className={this.state.orientation} src={image.imageUrl} /></a>
                 </div>
 
                 <div className="list-item-content">

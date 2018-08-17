@@ -21,7 +21,7 @@ export default class ProductShow extends React.Component {
     }
     
     componentDidMount() {
-        if (!this.props.product) {
+        if (!this.props.product || !this.props.product[this.props.match.params.id]) {
             this.props.fetchProduct(this.props.match.params.id);
         }
     }
@@ -82,9 +82,11 @@ export default class ProductShow extends React.Component {
         event.preventDefault();
 
         let prevBid = this.props.product.startingPrice;
-        if (this.props.bids.length !== 0) {
+        
+        if (prevBid && Object.values(this.props.bids).length !== 0) {
             prevBid = this.props.bids.slice(-1)[0].bid || this.props.product.startingPrice;
         }
+
         const highestBid = prevBid.toFixed(2);
 
         if (!this.props.currentUser) {
@@ -93,7 +95,7 @@ export default class ProductShow extends React.Component {
         else if (this.props.currentUser === this.props.product.sellerId) {
             this.setState({errors: "You can't bid on your own product."});
         }
-        else if (this.state.bid < highestBid) {
+        else if (parseFloat(this.state.bid) < parseFloat(highestBid)) {
             this.setState({errors: 'Your bid must be greater than the previous bid.'});
         }
         else {

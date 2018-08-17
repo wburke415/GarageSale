@@ -32,7 +32,6 @@ gem 'sass', '~> 3.5.7'
 gem 'jquery-rails'
 gem 'rails_12factor'
 gem "aws-sdk-s3"
-gem 'mini_magick'
 #-----------------------------------
 
 # Use ActiveStorage variant

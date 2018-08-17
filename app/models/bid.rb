@@ -26,6 +26,7 @@ class Bid < ApplicationRecord
         bid = Bid.where('product_id = ?', self.product_id).order('bid DESC').limit(1).select('bid')
 
         if bid[0] && bid[0].bid >= self.bid
+            debugger
             errors.add(:bid, 'Bid must be higher than the previous bid')
         end 
     end

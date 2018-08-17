@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import NavBar from './nav_bar';
 import { logout } from '../../actions/session_actions';
-import { fetchProducts } from '../../actions/product_actions';
+import { fetchProducts, clearProducts } from '../../actions/product_actions';
 
 const mapStateToProps = (state, ownProps) => ({
     user: state.entities.users[state.session.id],
@@ -11,7 +11,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(logout()),
-    fetchProducts: search => dispatch(fetchProducts(search))
+    fetchProducts: search => dispatch(fetchProducts(search)),
+    clearProducts: () => dispatch(clearProducts())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

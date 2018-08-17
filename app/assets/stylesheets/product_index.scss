@@ -15,26 +15,20 @@
         display: flex;
 
         .image-container {
-            height: 225px;
+            max-height: 140px;
             width: 225px;
             border: 1px solid #ccc;
             display: flex;
             justify-content: center;
-            align-items: center;
-
-            .distorted {
-                width: 223px;
-                height: 223px;
-            }
 
             .landscape {
                 width: 223px;
-                height: auto;
+                max-height: 100%;
             }
 
             .portrait {
-                width: auto;
-                height: 223px;
+                max-width: 100%;
+                height: 138px;
             }
         }
 

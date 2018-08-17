@@ -2,7 +2,8 @@ import merge from 'lodash/merge';
 
 import {
     RECEIVE_PRODUCT,
-    RECEIVE_PRODUCTS
+    RECEIVE_PRODUCTS,
+    CLEAR_PRODUCTS
 } from '../actions/product_actions';
 
 const productsReducer = (state = {}, action) => {
@@ -15,6 +16,9 @@ const productsReducer = (state = {}, action) => {
         case RECEIVE_PRODUCTS:
             if (action.products) return action.products;
             return state;
+
+        case CLEAR_PRODUCTS:
+            return {};
 
         default:
             return state;

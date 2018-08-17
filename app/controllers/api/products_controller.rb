@@ -7,11 +7,18 @@ class Api::ProductsController < ApplicationController
     def index
 
         if params[:search] == "splash"
-            products = Product.all
-            @products = products.sample(20)
+            products = Product.all.includes(:bids, :seller, :shipping_policy, :location)
+            @products = products.sample(50)
         elsif params[:search] == "?dailydeals"
-            products = Product.all
-            @products = products.sort_by {|product| product.starting_price || product.bin_price }[0..20]
+            products = Product.all.includes(:bids, :seller, :shipping_policy, :location)
+            selected_products = products.select do |product| 
+                price = product.starting_price || product.bin_price
+                (price > 5 && price < 20)
+            end 
+            @products = selected_products.sample(20)
+        elsif params[:search][1..9] == "category="
+            category = params[:search][10..-1].to_i
+             @products = Product.includes(:bids, :seller, :shipping_policy, :location).where("category_id = ?", category)
         else
             search = params[:search].include?('%20') ? params[:search].delete("?").split("%20").join(" ") : params[:search].delete("?")
             search = "%#{search}%".downcase

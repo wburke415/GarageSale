@@ -9,15 +9,18 @@ export default class NavBar extends React.Component {
             search: "",
             showResults: false,
             sendQuery: true,
-            signoutActive: false
+            signoutActive: false,
+            showCategories: false
         };
 
+        this.searchCategory = this.searchCategory.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.setSearch = this.setSearch.bind(this);
         this.directToDailyDeals = this.directToDailyDeals.bind(this);
         this.toggleSignoutButton = this.toggleSignoutButton.bind(this);
+        this.toggleCategories = this.toggleCategories.bind(this);
     }
 
     greeting() {
@@ -28,7 +31,7 @@ export default class NavBar extends React.Component {
                     onClick={this.toggleSignoutButton} 
                     className="greeting-firstname">
                         {this.props.user.firstname}!
-                        <i class="fas fa-sort-down"></i>
+                        <i className="fas fa-sort-down"></i>
                     </span>
                     {this.signOutButton()}
                 </li>
@@ -62,11 +65,15 @@ export default class NavBar extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.history.push({
-            pathname: '/products',
-            search: `?${this.state.search}`
-        });
-        this.toggleResults("hide");
+        this.props.clearProducts();
+        this.setState({showResults: false});
+        this.props.fetchProducts(this.state.search)
+        .then(
+            this.props.history.push({
+                pathname: '/products',
+                search: `?${this.state.search}`
+            })
+        );
     }
 
     setSearch(e) {
@@ -133,6 +140,38 @@ export default class NavBar extends React.Component {
         }
     }
 
+    toggleCategories(e) {
+        if(this.state.showCategories === false) this.setState({showCategories: true});
+        if(this.state.showCategories === true) this.setState({showCategories: false});
+    }
+
+    searchCategory(event) {
+        this.props.clearProducts();
+        this.setState({ showCategories: false });
+        this.props.fetchProducts(`?category=${event.target.value}`)
+            .then(
+                this.props.history.push({
+                    pathname: '/products',
+                    search: `?category=${event.target.value}`
+                })
+            );
+    }
+
+    categories() {
+        if(this.state.showCategories) {
+            return (
+                <div>
+                    <ul className="category-dropdown">
+                        <li value={2} onClick={this.searchCategory}>Books</li>
+                        <li value={1} onClick={this.searchCategory}>Video Games</li>
+                        <li value={3} onClick={this.searchCategory}>Pet Toys</li>
+                    </ul>
+                    <div className="rest-of-page" onClick={this.toggleCategories}></div>
+                </div>
+            );
+        }
+    }
+
     render() {
         return (
             <div className="navbar-container">
@@ -155,7 +194,11 @@ export default class NavBar extends React.Component {
                         <img src={window.logo} />
                     </Link>
                     <form onSubmit={this.handleSubmit} className="search-form">
-
+                        <div className="category-search" onClick={this.toggleCategories}>
+                            <span>Shop by category</span>
+                            {this.categories()}
+                            <i className="fas fa-sort-down"></i>
+                        </div>
                         <div className="navbar-search">
                             <ReactCSSTransitionGroup
                                 transitionName="example"

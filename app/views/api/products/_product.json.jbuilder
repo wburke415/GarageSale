@@ -54,7 +54,7 @@ end
 if product.seller
     json.sellers do
         json.set! product.seller.id do 
-            json.extract! product.seller, :id, :username
+            json.extract! product.seller, :id, :username, :business
         end 
     end 
 end 

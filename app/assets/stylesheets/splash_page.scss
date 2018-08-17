@@ -39,14 +39,15 @@
         margin-top: 40px;
 
         h1 {
+            font-family: "Market Sans", Arial, sans-serif;
             margin-left: 40px;
             font-size: 32px;
-            font-weight: 700;
+            font-weight: 500;
         }
 
         ul {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             margin-top: 20px;
     
             .splash-page-item {
@@ -58,8 +59,12 @@
                     height: 225px;
     
                     img {
-                        width: 100%;
-                        height: 100%;
+                        width: 75%;
+                        height: 90%;
+                    }
+
+                    img:hover {
+                        border: 2px solid #666;
                     }
                 }
     
@@ -67,7 +72,7 @@
                     font-family: "Market Sans", Arial, sans-serif;
                     font-weight: bold;
                     font-size: 1rem;
-                    margin-top: 16px;
+                    margin-top: 5px;
                 }
             }
         }

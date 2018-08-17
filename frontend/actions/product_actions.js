@@ -2,6 +2,7 @@ import * as APIUtil from '../utils/product_api_util';
 
 export const RECEIVE_PRODUCT = "RECEIVE_PRODUCT";
 export const RECEIVE_PRODUCTS = "RECEIVE_PRODUCTS";
+export const CLEAR_PRODUCTS = "CLEAR_PRODUCTS";
 
 export const receiveProduct = payload => ({
     type: RECEIVE_PRODUCT,
@@ -21,6 +22,10 @@ export const receiveProducts = payload => ({
     sellers: payload.sellers,
     shippingPolicies: payload.shippingPolicies,
     locations: payload.locations
+});
+
+export const clearProducts = () => ({
+    type: CLEAR_PRODUCTS
 });
 
 export const fetchProduct = id => dispatch => (
