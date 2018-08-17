@@ -13,16 +13,15 @@ export default class ProductShowImages extends React.Component {
         this.pushToNew = this.pushToNew.bind(this);
     }
 
-    switchCurrentMainImage(e) {
-        this.setState({currentMainImage: e.target.id});
-        this.setState({selected: true});
-    }
-
     pushToNew(e) {
         e.preventDefault();
         this.props.history.push("/products/new");
     }
 
+    switchCurrentMainImage(e) {
+        this.setState({currentMainImage: e.target.id});
+        this.setState({selected: true});
+    }
 
     render() {
         const {currentMainImage} = this.state;
