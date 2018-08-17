@@ -15,6 +15,7 @@ import NavBarContainer from './nav_bar/nav_bar_container';
 import ProductShowContainer from './product/product_show_container';
 import CreateProductFormContainer from './product/create_product_form_container';
 import ProductIndexContainer from './product/product_index_container';
+import SplashPageContainer from './splash_page/splash_page_container';
 
 const App = () => (
   <div>
@@ -28,6 +29,7 @@ const App = () => (
     <Switch>
       <Route exact path="/products/" component={ProductIndexContainer} />
       <Route exact path="/products/:id" component={ProductShowContainer} />
+      <Route path="/" component={SplashPageContainer} />
     </Switch>
   </div>
 );

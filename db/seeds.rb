@@ -54,31 +54,155 @@ product.photos.attach(io: file, filename: "cod4image4.jpg")
 
 # ---------------------
 
+# product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+#     title: ,
+#     condition: ,
+#     auction: ,
+#     starting_price: ,
+#     bin_price: ,
+#     quantity: 1,
+#     description: 
+# )
+
+# file = File.open("app/assets/images/.jpg")
+# product.photos.attach(io: file, filename: ".jpg")
+
 product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
-    title: ,
-    condition: ,
-    auction: ,
-    starting_price: ,
-    bin_price: ,
+    title: "The Great Gatsby",
+    condition: "New",
+    auction: false,
+    bin_price: 9.99,
     quantity: 1,
-    description: 
+    description: 'he Great Gatsby, F. Scott Fitzgerald’s third book, stands as the supreme achievement of his career. This exemplary novel of the Jazz Age has been acclaimed by generations of readers. The Great Gatsby, F. Scott Fitzgeralds third book, stands as the supreme achievement of his career. This exemplary novel of the Jazz Age has been acclaimed by generations of readers. The story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan, of lavish parties on Long Island at a time when The New York Times noted “gin was the national drink and sex the national obsession,” it is an exquisitely crafted tale of America in the 1920s.'
 )
 
-file = File.open("app/assets/images/.jpg")
-product.photos.attach(io: file, filename: ".jpg")
+file = File.open("app/assets/images/gatsby.jpg")
+product.photos.attach(io: file, filename: "gatsby.jpg")
+
+product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: "Of Mice and Men",
+    condition: "Used",
+    auction: true,
+    starting_price: 14.99,
+    bin_price: 19.99,
+    quantity: 1,
+    description: "While the powerlessness of the laboring class is a recurring theme in Steinbeck's work of the late 1930s, he narrowed his focus when composing Of Mice and Men (1937), creating an intimate portrait of two men facing a world marked by petty tyranny, misunderstanding, jealousy, and callousness. But though the scope is narrow, the theme is universal; a friendship and a shared dream that makes an individual's existence meaningful."
+)
+
+file = File.open("app/assets/images/miceandmen.jpg")
+product.photos.attach(io: file, filename: "miceandmen.jpg")
+
+product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: "The Hate U Give",
+    condition: "New",
+    auction: false,
+    bin_price: 12.95,
+    quantity: 1,
+    description: 'Eight Starred Reviews! "Absolutely riveting!" —Jason Reynolds "Stunning." —John Green "This story is necessary. This story is important." —Kirkus Reviews (starred review) "Heartbreakingly topical." —Publishers Weekly (starred review)'
+)
+
+file = File.open("app/assets/images/thehateyougive.jpg")
+product.photos.attach(io: file, filename: "thehateyougive.jpg")
+
+product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: "Lord of the Flies",
+    condition: "Used",
+    auction: false,
+    bin_price: 9.99,
+    quantity: 1,
+    description: "Lord of the Flies remains as provocative today as when it was first published in 1954, igniting passionate debate with its startling, brutal portrait of human nature. Though critically acclaimed, it was largely ignored upon its initial publication. Yet soon it became a cult favorite among both students and literary critics who compared it to J.D. Salinger's The Catcher in the Rye in its influence on modern thought and literature."
+)
+
+file = File.open("app/assets/images/lordoftheflies.jpg")
+product.photos.attach(io: file, filename: "lordoftheflies.jpg")
+
+product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: "1984",
+    condition: "Used",
+    auction: true,
+    starting_price: 4.99,
+    bin_price: 9.99,
+    quantity: 1,
+    description: "View our feature on George Orwell’s 1984.Written in 1948, 1984 was George Orwell’s chilling prophecy about the future. And while 1984 has come and gone, Orwell’s narrative is timelier than ever. 1984 presents a startling and haunting vision of the world, so powerful that it is completely convincing from start to finish. No one can deny the power of this novel, its hold on the imaginations of multiple generations of readers, or the resiliency of its admonitions—a legacy that seems only to grow with the passage of time."
+)
+
+file = File.open("app/assets/images/1984.jpg")
+product.photos.attach(io: file, filename: "1984.jpg")
+
+product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: "Gold Is A Better Way: And Other Wealth Building Secrets Wall Street Doesn't Want You To Know",
+    condition: "New",
+    auction: false,
+    bin_price: 24.99,
+    quantity: 1,
+    description: "Gold Is A Better Way is a financially enlightening guide that reveals the shocking truth about where the markets are headed and why owning physical gold is a far better strategy to building real wealth as opposed to the inflated paper assets Wall Street recommends. There is a massive environmental shift happening in financial markets. Interest rates are rising and what has been very easy for investors in the past is about to become very hard. Everything people think they know about investing is being turned on its head. It's time to change investing behavior."
+)
+
+file = File.open("app/assets/images/goldisbetter.jpg")
+product.photos.attach(io: file, filename: "goldisbetter.jpg")
+
+product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: "To Kill a Mockingbird",
+    condition: "Used",
+    auction: true,
+    starting_price: 9.99,
+    bin_price: 19.99,
+    quantity: 1,
+    description: "Lawyer Atticus Finch defends the real mockingbird of Harper Lee's classic, Puliter Prize-winning novel—a black man charged with the rape of a white woman. Through the eyes of Atticus's children, Scout and Jem Finch, Harper Lee explores with rich humor and unanswering honesty the irrationality of adult attitudes toward race and class in the Deep South of the 1930's."
+)
+
+file = File.open("app/assets/images/mockingbird.jpg")
+product.photos.attach(io: file, filename: "mockingbird.jpg")
+
+product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: "The Russia Hoax: The Illicit Scheme to Clear Hillary Clinton and Frame Donald Trump",
+    condition: "New",
+    auction: true,
+    starting_price: 16.95,
+    quantity: 1,
+    description: "Fox News legal analyst Gregg Jarrett reveals the real story behind Hillary Clinton’s deep state collaborators in government and exposes their nefarious actions during and after the 2016 election. The Russia Hoax reveals how persons within the FBI and Barack Obama’s Justice Department worked improperly to help elect Hillary Clinton and defeat Donald Trump in the 2016 presidential election. When this suspected effort failed, those same people appear to have pursued a contrived investigation of President Trump in an attempt to undo the election results and remove him as president." 
+)
+
+file = File.open("app/assets/images/russiahoax.jpg")
+product.photos.attach(io: file, filename: "russiahoax.jpg")
+
+product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: "Texas Ranger",
+    condition: 'Used',
+    auction: true,
+    starting_price: 9.99,
+    bin_price: 14.99,
+    quantity: 1,
+    description: "Across the ranchlands and cities of his home state, Rory Yates's discipline and law-enforcement skills have carried him far: from local highway patrolman to the honorable rank of Texas Ranger. He arrives in his hometown to find a horrifying crime scene and a scathing accusation: he is named a suspect in the murder of his ex-wife, Anne, a devoted teacher whose only controversial act was ending her marriage to a Ranger."
+)
+
+file = File.open("app/assets/images/texasranger.jpg")
+product.photos.attach(io: file, filename: "texasranger.jpg")
+
+product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
+    title: "Crazy Rich Asians",
+    condition: "New",
+    auction: false,
+    bin_price: 19.99,
+    quantity: 1,
+    description: "When New Yorker Rachel Chu agrees to spend the summer in Singapore with her boyfriend, Nicholas Young, she envisions a humble family home and quality time with the man she hopes to marry. But Nick has failed to give his girlfriend a few key details. One, that his childhood home looks like a palace; two, that he grew up riding in more private planes than cars; and three, that he just happens to be the country’s most eligible bachelor."
+)
+
+file = File.open("app/assets/images/crazyrichasians.jpg")
+product.photos.attach(io: file, filename: "crazyrichasians.jpg")
 
 product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
     title: "Blood Communion: A Tale of Prince Lestat (Signed Book)",
-    condition: ,
-    auction: ,
-    starting_price: ,
-    bin_price: ,
+    condition: 'Used',
+    auction: true,
+    starting_price: 14.95,
+    bin_price: 19.99,
     quantity: 1,
-    description: 
+    description: "The Vampire Chronicles continue with a riveting, rich saga--part adventure, part fairy-tale--of Prince Lestat and the story of the Blood Communion as he tells the tale of his coming to rule the vampire world and the eternal struggle to find belonging, a place in the universe for the undead, and how, against his will, he must battle the menacing, seemingly unstoppable force determined to thwart his vision and destroy the entire vampire netherworld."
 )
 
-file = File.open("app/assets/images/.jpg")
-product.photos.attach(io: file, filename: ".jpg")
+file = File.open("app/assets/images/bloodcommunion1.jpg")
+product.photos.attach(io: file, filename: "bloodcommunion1.jpg")
 
 product = Product.create(seller_id: 6, category_id: 2, payment_policy_id: 1, shipping_policy_id: 1, return_policy_id: 1, 
     title: "Unhinged: An Insider's Account of the Trump White House",

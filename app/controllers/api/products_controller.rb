@@ -5,10 +5,18 @@ class Api::ProductsController < ApplicationController
     end
 
     def index
-        search = params[:search].include?('%20') ? params[:search].delete("?").split("%20").join(" ") : params[:search].delete("?")
-        search = "%#{search}%".downcase
 
-        @products = Product.includes(:bids, :seller, :shipping_policy, :location).where("search_string LIKE ?", search)
+        if params[:search] == "splash"
+            products = Product.all
+            @products = products.sample(20)
+        elsif params[:search] == "?dailydeals"
+            products = Product.all
+            @products = products.sort_by {|product| product.starting_price || product.bin_price }[0..20]
+        else
+            search = params[:search].include?('%20') ? params[:search].delete("?").split("%20").join(" ") : params[:search].delete("?")
+            search = "%#{search}%".downcase
+            @products = Product.includes(:bids, :seller, :shipping_policy, :location).where("search_string LIKE ?", search)
+        end 
     end
 
     def create

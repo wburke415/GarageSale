@@ -67,7 +67,8 @@ export default class NavBar extends React.Component {
     searchResults() {
         let searchResults = Object.values(this.props.products)
             .filter(product => product.searchString.includes(this.state.search.toLowerCase()))
-            .map(product => product.title);
+            .map(product => product.title)
+            .slice(0,10);
 
         if (this.state.search && this.state.showResults) {
             return (

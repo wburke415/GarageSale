@@ -128,7 +128,7 @@ export default class ProductShow extends React.Component {
                     </div>
 
                     <div className="auction-buttons">
-                        <div className="bid-count"><p>[</p><a href="/placeholder">{this.props.product.bidIds.length} bids</a><p>]</p></div>
+                        <div className="bid-count"><p>[</p><a>{this.props.product.bidIds.length} bids</a><p>]</p></div>
                         <button onClick={this.submitBid} className="price-button">Place bid</button>
                         <div></div>
                         <div className="bid-error">{error}</div>
@@ -154,7 +154,7 @@ export default class ProductShow extends React.Component {
                     <div className="shipping-service">
                         <p className="product-show-policy-label">Shipping:</p> 
                         <span>${shippingPolicy.shippingCost.toFixed(2)}</span> 
-                        <div>{shippingPolicy.service} | <a href='/placeholder'>See details</a></div>
+                        <div>{shippingPolicy.service} | <a>See details</a></div>
                     </div>
                     <div className="item-location">Item location: {location.city}, {location.state}, {location.country}</div>
                     <div className="ships-to">Ships to: United States</div>
@@ -167,7 +167,7 @@ export default class ProductShow extends React.Component {
 
                 <div className="return-policy">
                     <p className="product-show-policy-label">Returns:</p> 
-                    <span>Seller does not accept returns | <a href='/placeholder'>See details</a></span>
+                    <span>Seller does not accept returns | <a>See details</a></span>
                 </div>
             </div>
         );
