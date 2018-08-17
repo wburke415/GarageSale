@@ -23,4 +23,4 @@ Frontend Redux state is split into various segments for users, products, bids, i
 User pages with listings of all created or purchased products
 Product feedback
 
-![preview_snippet]('app/assets/images/preview_snippet')
+![preview_snippet](/app/assets/images/preview_snippet)
