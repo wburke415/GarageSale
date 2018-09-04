@@ -65,7 +65,7 @@ export default class NavBar extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({showResults: false});
+        this.setState({showResults: false, search: ''});
         this.props.fetchProducts(this.state.search)
         .then(
             this.props.history.push({
