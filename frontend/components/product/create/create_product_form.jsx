@@ -39,24 +39,13 @@ export default class CreateProductForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
+        const { product } = this.state;
         const formData = new FormData();
-        formData.append('product[sellerId]', this.state.product.sellerId);
-        formData.append('product[paymentPolicyId]', this.state.product.paymentPolicyId);
-        formData.append('product[returnPolicyId]', this.state.product.returnPolicyId);
-        formData.append('product[categoryId]', this.state.product.categoryId);
-        formData.append('product[shippingPolicyId]', this.state.product.shippingPolicyId);
-        formData.append('product[title]', this.state.product.title);
-        formData.append('product[subtitle]', this.state.product.subtitle);
-        formData.append('product[sku]', this.state.product.sku);
-        formData.append('product[condition]', this.state.product.condition);
-        formData.append('product[conditionDescription]', this.state.product.conditionDescription);
-        formData.append('product[description]', this.state.product.description);
-        formData.append('product[auction]', this.state.product.auction);
-        formData.append('product[duration]', this.state.product.duration);
-        formData.append('product[startingPrice]', this.state.product.startingPrice);
-        formData.append('product[binPrice]', this.state.product.binPrice);
-        formData.append('product[reservePrice]', this.state.product.reservePrice);
-        formData.append('product[quantity]', this.state.product.quantity);
+
+        for (let i = 0; i < Object.keys(product).length; i++) {
+          let key = Object.keys(product)[i];
+          formData.append(`product[${key}]`, product[key])
+        }
         
         if (this.state.images.imageFile) {
             this.state.images.imageFile.forEach(file => formData.append('photos[]', file));
@@ -64,7 +53,6 @@ export default class CreateProductForm extends React.Component {
         
         this.props.createProduct(formData)
             .then(payload => {
-                // debugger;
                 this.props.history.push(`/products/${Object.values(payload.products)[0].id}`);
             });
     }
@@ -82,11 +70,7 @@ export default class CreateProductForm extends React.Component {
             that.setState({images: newState});
         };
 
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            // this.setState({images: { imageUrl: [], imageFile: null }});
-        }
+        if (file) reader.readAsDataURL(file);
     }
 
     handleChange(property) {

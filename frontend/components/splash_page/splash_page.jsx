@@ -11,10 +11,6 @@ export default class SplashPage extends React.Component {
         this.props.fetchProducts("splash");
     }
 
-    componentWillUnmount() {
-        this.props.clearProducts();
-    }
-
     directToDailyDeals(e) {
         e.preventDefault();
         this.props.history.push({

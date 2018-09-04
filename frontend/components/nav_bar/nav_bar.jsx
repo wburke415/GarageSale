@@ -65,7 +65,6 @@ export default class NavBar extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.clearProducts();
         this.setState({showResults: false});
         this.props.fetchProducts(this.state.search)
         .then(
@@ -146,7 +145,6 @@ export default class NavBar extends React.Component {
     }
 
     searchCategory(event) {
-        this.props.clearProducts();
         this.setState({ showCategories: false });
         this.props.fetchProducts(`?category=${event.target.value}`)
             .then(

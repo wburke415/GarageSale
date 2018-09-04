@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import ProductShow from './product_show';
-import { fetchProduct, createBid, updateProduct } from '../../actions/product_actions';
+import { fetchProduct, createBid, updateProduct } from '../../../actions/product_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const _nullProduct = null;

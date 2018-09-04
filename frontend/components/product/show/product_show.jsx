@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ProductShowImages from './product_show_components/images';
-import sellerInfo from './product_show_components/seller_info';
-import * as timeUtils from '../../utils/time_util';
+import ProductShowImages from './images';
+import sellerInfo from './seller_info';
+import * as timeUtils from '../../../utils/time_util';
 
 export default class ProductShow extends React.Component {
     constructor(props) {
@@ -225,27 +225,31 @@ export default class ProductShow extends React.Component {
                 {this.itemSoldBanner()}
                 <div className="upper-show-page">
                     <ProductShowImages history={this.props.history} productImages={this.props.productImages}/>
-                    <div className="show-page-content">
-                        <h1 className="product-show-title">{this.props.product.title}</h1>
-                        <h2 className="product-show-subtitle">{this.props.product.subtitle}</h2>
-                        <div className="product-condition"><p>Condition:</p> <span>{this.props.product.condition}</span></div>
-                        {this.conditionDescription()}
-                        
-                        <div className="time-left">
-                            {timeUtils.timeLeft(timeStrings)}
-                            {timeUtils.endTime(this.props.product)}
+                    <div className="show-page-content-container">
+                      <h1 className="product-show-title">{this.props.product.title}</h1>
+                      <h2 className="product-show-subtitle">{this.props.product.subtitle}</h2>
+                      <div className="content-seller-info-container">
+                        <div className="show-page-content">
+                            <div className="product-condition"><p>Condition:</p> <span>{this.props.product.condition}</span></div>
+                            {this.conditionDescription()}
+                            
+                            <div className="time-left">
+                                {timeUtils.timeLeft(timeStrings)}
+                                {timeUtils.endTime(this.props.product)}
+                            </div>
+
+                            <div className="product-bid-container"> 
+                                {this.auctionPrice()}
+                                {this.auctionBinDivider()}
+                                {this.binPrice()}
+                            </div>
+
+                            {this.policies()}
+
                         </div>
-
-                        <div className="product-bid-container"> 
-                            {this.auctionPrice()}
-                            {this.auctionBinDivider()}
-                            {this.binPrice()}
-                        </div>
-
-                        {this.policies()}
-
+                        {sellerInfo(this.props.seller)}
+                      </div>
                     </div>
-                    {sellerInfo(this.props.seller)}
                 </div>
 
                 <div className="lower-show-page-container">

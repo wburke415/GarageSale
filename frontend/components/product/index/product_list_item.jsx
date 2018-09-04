@@ -1,5 +1,5 @@
 import React from 'react';
-import * as timeUtils from '../../utils/time_util';
+import * as timeUtils from '../../../utils/time_util';
 
 export default class ProductListItem extends React.Component {
     constructor(props) {

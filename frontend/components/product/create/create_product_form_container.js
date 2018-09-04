@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import CreateProductForm from './create_product_form';
-import { createProduct } from '../../actions/product_actions';
+import { createProduct } from '../../../actions/product_actions';
 
 const mapStateToProps = (state, ownProps) => ({
     currentUser: state.session.id
