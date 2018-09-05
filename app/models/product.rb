@@ -33,6 +33,7 @@ class Product < ApplicationRecord
     validate :ensure_valid_price
 
     after_initialize :ensure_downcased_search_string
+    attr_accessor :daily_deal
 
     has_many_attached :photos
 

@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
     let products;
     const {search} = ownProps.location;
 
-    if (search.includes('dailydeals') || search.includes('category')) {
+    if (search.includes('dailydeals')) {
       products = Object.values(state.entities.products);
     } else {
       let parsedSearch = search.split('%20')

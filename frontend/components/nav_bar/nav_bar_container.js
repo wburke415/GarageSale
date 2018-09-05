@@ -12,7 +12,6 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(logout()),
     fetchProducts: search => dispatch(fetchProducts(search)),
-    clearProducts: () => dispatch(clearProducts())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
