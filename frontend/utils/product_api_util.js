@@ -13,6 +13,14 @@ export const fetchProducts = search => {
     });
 };
 
+export const fetchProductTitles = search => {
+    return $.ajax({
+        method: 'GET',
+        url: `api/products/search`,
+        data: { search }
+    });
+};
+
 export const createProduct = product => {
     return $.ajax({
         method: 'POST',

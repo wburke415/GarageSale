@@ -9,7 +9,12 @@ const mapStateToProps = (state, ownProps) => {
 
     if (search.includes('dailydeals')) {
       products = Object.values(state.entities.products);
+    } else if (search.includes('category=')) {
+
+      let category = search.split('=')[-1];
+      products = Object.values(state.entities.products).filter(product => product.category === category);
     } else {
+
       let parsedSearch = search.split('%20')
         .join(' ')
         .replace('?', '')

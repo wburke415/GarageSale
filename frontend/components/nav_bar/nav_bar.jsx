@@ -102,8 +102,8 @@ export default class NavBar extends React.Component {
           </Link>
 
           <SearchBar
-            fetchProducts={this.props.fetchProducts}
-            products={this.props.products}
+            fetchProductTitles={this.props.fetchProductTitles}
+            searchResults={this.props.searchResults}
             history={this.props.history} />
         </div>
 

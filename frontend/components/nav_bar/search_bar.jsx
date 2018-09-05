@@ -23,7 +23,7 @@ export default class SearchBar extends React.Component {
   handleInput(e) {
     this.setState({ search: e.target.value }, () => {
       if (this.state.sendQuery) {
-        this.setState({ sendQuery: false }, () => this.props.fetchProducts(this.state.search));
+        this.setState({ sendQuery: false }, () => this.props.fetchProductTitles(this.state.search));
       }
       if (this.state.search === "") this.setState({ sendQuery: true });
     });
@@ -31,14 +31,13 @@ export default class SearchBar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({ showResults: false, search: '' });
-    this.props.fetchProducts(this.state.search)
-      .then(
-        this.props.history.push({
-          pathname: '/products',
-          search: `?${this.state.search}`
-        })
-      );
+    let searchBar = document.getElementsByClassName('searchbar')[0];
+    searchBar.blur();
+    this.setState({ search: '' });
+    this.props.history.push({
+      pathname: '/products',
+      search: `?${this.state.search}`
+    })
   }
 
   setSearch(e) {
@@ -57,18 +56,15 @@ export default class SearchBar extends React.Component {
 
   searchCategory(event) {
     this.setState({ showCategories: false });
-    this.props.fetchProducts(`?category=${event.target.value}`)
-      .then(
-        this.props.history.push({
-          pathname: '/products',
-          search: `?category=${event.target.value}`
-        })
-      );
+    this.props.history.push({
+      pathname: '/products',
+      search: `?category=${event.target.value}`
+    });
   }
 
   searchResults() {
-    let searchResults = Object.values(this.props.products)
-      .filter(product => product.searchString.includes(this.state.search.toLowerCase()))
+    let searchResults = this.props.searchResults
+      .filter(product => product.title.toLowerCase().includes(this.state.search.toLowerCase()))
       .map(product => product.title)
       .slice(0, 10);
 

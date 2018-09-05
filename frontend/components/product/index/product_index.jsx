@@ -12,8 +12,8 @@ export default class ProductIndex extends React.Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        if (this.props.match.params.id !== nextProps.match.params.id) {
-            this.props.fetchProducts(this.props.location.search);
+        if (this.props.location.search !== nextProps.location.search) {
+            this.props.fetchProducts(nextProps.location.search);
         }
     }
 
