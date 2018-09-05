@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
+import CategoryDropdown from './category_dropdown';
+
 export default class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -9,15 +11,12 @@ export default class SearchBar extends React.Component {
       search: "",
       showResults: false,
       sendQuery: true,
-      showCategories: false,
-      showCategories: false
     };
 
-    this.searchCategory = this.searchCategory.bind(this);
+    
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setSearch = this.setSearch.bind(this);
-    this.toggleCategories = this.toggleCategories.bind(this);
   }
 
   handleInput(e) {
@@ -49,19 +48,6 @@ export default class SearchBar extends React.Component {
     });
   }
 
-  toggleCategories(e) {
-    if (this.state.showCategories === false) this.setState({ showCategories: true });
-    if (this.state.showCategories === true) this.setState({ showCategories: false });
-  }
-
-  searchCategory(event) {
-    this.setState({ showCategories: false });
-    this.props.history.push({
-      pathname: '/products',
-      search: `?category=${event.target.value}`
-    });
-  }
-
   searchResults() {
     let searchResults = this.props.searchResults
       .filter(product => product.title.toLowerCase().includes(this.state.search.toLowerCase()))
@@ -84,46 +70,22 @@ export default class SearchBar extends React.Component {
     };
   }
 
-  categories() {
-    if (this.state.showCategories) {
-
-    return (
-      <div>
-        <ul className="category-dropdown">
-          <li value={2} onClick={this.searchCategory}>Books</li>
-          <li value={1} onClick={this.searchCategory}>Video Games</li>
-          <li value={3} onClick={this.searchCategory}>Pet Toys</li>
-        </ul>
-        <div className="rest-of-page" onClick={this.toggleCategories}></div>
-      </div>
-    );
-    }
-  }
-
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="search-form">
 
-        <div className="category-search" onClick={this.toggleCategories}>
-          <span>Shop by category</span>
-          {this.categories()}
-          <i className="fas fa-sort-down"></i>
-        </div>
+        <CategoryDropdown history={this.props.history}/>
 
         <div className="navbar-search">
-          <ReactCSSTransitionGroup
-            transitionName="example"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={300}>
-
+          <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
             <input
               className="searchbar"
               onChange={this.handleInput}
               onFocus={this.toggleResults("show")}
               onBlur={this.toggleResults("hide")}
               value={this.state.search}
-              placeholder="Search for anything" />
-
+              placeholder="Search for anything" 
+            />
             {this.searchResults()}
           </ReactCSSTransitionGroup>
         </div>
