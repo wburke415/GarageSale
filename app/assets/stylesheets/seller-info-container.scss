@@ -1,99 +1,99 @@
 .seller-info-wrapper {
-    width: 100%;
+  width: 100%;
 
-    .seller-info-box {
-        width: 300px;
-        background-color: white;
-        border-radius: 3px;
-        margin: 0 auto;
-        margin-top: 10px;
-        margin-left: 20px;
-        border: 1px solid #CCC;
-        padding: 9px 11px 11px 11px;
-        font-size: 16px;
+  .seller-info-box {
+    width: 300px;
+    background-color: white;
+    border-radius: 3px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-left: 20px;
+    border: 1px solid #CCC;
+    padding: 9px 11px 11px 11px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+
+    .username-container {
+      display: flex;
+      align-items: center;
+
+      .product-show-seller-username {
+        color: #0654ba;
         font-weight: bold;
-        color: #333;
+        white-space: normal;
+        font-size: 13px;
+        margin-top: 5px;
+        padding-right: 5px;
+      }
 
-        .username-container {
-            display: flex;
-            align-items: center;
+      .product-show-seller-feedback {
+        font-size: 13px;
+        font-weight: normal;
 
-            .product-show-seller-username {
-                color: #0654ba;
-                font-weight: bold;
-                white-space: normal;
-                font-size: 13px;
-                margin-top: 5px;
-                padding-right: 5px;
-            }
-
-            .product-show-seller-feedback {
-                font-size: 13px;
-                font-weight: normal;
-
-                a {
-                    padding: 0 2px 0 2px;
-                    color: blue;
-                    text-decoration: none;
-                }
-
-                a:hover {
-                    text-decoration: underline;
-                }
-            }
+        a {
+          padding: 0 2px 0 2px;
+          color: blue;
+          text-decoration: none;
         }
 
-        .product-show-feedback-percentage {
-            font-weight: normal;
-            font-size: 12px;
-            margin-top: 11px;
-            padding-bottom: 10px;
-            border-bottom: 2px dotted #999;
+        a:hover {
+          text-decoration: underline;
         }
-
-        .save-this-seller {
-            display: flex;
-            align-items: center;
-            font-size: 13px;
-            color: blue;
-            font-weight: normal;
-            margin-top: 10px;
-            text-decoration: none;
-
-            i {
-                font-size: 16px;
-                margin-right: 5px;
-            }
-
-            div:hover {
-                text-decoration: underline;
-            }
-        }
-        
-        .contact-seller {
-            display: block;
-            font-size: 13px;
-            color: blue;
-            font-weight: normal;
-            margin-top: 10px;
-            text-decoration: none;
-        }
-        
-        .contact-seller:hover {
-            text-decoration: underline;
-        }
-
-        .see-other-items {
-            display: block;
-            font-size: 13px;
-            color: blue;
-            font-weight: normal;
-            margin-top: 10px;
-            text-decoration: none;
-        }
-        
-        .see-other-items:hover {
-            text-decoration: underline;
-        }
+      }
     }
+
+    .product-show-feedback-percentage {
+      font-weight: normal;
+      font-size: 12px;
+      margin-top: 11px;
+      padding-bottom: 10px;
+      border-bottom: 2px dotted #999;
+    }
+
+    .save-this-seller {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: blue;
+      font-weight: normal;
+      margin-top: 10px;
+      text-decoration: none;
+
+      i {
+        font-size: 16px;
+        margin-right: 5px;
+      }
+
+      div:hover {
+        text-decoration: underline;
+      }
+    }
+        
+    .contact-seller {
+      display: block;
+      font-size: 13px;
+      color: blue;
+      font-weight: normal;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+    
+    .contact-seller:hover {
+      text-decoration: underline;
+    }
+
+    .see-other-items {
+      display: block;
+      font-size: 13px;
+      color: blue;
+      font-weight: normal;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+    
+    .see-other-items:hover {
+      text-decoration: underline;
+    }
+  }
 }

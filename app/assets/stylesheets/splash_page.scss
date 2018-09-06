@@ -1,80 +1,78 @@
 .splash-page-container {
 
-    .daily-deals-banner {
-        // background-image: url('headphonebackground.jpg');
-        margin-top: 40px;
+  .daily-deals-banner {
+    margin-top: 40px;
 
-        img {
-            height: 330px;
-            width: 100%;
-            position: relative;
-        }
-
-        button {
-            position: absolute;
-            right: 55px;
-            top: 370px;
-            height: 40px;
-            padding: 0 20px;
-            // background-color: transparent;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        button:hover {
-            transition: all 500ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
-            color: rgb(251, 205, 37);
-            background-color: maroon;
-            cursor: pointer;
-        }
-
-        a:hover {
-            cursor: pointer;
-        }
+    img {
+      height: 330px;
+      width: 100%;
+      position: relative;
     }
 
-    .daily-deals-products {
+    button {
+      position: absolute;
+      right: 55px;
+      top: 370px;
+      height: 40px;
+      padding: 0 20px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      transition: all 500ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+      color: rgb(251, 205, 37);
+      background-color: maroon;
+      cursor: pointer;
+    }
+
+    a:hover {
+      cursor: pointer;
+    }
+  }
+
+  .daily-deals-products {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+
+      h1 {
+        font-family: "Market Sans", Arial, sans-serif;
+        margin-left: 40px;
+        font-size: 32px;
+        font-weight: 500;
+      }
+
+    ul {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+
+      .splash-page-item {
         display: flex;
         flex-direction: column;
-        margin-top: 40px;
 
-        h1 {
-            font-family: "Market Sans", Arial, sans-serif;
-            margin-left: 40px;
-            font-size: 32px;
-            font-weight: 500;
+        .splash-img-container {
+          width: 225px;
+          height: 225px;
+
+          img {
+            width: 75%;
+            height: 90%;
+          }
+
+          img:hover {
+            border: 2px solid #666;
+          }
         }
 
-        ul {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-    
-            .splash-page-item {
-                display: flex;
-                flex-direction: column;
-    
-                .splash-img-container {
-                    width: 225px;
-                    height: 225px;
-    
-                    img {
-                        width: 75%;
-                        height: 90%;
-                    }
-
-                    img:hover {
-                        border: 2px solid #666;
-                    }
-                }
-    
-                span {
-                    font-family: "Market Sans", Arial, sans-serif;
-                    font-weight: bold;
-                    font-size: 1rem;
-                    margin-top: 5px;
-                }
-            }
+        span {
+          font-family: "Market Sans", Arial, sans-serif;
+          font-weight: bold;
+          font-size: 1rem;
+          margin-top: 5px;
         }
+      }
     }
+  }
 }

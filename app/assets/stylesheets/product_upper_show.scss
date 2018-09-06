@@ -1,321 +1,322 @@
 .item-sold-banner {
-    margin-top: 90px;
+  margin-top: 90px;
 }
 
 .item-sold-banner-active {
-    padding: 10px 15px 10px 15px;
-    background-color: #fbe39e;
-    border-right: 2px solid #9d9d9d;
-    border-bottom: 1px solid #9d9d9d;
-    margin: 70px 10px 20px 10px;
-    font-size: 12px;
-    font-weight: bold;
-    font-family: "Helvetica neue", Helvetica, Verdana, Sans-serif;
+  padding: 10px 15px 10px 15px;
+  background-color: #fbe39e;
+  border-right: 2px solid #9d9d9d;
+  border-bottom: 1px solid #9d9d9d;
+  margin: 70px 10px 20px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "Helvetica neue", Helvetica, Verdana, Sans-serif;
 }
 
 .upper-show-page {
-    background-color: rgb(245, 245, 245);
-    font-family: "Helvetica neue", Helvetica, Verdana, Sans-serif;
+  background-color: rgb(245, 245, 245);
+  font-family: "Helvetica neue", Helvetica, Verdana, Sans-serif;
+  display: flex;
+  margin: 0 5px 10px 5px;
+
+  .content-seller-info-container {
     display: flex;
-    margin: 0 5px 10px 5px;
+  }
 
-    .content-seller-info-container {
-      display: flex;
-    }
-
-    .product-show-title {
+  .product-show-title {
     display: block;
     font-size: 18px;
     font-weight: bold;
     color: #333;
+  }
+
+  .product-show-subtitle {
+    padding-bottom: 26px;
+    border-bottom: 1px solid #CCC;
+    font-size: 13px;
+    padding-top: 5px;
+    font-weight: normal;
+    color: #555;
+  }
+
+  .show-page-content {
+    width: 930;
+
+    .product-show-policies {
+      margin-top: 30px;
+
+      .return-policy {
+        display: flex;
+        margin-top: 5px;
+        font-size: 13px;
+      }
+
+      .delivery-estimate {
+        display: flex;
+        font-size: 13px;
+        margin-top: 5px;
+          
+        span {
+          padding: 5px 0 5px 0;
+          border-top: 1px dashed #333;
+          border-bottom: 1px dashed #333;
+          width: 425px;
+        }
+
+        .delivery-string {
+          font-weight: bold;
+          display: inline;
+        }
+
+        .product-show-policy-label {
+          padding-top: 5px;
+        }
+      }
+
+      .product-show-shipping-policy {
+        display: flex;
+        flex-direction: column;
+        font-size: 13px;
+        font-weight: normal;
+
+
+        .item-location {
+          text-align: center;
+          padding-right: 30px;
+          margin-top: 5px;
+          font-size: 11px;
+          color: #555;
+        }
+
+        .ships-to {
+          text-align: center;
+          padding-right: 180px;
+          margin-top: 5px;
+          font-size: 11px;
+          color: #555;
+        }
+
+        .shipping-service {
+          display: flex;
+
+          span {
+            font-weight: bold;
+            padding-right: 5px;
+          }
+        }
+      }
+
+      .product-show-policy-label {
+        padding-right: 13px;
+        color: #666;
+        font-size: 13px;
+        width: 21%;
+        text-align: right;
+      }
+
+      a {
+        color: #555;
+        text-decoration: underline;
+        font-size: 11px;
+      }
+    }
+        
+    .time-left {
+      display: flex;
+      align-items: baseline;
+
+      .product-show-time-string {
+        display: flex;
+        font-size: 13px;
+        margin-left: 70px;
+        margin-top: 10px;
+        width: 22%;
+
+        .product-show-time-left {
+          padding-right: 13px;
+          color: #666;
+        }
+      }
+
+      .item-end-time {
+        font-size: 13px;
+      }
     }
 
-    .product-show-subtitle {
-      padding-bottom: 26px;
-      border-bottom: 1px solid #CCC;
-      font-size: 13px;
-      padding-top: 5px;
+    .product-condition {
+      display: flex;
+      font-size: small;
+      padding-top: 10px;
+
+      p {
+        padding-right: 13px;
+        font-weight: normal;
+        color: #666;
+        width: 128px;
+        text-align: right;
+      }
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    .condition-description {
+      display: flex;
+      padding-left: 22%;
+      width: 475px;
+      font-style: italic;
+      color: #333;
       font-weight: normal;
-      color: #555;
+      font-size: 100%;
+
+      p {
+        font-family: arial;
+        color: #333;
+        font-style: normal;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      span {
+        padding-top: 5px;
+      }
     }
 
-    .show-page-content {
-        width: 930;
+    .product-bid-container {
+      width: 550px;
+      background-color: #e2e2e2;
+      padding-top: 10px;
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
 
-        .product-show-policies {
-            margin-top: 30px;
-
-            .return-policy {
-                display: flex;
-                margin-top: 5px;
-                font-size: 13px;
-            }
-
-            .delivery-estimate {
-                display: flex;
-                font-size: 13px;
-                margin-top: 5px;
-                
-                span {
-                    padding: 5px 0 5px 0;
-                    border-top: 1px dashed #333;
-                    border-bottom: 1px dashed #333;
-                    width: 425px;
-                }
-
-                .delivery-string {
-                    font-weight: bold;
-                    display: inline;
-                }
-
-                .product-show-policy-label {
-                    padding-top: 5px;
-                }
-
-            }
-            .product-show-shipping-policy {
-                display: flex;
-                flex-direction: column;
-                font-size: 13px;
-                font-weight: normal;
+      .auction-bin-divider {
+        border-bottom: 1px solid white;
+        margin-bottom: 10px;
+      }
+      
+      .auction-bid-container {
+        display: flex;
+        flex-direction: column;
 
 
-                .item-location {
-                    text-align: center;
-                    padding-right: 30px;
-                    margin-top: 5px;
-                    font-size: 11px;
-                    color: #555;
-                }
+        .current-bid {
+          display: flex;
+        }
 
-                .ships-to {
-                    text-align: center;
-                    padding-right: 180px;
-                    margin-top: 5px;
-                    font-size: 11px;
-                    color: #555;
-                }
+        input {
+          margin-left: 123px;
+          margin-top: 10px;
+          margin-bottom: 5px;
+          width: 107px;
+          height: 22px;
+        }
 
-                .shipping-service {
-                    display: flex;
+        .highest-bid {
+          align-self: center;
+          margin-bottom: 10px;
+          font-family: Verdana;
+          font-size: 10px;
+          padding-left: 87px;
+          color: black;
+          white-space: nowrap;
+        }
+      }
 
-                    span {
-                        font-weight: bold;
-                        padding-right: 5px;
-                    }
-                }
-            }
+      .product-price {
+        display: flex;
 
-            .product-show-policy-label {
-                padding-right: 13px;
-                color: #666;
-                font-size: 13px;
-                width: 21%;
-                text-align: right;
+        .price-button {
+          color: white;
+          width: 128px;
+          font-size: 16px;
+          font-weight: 700;
+          background: linear-gradient(#0079bc, #00509d);
+          border: 1px solid transparent;
+          cursor: pointer;
+          zoom: 1;
+          border-radius: 3px;
+          padding: 5px 0 5px 0
+        }
+
+        .bin-error {
+          padding-top: 8px;
+          font-size: 12px;
+          color: red;
+        }
+
+        .auction-buttons {
+          display: flex;
+          flex-direction: column;
+
+          .bid-error {
+            font-size: 12px;
+            color: red;
+          }
+
+          .bid-count {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 15px;
+            font-size: 12px;
+            text-align: left;
+
+            p {
+              width: 5px;
+              padding: 0px;
+              color: black;
             }
 
             a {
-                color: #555;
-                text-decoration: underline;
-                font-size: 11px;
+              width: 40px;
+              display: inline;
+              text-align: center;
+              color: blue;
+              text-decoration: none;
             }
-        }
-        
-        .time-left {
-            display: flex;
-            align-items: baseline;
 
-            .product-show-time-string {
-                display: flex;
-                font-size: 13px;
-                margin-left: 70px;
-                margin-top: 10px;
-                width: 22%;
+            a:hover {
+              text-decoration: underline;
+            }
+          }
+
+          div {
+            height: 10px;
+          }
+          
+          .watch-list-button {
+            border: solid 1px #999;
+            cursor: pointer;
+            height: 18px;
+            width: 96px;
+            color: #666;
+            font-size: 10px;
+            text-align: center;
+            box-sizing: border-box;
+            line-height: 1.2em;
+            white-space: nowrap;
+            background: linear-gradient(white, #e2e2e2);
+          }
+        }
     
-                .product-show-time-left {
-                    padding-right: 13px;
-                    color: #666;
-                }
-            }
-
-            .item-end-time {
-                font-size: 13px;
-            }
+        p {
+          padding-right: 13px;
+          padding-top: 4px;
+          width: 112px;
+          text-align: right;
+          font-size: small;
+          color: #666;
+          font-weight: normal;
         }
 
-        .product-condition {
-            display: flex;
-            font-size: small;
-            padding-top: 10px;
-
-            p {
-                padding-right: 13px;
-                font-weight: normal;
-                color: #666;
-                width: 128px;
-                text-align: right;
-            }
-
-            span {
-                font-weight: bold;
-            }
+        span {
+          color: #000;
+          font-weight: 700;
+          width: 157px;
+          text-align: left;
         }
-
-        .condition-description {
-            display: flex;
-            padding-left: 22%;
-            width: 475px;
-            font-style: italic;
-            color: #333;
-            font-weight: normal;
-            font-size: 100%;
-
-            p {
-                font-family: arial;
-                color: #333;
-                font-style: normal;
-                font-size: 18px;
-                font-weight: bold;
-            }
-
-            span {
-                padding-top: 5px;
-            }
-        }
-
-        .product-bid-container {
-            width: 550px;
-            background-color: #e2e2e2;
-            padding-top: 10px;
-            margin-top: 20px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-
-            .auction-bin-divider {
-                border-bottom: 1px solid white;
-                margin-bottom: 10px;
-            }
-            
-            .auction-bid-container {
-                display: flex;
-                flex-direction: column;
-
-
-                .current-bid {
-                    display: flex;
-                }
-
-                input {
-                    margin-left: 123px;
-                    margin-top: 10px;
-                    margin-bottom: 5px;
-                    width: 107px;
-                    height: 22px;
-                }
-
-                .highest-bid {
-                    align-self: center;
-                    margin-bottom: 10px;
-                    font-family: Verdana;
-                    font-size: 10px;
-                    padding-left: 87px;
-                    color: black;
-                    white-space: nowrap;
-                }
-            }
-
-            .product-price {
-                display: flex;
-
-                .price-button {
-                    color: white;
-                    width: 128px;
-                    font-size: 16px;
-                    font-weight: 700;
-                    background: linear-gradient(#0079bc, #00509d);
-                    border: 1px solid transparent;
-                    cursor: pointer;
-                    zoom: 1;
-                    border-radius: 3px;
-                    padding: 5px 0 5px 0
-                }
-
-                .bin-error {
-                    padding-top: 8px;
-                    font-size: 12px;
-                    color: red;
-                }
-
-                .auction-buttons {
-                    display: flex;
-                    flex-direction: column;
-
-                    .bid-error {
-                        font-size: 12px;
-                        color: red;
-                    }
-
-                    .bid-count {
-                        display: flex;
-                        align-items: baseline;
-                        margin-bottom: 15px;
-                        font-size: 12px;
-                        text-align: left;
-
-                        p {
-                            width: 5px;
-                            padding: 0px;
-                            color: black;
-                        }
-
-                        a {
-                            width: 40px;
-                            display: inline;
-                            text-align: center;
-                            color: blue;
-                            text-decoration: none;
-                        }
-
-                        a:hover {
-                            text-decoration: underline;
-                        }
-                    }
-
-                    div {
-                        height: 10px;
-                    }
-                    .watch-list-button {
-                        border: solid 1px #999;
-                        cursor: pointer;
-                        height: 18px;
-                        width: 96px;
-                        color: #666;
-                        font-size: 10px;
-                        text-align: center;
-                        box-sizing: border-box;
-                        line-height: 1.2em;
-                        white-space: nowrap;
-                        background: linear-gradient(white, #e2e2e2);
-                    }
-                }
-    
-                p {
-                    padding-right: 13px;
-                    padding-top: 4px;
-                    width: 112px;
-                    text-align: right;
-                    font-size: small;
-                    color: #666;
-                    font-weight: normal;
-                }
-    
-                span {
-                    color: #000;
-                    font-weight: 700;
-                    width: 157px;
-                    text-align: left;
-                }
-            }
-        }
+      }
     }
+  }
 }
