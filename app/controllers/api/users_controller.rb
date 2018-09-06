@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
 
   before_action only: [:update, :destroy] do
-    ensure_correct_current_user(User.find_by(id: params[:id])) #come back to this and make sure it is solid
+    ensure_correct_current_user(User.find_by(id: params[:id]))
   end
 
   def create

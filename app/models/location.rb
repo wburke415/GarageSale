@@ -14,13 +14,13 @@
 #
 
 class Location < ApplicationRecord
-    validates :country, :state, :city, :address, :zip_code, presence: true
+  validates :country, :state, :city, :address, :zip_code, presence: true
 
-    belongs_to :user,
-        foreign_key: :user_id,
-        class_name: :User
+  belongs_to :user,
+    foreign_key: :user_id,
+    class_name: :User
 
-    has_many :shipping_policies,
-        foreign_key: :location_id,
-        class_name: :ShippingPolicy
+  has_many :shipping_policies,
+    foreign_key: :location_id,
+    class_name: :ShippingPolicy
 end

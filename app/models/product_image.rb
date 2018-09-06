@@ -10,10 +10,10 @@
 #
 
 class ProductImage < ApplicationRecord
-    validates :image_url, presence: true
+  validates :image_url, presence: true
 
-    belongs_to :product,
-        foreign_key: :product_id,
-        class_name: :Product
+  belongs_to :product,
+    foreign_key: :product_id,
+    class_name: :Product
         
 end

@@ -28,57 +28,57 @@
 #
 
 class Product < ApplicationRecord
-    validates :title, :condition, :duration, :quantity, presence: true
-    validates :auction, inclusion: { in: [true, false] }
-    validate :ensure_valid_price
+  validates :title, :condition, :duration, :quantity, presence: true
+  validates :auction, inclusion: { in: [true, false] }
+  validate :ensure_valid_price
 
-    after_initialize :ensure_downcased_search_string
-    attr_accessor :daily_deal
+  after_initialize :ensure_downcased_search_string
+  attr_accessor :daily_deal
 
-    has_many_attached :photos
+  has_many_attached :photos
 
-    belongs_to :seller,
-        foreign_key: :seller_id,
-        class_name: :User
+  belongs_to :seller,
+    foreign_key: :seller_id,
+    class_name: :User
 
-    # belongs_to :category,
-    #     foreign_key: :category_id,
-    #     class_name: :Category
+  # belongs_to :category,
+#     foreign_key: :category_id,
+#     class_name: :Category
 
-    # belongs_to :payment_policy,
-    #     foreign_key: :payment_policy_id,
-    #     class_name: :PaymentPolicy
+  # belongs_to :payment_policy,
+#     foreign_key: :payment_policy_id,
+#     class_name: :PaymentPolicy
 
-    belongs_to :shipping_policy,
-        foreign_key: :shipping_policy_id,
-        class_name: :ShippingPolicy
+  belongs_to :shipping_policy,
+    foreign_key: :shipping_policy_id,
+    class_name: :ShippingPolicy
 
-    # belongs_to :return_policy,
-    #     foreign_key: :return_policy_id,
-    #     class_name: :ReturnPolicy
+  # belongs_to :return_policy,
+#     foreign_key: :return_policy_id,
+#     class_name: :ReturnPolicy
 
-    has_one :location,
-        through: :shipping_policy,
-        source: :location
+  has_one :location,
+    through: :shipping_policy,
+    source: :location
 
-    has_many :product_images,
-        foreign_key: :product_id,
-        class_name: :ProductImage
+  has_many :product_images,
+    foreign_key: :product_id,
+    class_name: :ProductImage
 
-    has_many :bids,
-        foreign_key: :product_id,
-        class_name: :Bid
+  has_many :bids,
+    foreign_key: :product_id,
+    class_name: :Bid
 
-    def ensure_downcased_search_string
-        self.search_string ||= self.title.downcase
-    end
+  def ensure_downcased_search_string
+    self.search_string ||= self.title.downcase
+  end
 
-    def ensure_valid_price
-        if (self.auction) 
-            errors.add('Auctions must have a starting price') unless self.starting_price
-        else
-            errors.add('Listing must have a price') unless self.bin_price
-        end 
+  def ensure_valid_price
+    if (self.auction) 
+      errors.add('Auctions must have a starting price') unless self.starting_price
+    else
+      errors.add('Listing must have a price') unless self.bin_price
     end 
+  end 
 
 end
