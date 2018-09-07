@@ -40,23 +40,23 @@ export default class SessionForm extends React.Component {
       return (
         <div className="business-buttons">
 
-            <label htmlFor="personal-button">
-              <input
-                id="personal-button"
-                type="radio"
-                value={false}
-                checked={this.state.business === false}
-                onChange={this.handleOptionChange()} />
-            Personal Account</label>
+          <label htmlFor="personal-button">
+            <input
+              id="personal-button"
+              type="radio"
+              value={false}
+              checked={this.state.business === false}
+              onChange={this.handleOptionChange()} />
+          Personal Account</label>
 
-            <label htmlFor="business-button">
-              <input
-                id="business-button"
-                type="radio"
-                value={true}
-                checked={this.state.business === true}
-                onChange={this.handleOptionChange()} />
-            Business Account</label>
+          <label htmlFor="business-button">
+            <input
+              id="business-button"
+              type="radio"
+              value={true}
+              checked={this.state.business === true}
+              onChange={this.handleOptionChange()} />
+          Business Account</label>
 
         </div>
       );

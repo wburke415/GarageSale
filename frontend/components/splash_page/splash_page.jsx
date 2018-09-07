@@ -32,6 +32,7 @@ export default class SplashPage extends React.Component {
 
     render() {
         if (Object.values(this.props.products).length === 0) { return null; }
+        // debugger;
         return (
             <div className="splash-page-container">
                 <div className="daily-deals-banner">

@@ -1,16 +1,16 @@
 class Api::ProductsController < ApplicationController
 
   def show
-    @product = Product.includes(:bids, :seller, :shipping_policy, :location).find_by(id: params[:id])
+    @product = Product.includes(:bids, :seller, :shipping_policy, :location, :product_images).find_by(id: params[:id])
   end
 
   def index
     if params[:search] == "splash"
-      products = Product.includes(:bids, :seller, :shipping_policy, :location).where("sold = false")
+      products = Product.includes(:bids, :seller, :shipping_policy, :location, :product_images).where("sold = false")
       @products = products.sample(50)
 
     elsif params[:search] == "?dailydeals"
-      products = Product.includes(:bids, :seller, :shipping_policy, :location).where("sold = false")
+      products = Product.includes(:bids, :seller, :shipping_policy, :location, :product_images).where("sold = false")
       selected_products = products.select do |product| 
         price = product.starting_price || product.bin_price
         (price > 5 && price < 20)
@@ -19,12 +19,12 @@ class Api::ProductsController < ApplicationController
 
     elsif params[:search][1..9] == "category="
       category = params[:search][10..-1].to_i
-      @products = Product.includes(:bids, :seller, :shipping_policy, :location).where("category_id = ? AND sold = false", category)
+      @products = Product.includes(:bids, :seller, :shipping_policy, :location, :product_images).where("category_id = ? AND sold = false", category)
 
     else
       search = params[:search].include?('%20') ? params[:search].delete("?").split("%20").join(" ") : params[:search].delete("?")
       search = "%#{search}%".downcase
-      @products = Product.includes(:bids, :seller, :shipping_policy, :location).where("search_string LIKE ? AND sold = false", search)
+      @products = Product.includes(:bids, :seller, :shipping_policy, :location, :product_images).where("search_string LIKE ? AND sold = false", search)
     end 
   end
   

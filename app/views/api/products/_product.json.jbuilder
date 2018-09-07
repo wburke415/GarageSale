@@ -5,10 +5,15 @@ json.products do
 
     product_image_ids = []
   
-    if product.photos
+    if product.photos || product.product_images
       product.photos.each do |photo|
         product_image_ids.push(photo.id)
       end 
+      
+      product.product_images.each do |image|
+        product_image_ids.push(image.id)
+      end 
+
       json.productImageIds product_image_ids
     end 
 
@@ -22,12 +27,19 @@ json.products do
   end 
 end
 
-if product.photos
+if product.photos || product.product_images
   json.productImages do
     product.photos.each do |photo|
       json.set! photo.id do
         json.id  photo.id
         json.imageUrl url_for(photo)
+      end 
+    end 
+
+    product.product_images.each do |image|
+      json.set! image.id do 
+        json.id image.id
+        json.imageUrl image.image_url
       end 
     end 
   end 
