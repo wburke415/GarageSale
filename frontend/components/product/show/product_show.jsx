@@ -13,10 +13,7 @@ export default class ProductShow extends React.Component {
       bid: "",
       selectedTab: "Description",
       errors: "",
-      orientation: 'portrait'
     };
-
-    this.myImg = React.createRef();
 
     this.submitBid = this.submitBid.bind(this);
     this.switchTabs = this.switchTabs.bind(this);
