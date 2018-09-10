@@ -58,7 +58,7 @@ export default class ProductShow extends React.Component {
         return (
           <div className="product-price">
             <p>Price:</p>
-            <span>US ${this.props.product.binPrice}</span>
+            <span>US ${this.props.product.binPrice.toFixed(2)}</span>
             <div className="auction-buttons">
               <button onClick={this.handlePurchase} className="price-button">Buy It Now</button>
               {error}

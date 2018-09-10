@@ -3,6 +3,7 @@ require 'byebug'
 
 require_relative 'video_games'
 require_relative 'books'
+require_relative 'pet_toys'
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
@@ -18,7 +19,6 @@ User.create(firstname: 'Whitman', lastname: 'Burke', username: 'wburke415', emai
 User.create(firstname: 'Brianna', lastname: 'Burke', username: 'briiito', email: 'briannaeatscake@gmail.com', business: false, password: 'password')
 User.create(firstname: 'Jim', lastname: 'Burke', username: 'EnglishCompanion', email: 'jimburke@englishcompanion.com', business: true, password: 'password')
 User.create(firstname: 'Susan', lastname: 'Burke', username: 'SuperSusan', email: 'susan-burke@comcast.net', business: false, password: 'password')
-User.create(firstname: "Pet Toy", lastname: "Seller", username: "DoggoToysDeluxe", email: 'doggotoysdeluxe@gmail.com', business: true, password: 'password')
 
 (1..100).each do |i|
   User.create(firstname: 'Guest', lastname: 'user', username: "guest#{i}", email: "guest#{i}@gmail.com", business: false, password: 'password')
@@ -67,7 +67,7 @@ Utroque ullamcorper ea nam, laoreet accusata contentiones quo no. Eos summo offi
   if product.auction
     rand(0..7).times do |i|
       break if product.starting_price + i >= product.bin_price
-      Bid.create(product_id: product.id, buyer_id: rand(6..106), bid: starting_price + i)
+      Bid.create(product_id: product.id, buyer_id: rand(5..104), bid: starting_price + i)
     end 
   end
 
@@ -119,11 +119,63 @@ Utroque ullamcorper ea nam, laoreet accusata contentiones quo no. Eos summo offi
   if product.auction
     rand(0..7).times do |i|
       break if product.starting_price + i >= product.bin_price
-      Bid.create(product_id: product.id, buyer_id: rand(6..106), bid: starting_price + i)
+      Bid.create(product_id: product.id, buyer_id: rand(5..104), bid: starting_price + i)
     end 
   end
 
   images = book[:images].split(";")
+  uploaded_images = []
+  (5).downto(0) do |i|
+    next if !images[i]
+
+    img_tag = images[i].split('/')[-2..-1].join("/")
+    next if uploaded_images.include?(img_tag)
+
+    ProductImage.create(product_id: product.id, image_url: images[i])
+    uploaded_images.push(img_tag)
+  end 
+end 
+
+# PET TOY SEEDS
+
+seller = User.create(firstname: "Pet Toy", lastname: "Seller", username: "DoggoToysDeluxe", email: 'doggotoysdeluxe@gmail.com', business: true, password: 'password')
+
+PET_TOY_SEEDS.each do |toy|
+  toy_location = toy[:location].split(", ")
+  location = Location.create(user_id: seller.id, country: toy_location[2], state: toy_location[1], city: toy_location[0])
+  shipping_policy = ShippingPolicy.create(user_id: seller.id, location_id: location.id)
+
+  auction = [true, false].sample
+  starting_price = auction ? ((toy[:bin_price] * 0.5) * 100).ceil / 100.00 : nil
+
+  product = Product.create(seller_id: seller.id, category_id: 3, payment_policy_id: 1, shipping_policy_id: shipping_policy.id, return_policy_id: 1, 
+    title: toy[:title],
+    condition: toy[:condition],
+    condition_description: toy[:condition_description],
+    bin_price: toy[:bin_price],
+    starting_price: starting_price,
+    auction: auction,
+    duration: rand(1..10),
+    quantity: [1,1,1,1,1,1,2,3,4,5].sample,
+    description: "Lorem ipsum dolor sit amet, in has assentior intellegat maiestatis, animal vituperata conclusionemque et eam. Nibh novum vix ex, cum id dolores invenire sensibus, integre urbanitas honestatis pro ad. Mel utroque fuisset adversarium id. Alia viris epicuri at mea, sed dico labitur ea. Ne vix convenire ocurreret. Pro prima similique reprimique ei, ea oblique incorrupte quaerendum mea, stet dolor ad cum.
+
+Ex magna maluisset sit, cu elitr corpora officiis qui. Ius etiam putent aperiam an, cibo timeam ut est, eros etiam singulis pri in. Per oblique labores scribentur at, appareat omittantur et nec, ea noster voluptatum eam. Pro ei vide lobortis reprimique, sea sale epicuri vituperata ne. Pericula sadipscing eam an.
+
+In has vocibus feugait, id mea munere dolorum. Movet interesset vis in, mea ex lobortis ocurreret moderatius. Pro ad tamquam prompta, eum ad nonumy quidam repudiare, eam magna aliquip invenire ea. Eum probo liberavisse et. Mea molestie convenire definitiones ne, te congue recusabo vituperatoribus est.
+
+Sed iudico ullamcorper in, vel noster voluptua disputationi an, no quem sumo nibh his. Ea alii timeam placerat mei, pro at timeam latine. Utroque insolens id per, ius in quod sententiae. Movet nostro epicuri sit cu, ei maiorum tacimates pertinax eos, splendide forensibus intellegebat nec eu. No vix perfecto adolescens. Alterum probatus mediocritatem vel no, probatus vulputate liberavisse qui ut, primis semper option id quo.
+
+Utroque ullamcorper ea nam, laoreet accusata contentiones quo no. Eos summo officiis cu. Vel odio stet fastidii et, offendit praesent assueverit duo eu. Sit summo iusto fuisset ad, ne quot regione explicari nam."
+  )
+  
+  if product.auction
+    rand(0..7).times do |i|
+      break if product.starting_price + i >= product.bin_price
+      Bid.create(product_id: product.id, buyer_id: rand(5..104), bid: starting_price + i)
+    end 
+  end
+
+  images = toy[:images].split(";")
   uploaded_images = []
   (5).downto(0) do |i|
     next if !images[i]
