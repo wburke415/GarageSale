@@ -6,17 +6,16 @@ export default class ProductIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      currentPage: 0,
+      resultsPerPage: 20
     }
   }
 
   componentDidMount() {
-    debugger;
     this.props.fetchProducts(this.props.location.search);
   }
     
   componentWillReceiveProps(nextProps) {
-    debugger;
     if (this.props.location.search !== nextProps.location.search) {
       this.props.fetchProducts(nextProps.location.search);
     }
@@ -49,15 +48,36 @@ export default class ProductIndex extends React.Component {
     return indexItems;
   }
 
+  pagination(resultsCount) {
+    let numPages = resultsCount / this.state.resultsPerPage;
+    let pageNumbers = [];
+
+    for (let i = 0; i < numPages; i++) {
+      pageNumbers.push(<li className="pagination-item">{i}</li>)
+    }
+
+    return (
+      <ul className="pagination">
+        {pageNumbers.map(item => item)}
+      </ul>
+    )
+  }
+
   render() {
     if (!this.props.products) { return null; }
 
+    let { currentPage, resultsPerPage } = this.state;
+    let pageStart = 0 + (resultsPerPage * currentPage);
+    let pageEnd = pageStart + resultsPerPage
+
     let listItems = this.listItems();
+
     return (
       <div className="product-index-container">
         <ul>
-          {listItems.map(li => li)}
+          {listItems.slice(pageStart, pageEnd).map(li => li)}
         </ul>
+        {this.pagination(listItems.length)}
       </div>
     );
   }

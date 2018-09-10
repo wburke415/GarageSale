@@ -9,6 +9,16 @@
   border-radius: 3px;
   padding: 16px;
 
+  .pagination {
+    display: flex;
+
+    .pagination-item {
+      border: .5px solid black;
+      width: 18px;
+      text-align: center;
+    }
+  }
+
   .product-list-item {
       border-top: 1px solid #ccc;
       padding: 10px 0;
