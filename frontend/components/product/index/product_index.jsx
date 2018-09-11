@@ -55,7 +55,7 @@ export default class ProductIndex extends React.Component {
 
   pagination() {
     let {currentPage} = this.state;
-    let numPages = Math.floor(this.props.products.length / this.state.resultsPerPage);
+    let numPages = Math.ceil(this.props.products.length / this.state.resultsPerPage);
     let pageNumbers = [];
     let arrows = ["<", ">"];
 
@@ -108,7 +108,7 @@ export default class ProductIndex extends React.Component {
     e.preventDefault();
 
     let {currentPage} = this.state;
-    let numPages = Math.floor(this.props.products.length / this.state.resultsPerPage);
+    let numPages = Math.ceil(this.props.products.length / this.state.resultsPerPage);
 
     if (e.target.innerText !== "<" && e.target.innerText !== ">") {
       this.setState({ currentPage: parseInt(e.target.innerText) });
