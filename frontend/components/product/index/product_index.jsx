@@ -6,9 +6,11 @@ export default class ProductIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 0,
+      currentPage: 1,
       resultsPerPage: 20
     }
+
+    this.changePage = this.changePage.bind(this);
   }
 
   componentDidMount() {
@@ -49,12 +51,47 @@ export default class ProductIndex extends React.Component {
   }
 
   pagination(resultsCount) {
+    let {currentPage} = this.state;
     let numPages = resultsCount / this.state.resultsPerPage;
     let pageNumbers = [];
+    let arrows = ["<", ">"];
 
-    for (let i = 0; i < numPages; i++) {
-      pageNumbers.push(<li className="pagination-item">{i}</li>)
+    if (numPages < 2) return;
+
+    let startingPoint;
+
+    if (numPages <= 10 || currentPage < 7) {
+      startingPoint = 1;
+    } else if (currentPage + 4 > numPages) {
+      startingPoint = numPages - 10;
+    } else {
+      startingPoint = currentPage - 6;
     }
+
+    let endPoint;
+    startingPoint + 10 > numPages ? endPoint = numPages : endPoint = startingPoint + 10
+
+    pageNumbers.push(
+      <li key="left-arrow" className="pagination-item arrow" onClick={this.changePage}>
+        {arrows[0]}
+      </li>
+    );
+    
+    for (let i = startingPoint; i < endPoint; i++) {
+      let className;
+      i === currentPage ? className = "pagination-item active" : className="pagination-item"
+      pageNumbers.push(
+        <li key={i} className={className} onClick={this.changePage}>
+          {i}
+        </li>
+      );
+    }
+
+    pageNumbers.push(
+      <li key="right-arrow" className="pagination-item arrow" onClick={this.changePage}>
+        {arrows[1]}
+      </li>
+    );
 
     return (
       <ul className="pagination">
@@ -63,10 +100,19 @@ export default class ProductIndex extends React.Component {
     )
   }
 
+  changePage(e) {
+    e.preventDefault();
+    if (e.target.innerText !== "<" && e.target.innerText !== ">") {
+      this.setState({ currentPage: parseInt(e.target.innerText) });
+    }
+  }
+
   render() {
     if (!this.props.products) { return null; }
 
     let { currentPage, resultsPerPage } = this.state;
+    currentPage -= 1;
+
     let pageStart = 0 + (resultsPerPage * currentPage);
     let pageEnd = pageStart + resultsPerPage
 
