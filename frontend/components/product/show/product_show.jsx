@@ -21,12 +21,14 @@ export default class ProductShow extends React.Component {
   }
     
   componentDidMount() {
+    window.scrollTo(0, 0);
     if (!this.props.product || !this.props.product[this.props.match.params.id]) {
       this.props.fetchProduct(this.props.match.params.id);
     }
   }
 
   componentWillReceiveProps(nextProps) {
+    window.scrollTo(0, 0);
     if (this.props.match.params.id !== nextProps.match.params.id) {
       this.props.fetchProduct(nextProps.match.params.id);
     }

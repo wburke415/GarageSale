@@ -14,11 +14,14 @@ export default class ProductIndex extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.fetchProducts(this.props.location.search);
   }
     
   componentWillReceiveProps(nextProps) {
+    window.scrollTo(0, 0);
     if (this.props.location.search !== nextProps.location.search) {
+      this.setState({currentPage: 1});
       this.props.fetchProducts(nextProps.location.search);
     }
   }
@@ -50,9 +53,9 @@ export default class ProductIndex extends React.Component {
     return indexItems;
   }
 
-  pagination(resultsCount) {
+  pagination() {
     let {currentPage} = this.state;
-    let numPages = resultsCount / this.state.resultsPerPage;
+    let numPages = Math.floor(this.props.products.length / this.state.resultsPerPage);
     let pageNumbers = [];
     let arrows = ["<", ">"];
 
@@ -63,13 +66,13 @@ export default class ProductIndex extends React.Component {
     if (numPages <= 10 || currentPage < 7) {
       startingPoint = 1;
     } else if (currentPage + 4 > numPages) {
-      startingPoint = numPages - 10;
+      startingPoint = numPages - 9;
     } else {
       startingPoint = currentPage - 6;
     }
 
     let endPoint;
-    startingPoint + 10 > numPages ? endPoint = numPages : endPoint = startingPoint + 10
+    startingPoint + 9 > numPages ? endPoint = numPages : endPoint = startingPoint + 9
 
     pageNumbers.push(
       <li key="left-arrow" className="pagination-item arrow" onClick={this.changePage}>
@@ -77,9 +80,10 @@ export default class ProductIndex extends React.Component {
       </li>
     );
     
-    for (let i = startingPoint; i < endPoint; i++) {
+    for (let i = startingPoint; i <= endPoint; i++) {
       let className;
       i === currentPage ? className = "pagination-item active" : className="pagination-item"
+
       pageNumbers.push(
         <li key={i} className={className} onClick={this.changePage}>
           {i}
@@ -102,8 +106,19 @@ export default class ProductIndex extends React.Component {
 
   changePage(e) {
     e.preventDefault();
+
+    let {currentPage} = this.state;
+    let numPages = Math.floor(this.props.products.length / this.state.resultsPerPage);
+
     if (e.target.innerText !== "<" && e.target.innerText !== ">") {
       this.setState({ currentPage: parseInt(e.target.innerText) });
+      window.scrollTo(0,0);
+    } else if (e.target.innerText === "<" && currentPage > 1) {
+      this.setState({currentPage: currentPage - 1})
+      window.scrollTo(0,0);
+    } else if (e.target.innerText === ">" && currentPage < numPages) {
+      this.setState({currentPage: currentPage + 1})
+      window.scrollTo(0,0);
     }
   }
 
@@ -123,7 +138,7 @@ export default class ProductIndex extends React.Component {
         <ul>
           {listItems.slice(pageStart, pageEnd).map(li => li)}
         </ul>
-        {this.pagination(listItems.length)}
+        {this.pagination()}
       </div>
     );
   }
