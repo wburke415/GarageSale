@@ -1,6 +1,3 @@
-require 'open-uri'
-require 'byebug'
-
 require_relative 'video_games'
 require_relative 'books'
 require_relative 'pet_toys'
