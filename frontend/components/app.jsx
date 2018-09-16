@@ -16,6 +16,7 @@ import ProductShowContainer from './product/show/product_show_container';
 import CreateProductFormContainer from './product/create/create_product_form_container';
 import ProductIndexContainer from './product/index/product_index_container';
 import SplashPageContainer from './splash_page/splash_page_container';
+import MyGarageContainer from './my_garage/my_garage_container';
 
 const App = () => (
   <div>
@@ -28,6 +29,7 @@ const App = () => (
 
     <Switch>
       <Route exact path="/products/:id" component={ProductShowContainer} />
+      <Route exact path="/mygarage" component={MyGarageContainer} />
       <Route exact path="/products" component={ProductIndexContainer} />
       <Route exact path="/" component={SplashPageContainer} />
     </Switch>

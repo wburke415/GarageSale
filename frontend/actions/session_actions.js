@@ -6,9 +6,10 @@ export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
 export const REMOVE_SESSION_ERRORS = 'REMOVE_SESSION_ERRORS';
 
 
-export const receiveCurrentUser = currentUser => ({
+export const receiveCurrentUser = payload => ({
   type: RECEIVE_CURRENT_USER,
-  currentUser
+  userId: parseInt(Object.keys(payload.users)[0]),
+  user: Object.values(payload.users)[0]
 });
 
 export const logoutCurrentUser = () => ({

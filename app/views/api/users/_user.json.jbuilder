@@ -1,1 +1,23 @@
-json.extract! user, :id, :firstname, :lastname, :email, :business
+json.users do
+  json.set! user.id do
+    json.extract! user, :id, :firstname, :lastname, :email, :business
+    if user.listed_products
+      listed_products = []
+
+      user.listed_products.each do |product|
+        listed_products.push(product.id)
+      end 
+
+      json.listedProducts listed_products
+    end 
+  
+    if user.bidded_products
+      bidded_products = []
+      user.bidded_products.each do |product|
+        bidded_products.push(product.id)
+      end 
+
+      json.biddedProducts bidded_products
+    end 
+  end   
+end 
