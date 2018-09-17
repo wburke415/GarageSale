@@ -1,6 +1,7 @@
 json.users do
   json.set! user.id do
     json.extract! user, :id, :firstname, :lastname, :email, :business
+
     if user.listed_products
       listed_products = []
 
@@ -19,5 +20,27 @@ json.users do
 
       json.biddedProducts bidded_products
     end 
+
+    if user.purchased_products
+      purchased_products = []
+      user.purchased_products.each do |product|
+        purchased_products.push(product.id)
+      end 
+
+      json.purchasedProducts purchased_products
+    end 
   end   
 end 
+
+# user.listed_products.each do |product|
+#   json.partial! "api/products/product", product: product
+# end
+
+# user.bidded_products.each do |product|
+#   json.partial! "api/products/product", product: product
+# end
+
+# user.bidded_products.each do |product|
+#   json.partial! "api/products/product", product: product
+# end
+

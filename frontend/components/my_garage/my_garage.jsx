@@ -6,7 +6,7 @@ export default class MyGarage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUser(this.props.currentUserId);
+    // this.props.fetchUser(this.props.currentUserId);
   }
 
   header() {

@@ -6,25 +6,11 @@ export default class ProductShowImages extends React.Component {
     super(props);
     this.state = {
       currentMainImage: 0,
-      selected: false,
-      orientation: 'portrait'
+      selected: false
     };
-
-    this.myImg = React.createRef();
 
     this.switchCurrentMainImage = this.switchCurrentMainImage.bind(this);
     this.pushToNew = this.pushToNew.bind(this);
-  }
-
-  componentDidMount() {
-    const width = this.myImg.current.offsetWidth;
-    const height = this.myImg.current.offsetHeight;
-
-    if (width > height) {
-      this.setState({ orientation: "landscape" });
-    } else {
-      this.setState({ orientation: "portrait" });
-    }
   }
 
   pushToNew(e) {
@@ -42,12 +28,12 @@ export default class ProductShowImages extends React.Component {
     const { selected } = this.state;
     const { productImages } = this.props;
 
-    let mainImage = <img className={this.state.orientation} />;
+    let mainImage = <img className='main-image' />;
     let childImages = [];
     let childClass = 'child-image';
 
     if (productImages.length !== 0) {
-      mainImage = <img ref={this.myImg} className={this.state.orientation} src={productImages[currentMainImage].imageUrl} />;
+      mainImage = <img ref={this.myImg} className="main-image" src={productImages[currentMainImage].imageUrl} />;
 
       childImages = productImages.map((image, idx) => {
         (idx == currentMainImage && selected) ? childClass = "child-image selected" : childClass = "child-image";

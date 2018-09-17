@@ -4,23 +4,6 @@ import * as timeUtils from '../../../utils/time_util';
 export default class ProductListItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      orientation: 'portrait'
-    };
-
-    this.myImg = React.createRef();
-  }
-
-  componentDidMount() {
-    const width = this.myImg.current.offsetWidth;
-    const height = this.myImg.current.offsetHeight;
-
-    if (width > height) {
-      this.setState({ orientation: "landscape" });
-    }
-    else {
-      this.setState({ orientation: "portrait" });
-    }
   }
 
   auctionPrice() {
@@ -73,7 +56,7 @@ export default class ProductListItem extends React.Component {
     return (
       <li className="product-list-item">
         <div className="image-container">
-          <a href={`/#/products/${product.id}`}><img ref={this.myImg} className={this.state.orientation} src={image.imageUrl} /></a>
+          <a href={`/#/products/${product.id}`}><img className="list-item-image" src={image.imageUrl} /></a>
         </div>
 
         <div className="list-item-content">

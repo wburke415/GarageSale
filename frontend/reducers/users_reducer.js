@@ -7,11 +7,9 @@ import { RECEIVE_USER } from '../actions/user_actions';
 const usersReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case RECEIVE_USER:
-      return merge({}, state, { [action.userId]: action.user });
 
     case RECEIVE_CURRENT_USER:
-      return merge({}, state, { [action.userId]: action.user });
+      return merge({}, state, { [Object.keys(action.payload.users)[0]]: Object.values(action.payload.users)[0] });
 
     case RECEIVE_PRODUCT: 
       return merge({}, state, action.sellers);
