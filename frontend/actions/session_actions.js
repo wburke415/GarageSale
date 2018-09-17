@@ -8,7 +8,13 @@ export const REMOVE_SESSION_ERRORS = 'REMOVE_SESSION_ERRORS';
 
 export const receiveCurrentUser = payload => ({
   type: RECEIVE_CURRENT_USER,
-  payload
+  user: payload.users,
+  products: payload.products,
+  productImages: payload.productImages,
+  bids: payload.bids,
+  sellers: payload.sellers,
+  shippingPolicies: payload.shippingPolicies,
+  locations: payload.locations
 });
 
 export const logoutCurrentUser = () => ({

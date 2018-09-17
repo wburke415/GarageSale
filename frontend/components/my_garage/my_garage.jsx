@@ -6,7 +6,7 @@ export default class MyGarage extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.fetchUser(this.props.currentUserId);
+    this.props.fetchUser(this.props.currentUserId);
   }
 
   header() {
@@ -16,17 +16,19 @@ export default class MyGarage extends React.Component {
   buyingReminders() {
 
     return (
-      <div>
-        <h1>Buying Reminders</h1>
-        <span>
-          <a></a>
-        </span>
+      <div className="mygarage-section">
+        <h1 className="section-header">Buying Reminders</h1>
+        <div className="section-content">
+          <div>(Last 31 days)</div>
+          <span>
+            <a>Placeholder</a>
+          </span>
+        </div>
       </div>
     );
   }
 
   render() {
-
     return (
       <div>
         <h1>My Garage</h1>

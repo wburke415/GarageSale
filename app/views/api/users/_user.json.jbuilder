@@ -32,15 +32,15 @@ json.users do
   end   
 end 
 
-# user.listed_products.each do |product|
-#   json.partial! "api/products/product", product: product
-# end
+user.listed_products.each do |product|
+  json.partial! "api/products/product.json.jbuilder", product: product
+end
 
-# user.bidded_products.each do |product|
-#   json.partial! "api/products/product", product: product
-# end
+user.bidded_products.each do |product|
+  json.partial! "api/products/product.json.jbuilder", product: product
+end
 
-# user.bidded_products.each do |product|
-#   json.partial! "api/products/product", product: product
-# end
+user.bidded_products.each do |product|
+  json.partial! "api/products/product.json.jbuilder", product: product
+end
 

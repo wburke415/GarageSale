@@ -1,0 +1,18 @@
+.mygarage-section {
+  font-family: "Helvetica neue", Helvetica, Arial, Sans-serif;
+
+  .section-header {
+    font-size: 22px;
+    font-weight: 700;
+    color: #666;
+    background-color: rgb(246, 233, 156);
+    padding: 12px;
+    border: 2px solid yellow;
+    border-radius: 3px;
+  }
+
+  .section-content {
+    border: 1px solid #ddd;
+    border-top: none;
+  }
+}

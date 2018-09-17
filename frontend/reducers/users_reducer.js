@@ -9,7 +9,7 @@ const usersReducer = (state = {}, action) => {
   switch (action.type) {
 
     case RECEIVE_CURRENT_USER:
-      return merge({}, state, { [Object.keys(action.payload.users)[0]]: Object.values(action.payload.users)[0] });
+      return merge({}, state, { [Object.keys(action.user)[0]]: Object.values(action.user)[0] });
 
     case RECEIVE_PRODUCT: 
       return merge({}, state, action.sellers);
