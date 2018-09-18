@@ -24,11 +24,19 @@ export default class MyGarage extends React.Component {
     }
 
     if (endingSoon.length > 0) {
-      return (
-        <a>
-          {endingSoon.length} products you bid on are ending soon.
-        </a>
-      );
+      if (endingSoon.length === 1) {
+        return (
+          <a>
+            {endingSoon.length} product I bid on is ending soon.
+          </a>
+        );
+      } else {
+        return (
+          <a>
+            {endingSoon.length} products I bid on are ending soon.
+          </a>
+        );
+      }
     }
   }
 
@@ -38,33 +46,95 @@ export default class MyGarage extends React.Component {
     for (let i = 0; i < this.props.biddedProducts.length; i++) {
       let product = this.props.biddedProducts[i];
       if (this.props.bids[product.bidIds[0]].buyerId !== parseInt(this.props.currentUserId)) outBid.push(product);
-      // make sure this is working correctly
     }
 
     if (outBid.length > 0) {
-      return <a>
-          I've been outbid on {outBid.length} products.
-        </a>;
+      if (outBid.length === 1) {
+        return (
+          <a>
+            I've been outbid on {outBid.length} product.
+          </a>
+        );
+      } else {
+        return (
+          <a>
+            I've been outbid on {outBid.length} products.
+          </a>
+        );
+      }
+    }
+  }
+
+  wonAuctions() {
+    let wonAuctions = [];
+
+    for (let i = 0; i < this.props.biddedProducts.length; i++) {
+      let timeString = TimeUtil.timeStrings(this.props.biddedProducts[i]);
+      if (timeString === 'Ended') wonAuctions.push(this.props.biddedProducts[i]);
+    } 
+
+    if (wonAuctions.length !== 0) {
+      if (wonAuctions.length === 1) {
+        return (
+          <a>
+            You have won {wonAuctions.length} auction.
+          </a>
+        );
+      } else {
+        return (
+          <a>
+            You have won {wonAuctions.length} auctions.
+          </a>
+        );
+      }
+    }
+  }
+
+  purchasedItems() {
+    if (this.props.purchasedProducts.length !== 0) {
+      if (this.props.purchasedProducts.length === 1) {
+        return (
+          <a>
+            {this.props.purchasedProducts.length} item I purchased is awaiting shipment.
+          </a>
+        );
+      } else {
+        return (
+          <a>
+            {this.props.purchasedProducts.length} items I purchased are awaiting shipment.
+          </a>
+        );
+      }
     }
   }
 
   buyingReminders() {
-    
-
     return (
       <div className="mygarage-section">
         <h1 className="section-header">Buying Reminders</h1>
         <div className="section-content">
           <div>(Last 31 days)</div>
-          <span>
-            {this.bidsEndingSoon()}
-          </span>
-          <span>
-            {this.outbidItems()}
-          </span>
+          <ul>
+            <div>
+              {this.bidsEndingSoon()}
+            </div>
+            <div>
+              {this.outbidItems()}
+            </div>
+            <div>
+              {this.wonAuctions()}
+            </div>
+            <div>
+              {this.purchasedItems()}
+            </div>
+          </ul>
         </div>
       </div>
     );
+  }
+
+  sellingReminders() {
+    
   }
 
   render() {
@@ -72,6 +142,7 @@ export default class MyGarage extends React.Component {
       <div>
         <h1>My Garage</h1>
         {this.buyingReminders()}
+        {this.sellingReminders()}
       </div>
     );
   }

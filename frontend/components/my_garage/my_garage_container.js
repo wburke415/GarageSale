@@ -17,8 +17,8 @@ const mapStateToProps = (state, ownProps) => {
   let shippingPolicies = state.entities.shippingPolicies;
 
   return ({
-    listedProducts: Object.values(state.entities.products).filter(product => product.sellerId === state.session.id),
-    purchasedProducts: Object.values(state.entities.products).filter(product => product.buyerId === state.session.id),
+    listedProducts: Object.values(state.entities.products).filter(product => product.sellerId == state.session.id),
+    purchasedProducts: Object.values(state.entities.products).filter(product => product.buyerId == state.session.id),
     biddedProducts,
     bids,
     productImages,

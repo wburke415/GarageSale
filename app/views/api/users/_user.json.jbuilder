@@ -40,7 +40,7 @@ user.bidded_products.each do |product|
   json.partial! "api/products/product.json.jbuilder", product: product
 end
 
-user.bidded_products.each do |product|
+user.purchased_products.each do |product|
   json.partial! "api/products/product.json.jbuilder", product: product
 end
 
