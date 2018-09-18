@@ -112,8 +112,9 @@ export default class ProductShow extends React.Component {
     if (!this.props.product.sold) {
       if (this.props.product.auction) {
         let bid = this.props.product.startingPrice;
+
         if (this.props.bids.length !== 0) {
-          bid = this.props.bids.slice(-1)[0].bid || this.props.product.startingPrice;
+          bid = this.props.bids[0].bid || this.props.product.startingPrice;
         }
         const highestBid = bid.toFixed(2);
 

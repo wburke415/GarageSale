@@ -11,12 +11,18 @@ export default class ProductListItem extends React.Component {
     const { bids } = this.props;
 
     if (product.startingPrice) {
-      return (
-        <div className="list-item-auction-price">
-          <span>${product.startingPrice.toFixed(2)}</span>
-          <div>{bids.length} bids</div>
-        </div>
-      );
+      let bid = product.startingPrice;
+
+      if (bids.length !== 0) {
+        bid = bids[0].bid || product.startingPrice;
+      }
+
+    return (
+      <div className="list-item-auction-price">
+        <span>${bid.toFixed(2)}</span>
+        <div>{bids.length} bids</div>
+      </div>
+    );
     }
   }
 

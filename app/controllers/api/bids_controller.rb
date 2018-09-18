@@ -2,7 +2,7 @@ class Api::BidsController < ApplicationController
 
   def create
     @bid = Bid.new(bid_params)
-    
+
     if @bid.save
       @product = Product.find_by(id: @bid.product_id)
       render "api/products/show"

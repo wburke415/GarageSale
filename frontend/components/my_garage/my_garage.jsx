@@ -37,7 +37,7 @@ export default class MyGarage extends React.Component {
 
     for (let i = 0; i < this.props.biddedProducts.length; i++) {
       let product = this.props.biddedProducts[i];
-      if (product.bidIds.slice(-1)[0].buyerId !== parseInt(this.props.currentUserId)) outBid.push(product);
+      if (this.props.bids[product.bidIds[0]].buyerId !== parseInt(this.props.currentUserId)) outBid.push(product);
       // make sure this is working correctly
     }
 

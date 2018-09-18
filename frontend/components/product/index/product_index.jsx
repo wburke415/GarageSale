@@ -41,10 +41,9 @@ export default class ProductIndex extends React.Component {
       let productBids = [];
 
       for (let j = 0; j < product.bidIds.length; j++) {
-        let bidId = product.bidIds[i];
+        let bidId = product.bidIds[j];
         productBids.push(bids[bidId]);
       }
-
       let shippingPolicy = shippingPolicies[product.shippingPolicyId];
 
       indexItems.push(<ProductListItem key={i} shippingPolicy={shippingPolicy} image={image} bids={productBids} product={product} />);
