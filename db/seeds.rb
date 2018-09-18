@@ -12,44 +12,33 @@ require_relative 'pet_toys'
 
 # Seed users -----------------------------------------------------------------------------------------------------------------------------------
 
-User.create(firstname: 'Whitman', lastname: 'Burke', username: 'wburke415', email: 'whitmanburke@gmail.com', business: true, password: 'password')
-User.create(firstname: 'Brianna', lastname: 'Burke', username: 'briiito', email: 'briannaeatscake@gmail.com', business: false, password: 'password')
-User.create(firstname: 'Jim', lastname: 'Burke', username: 'EnglishCompanion', email: 'jimburke@englishcompanion.com', business: true, password: 'password')
-User.create(firstname: 'Susan', lastname: 'Burke', username: 'SuperSusan', email: 'susan-burke@comcast.net', business: false, password: 'password')
-
-(1..100).each do |i|
+(1..30).each do |i|
   User.create(firstname: 'Guest', lastname: 'user', username: "guest#{i}", email: "guest#{i}@gmail.com", business: false, password: 'password')
 end 
-
-# Seed one location and shipping policy -----------------------------------------------------------------------------------------------------------------------------------
-
-Location.create(user_id: 1)
-ShippingPolicy.create(user_id: 1, location_id: 1)
-
 
 # Seed products -----------------------------------------------------------------------------------------------------------------------------------
 
 # VIDEO GAME SEEDS 
 
-seller = User.create(firstname: 'Gamer', lastname: 'Gamer', username: 'Gamer2Gamer', email: 'gamer2gamer@gmail.com', business: true, password: 'password')
-
 VIDEO_GAME_SEEDS.each do |game|
+  seller_id = rand(1..30)
+
   game_location = game[:location].split(", ")
-  location = Location.create(user_id: seller.id, country: game_location[2], state: game_location[1], city: game_location[0])
-  shipping_policy = ShippingPolicy.create(user_id: seller.id, location_id: location.id)
+  location = Location.create(user_id: seller_id, country: game_location[2], state: game_location[1], city: game_location[0])
+  shipping_policy = ShippingPolicy.create(user_id: seller_id, location_id: location.id)
 
   auction = [true, false].sample
   starting_price = auction ? ((game[:bin_price] * 0.5) * 100).ceil / 100.00 : nil
 
-  product = Product.create(seller_id: seller.id, category_id: 1, payment_policy_id: 1, shipping_policy_id: shipping_policy.id, return_policy_id: 1, 
+  product = Product.create(seller_id: seller_id, category_id: 1, payment_policy_id: 1, shipping_policy_id: shipping_policy.id, return_policy_id: 1, 
     title: game[:title],
     condition: game[:condition],
     condition_description: game[:condition_description],
     bin_price: game[:bin_price],
     starting_price: starting_price,
     auction: auction,
-    duration: rand(1..10),
-    quantity: [1,1,1,1,1,1,2,3,4,5].sample,
+    duration: rand(1..7),
+    quantity: 1,
     description: "Lorem ipsum dolor sit amet, in has assentior intellegat maiestatis, animal vituperata conclusionemque et eam. Nibh novum vix ex, cum id dolores invenire sensibus, integre urbanitas honestatis pro ad. Mel utroque fuisset adversarium id. Alia viris epicuri at mea, sed dico labitur ea. Ne vix convenire ocurreret. Pro prima similique reprimique ei, ea oblique incorrupte quaerendum mea, stet dolor ad cum.
 
 Ex magna maluisset sit, cu elitr corpora officiis qui. Ius etiam putent aperiam an, cibo timeam ut est, eros etiam singulis pri in. Per oblique labores scribentur at, appareat omittantur et nec, ea noster voluptatum eam. Pro ei vide lobortis reprimique, sea sale epicuri vituperata ne. Pericula sadipscing eam an.
@@ -64,7 +53,7 @@ Utroque ullamcorper ea nam, laoreet accusata contentiones quo no. Eos summo offi
   if product.auction
     rand(0..7).times do |i|
       break if product.starting_price + i >= product.bin_price
-      Bid.create(product_id: product.id, buyer_id: rand(5..104), bid: starting_price + i)
+      Bid.create(product_id: product.id, buyer_id: rand(1..30), bid: starting_price + i)
     end 
   end
 
@@ -83,25 +72,25 @@ end
 
 # BOOK SEEDS
 
-seller = User.create(firstname: "Book", lastname: "Seller", username: "TheBookSeller", email: 'thebookseller@gmail.com', business: true, password: 'password')
-
 BOOK_SEEDS.each do |book|
+  seller_id = rand(1..30);
+
   book_location = book[:location].split(", ")
-  location = Location.create(user_id: seller.id, country: book_location[2], state: book_location[1], city: book_location[0])
-  shipping_policy = ShippingPolicy.create(user_id: seller.id, location_id: location.id)
+  location = Location.create(user_id: seller_id, country: book_location[2], state: book_location[1], city: book_location[0])
+  shipping_policy = ShippingPolicy.create(user_id: seller_id, location_id: location.id)
 
   auction = [true, false].sample
   starting_price = auction ? ((book[:bin_price] * 0.5) * 100).ceil / 100.00 : nil
 
-  product = Product.create(seller_id: seller.id, category_id: 2, payment_policy_id: 1, shipping_policy_id: shipping_policy.id, return_policy_id: 1, 
+  product = Product.create(seller_id: seller_id, category_id: 2, payment_policy_id: 1, shipping_policy_id: shipping_policy.id, return_policy_id: 1, 
     title: book[:title],
     condition: book[:condition],
     condition_description: book[:condition_description],
     bin_price: book[:bin_price],
     starting_price: starting_price,
     auction: auction,
-    duration: rand(1..10),
-    quantity: [1,1,1,1,1,1,2,3,4,5].sample,
+    duration: rand(1..7),
+    quantity: 1,
     description: "Lorem ipsum dolor sit amet, in has assentior intellegat maiestatis, animal vituperata conclusionemque et eam. Nibh novum vix ex, cum id dolores invenire sensibus, integre urbanitas honestatis pro ad. Mel utroque fuisset adversarium id. Alia viris epicuri at mea, sed dico labitur ea. Ne vix convenire ocurreret. Pro prima similique reprimique ei, ea oblique incorrupte quaerendum mea, stet dolor ad cum.
 
 Ex magna maluisset sit, cu elitr corpora officiis qui. Ius etiam putent aperiam an, cibo timeam ut est, eros etiam singulis pri in. Per oblique labores scribentur at, appareat omittantur et nec, ea noster voluptatum eam. Pro ei vide lobortis reprimique, sea sale epicuri vituperata ne. Pericula sadipscing eam an.
@@ -116,7 +105,7 @@ Utroque ullamcorper ea nam, laoreet accusata contentiones quo no. Eos summo offi
   if product.auction
     rand(0..7).times do |i|
       break if product.starting_price + i >= product.bin_price
-      Bid.create(product_id: product.id, buyer_id: rand(5..104), bid: starting_price + i)
+      Bid.create(product_id: product.id, buyer_id: rand(1..30), bid: starting_price + i)
     end 
   end
 
@@ -135,25 +124,25 @@ end
 
 # PET TOY SEEDS
 
-seller = User.create(firstname: "Pet Toy", lastname: "Seller", username: "DoggoToysDeluxe", email: 'doggotoysdeluxe@gmail.com', business: true, password: 'password')
-
 PET_TOY_SEEDS.each do |toy|
+  seller_id = rand(1..30)
+
   toy_location = toy[:location].split(", ")
-  location = Location.create(user_id: seller.id, country: toy_location[2], state: toy_location[1], city: toy_location[0])
-  shipping_policy = ShippingPolicy.create(user_id: seller.id, location_id: location.id)
+  location = Location.create(user_id: seller_id, country: toy_location[2], state: toy_location[1], city: toy_location[0])
+  shipping_policy = ShippingPolicy.create(user_id: seller_id, location_id: location.id)
 
   auction = [true, false].sample
   starting_price = auction ? ((toy[:bin_price] * 0.5) * 100).ceil / 100.00 : nil
 
-  product = Product.create(seller_id: seller.id, category_id: 3, payment_policy_id: 1, shipping_policy_id: shipping_policy.id, return_policy_id: 1, 
+  product = Product.create(seller_id: seller_id, category_id: 3, payment_policy_id: 1, shipping_policy_id: shipping_policy.id, return_policy_id: 1, 
     title: toy[:title],
     condition: toy[:condition],
     condition_description: toy[:condition_description],
     bin_price: toy[:bin_price],
     starting_price: starting_price,
     auction: auction,
-    duration: rand(1..10),
-    quantity: [1,1,1,1,1,1,2,3,4,5].sample,
+    duration: rand(1..7),
+    quantity: 1,
     description: "Lorem ipsum dolor sit amet, in has assentior intellegat maiestatis, animal vituperata conclusionemque et eam. Nibh novum vix ex, cum id dolores invenire sensibus, integre urbanitas honestatis pro ad. Mel utroque fuisset adversarium id. Alia viris epicuri at mea, sed dico labitur ea. Ne vix convenire ocurreret. Pro prima similique reprimique ei, ea oblique incorrupte quaerendum mea, stet dolor ad cum.
 
 Ex magna maluisset sit, cu elitr corpora officiis qui. Ius etiam putent aperiam an, cibo timeam ut est, eros etiam singulis pri in. Per oblique labores scribentur at, appareat omittantur et nec, ea noster voluptatum eam. Pro ei vide lobortis reprimique, sea sale epicuri vituperata ne. Pericula sadipscing eam an.
@@ -168,7 +157,7 @@ Utroque ullamcorper ea nam, laoreet accusata contentiones quo no. Eos summo offi
   if product.auction
     rand(0..7).times do |i|
       break if product.starting_price + i >= product.bin_price
-      Bid.create(product_id: product.id, buyer_id: rand(5..104), bid: starting_price + i)
+      Bid.create(product_id: product.id, buyer_id: rand(1..30), bid: starting_price + i)
     end 
   end
 
