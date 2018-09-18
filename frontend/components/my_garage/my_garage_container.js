@@ -23,7 +23,8 @@ const mapStateToProps = (state, ownProps) => {
     bids,
     productImages,
     shippingPolicies,
-    currentUserId: state.session.id
+    currentUserId: state.session.id,
+    currentUser: state.entities.users[state.session.id]
   });
 };
 

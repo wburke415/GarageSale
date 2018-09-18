@@ -1,6 +1,6 @@
 json.users do
   json.set! user.id do
-    json.extract! user, :id, :firstname, :lastname, :email, :business
+    json.extract! user, :id, :firstname, :lastname, :email, :business, :username
 
     if user.listed_products
       listed_products = []

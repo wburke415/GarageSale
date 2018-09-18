@@ -56,7 +56,8 @@ export default class NavBar extends React.Component {
 
     handleLogout(e) {
       e.preventDefault();
-      this.props.logout().then(() => this.props.history.push("/login"));
+      this.props.history.push("/");
+      this.props.logout();
     }
 
   signOutButton() {
