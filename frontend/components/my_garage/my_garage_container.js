@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
     if (state.entities.products[productId]) biddedProducts.push(state.entities.products[productId]);
   }
 
-  let bids = state.entities.bids;
+  let bids = Object.values(state.entities.bids);
   let productImages = state.entities.productImages;
   let shippingPolicies = state.entities.shippingPolicies;
 

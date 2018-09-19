@@ -14,7 +14,7 @@ export default class ProductListItem extends React.Component {
       let bid = product.startingPrice;
 
       if (bids.length !== 0) {
-        bid = bids[0].bid || product.startingPrice;
+        bid = Math.max(...bids) || product.startingPrice;
       }
 
     return (
@@ -62,7 +62,7 @@ export default class ProductListItem extends React.Component {
     return (
       <li className="product-list-item">
         <div className="image-container">
-          <a href={`/#/products/${product.id}`}><img className="list-item-image" src={image.imageUrl} /></a>
+          <a href={`/#/products/${product.id}`}><img className="list-item-image" src={product.productImages[0]} /></a>
         </div>
 
         <div className="list-item-content">

@@ -1,49 +1,32 @@
 
 json.products do
   json.set! product.id do 
-    json.extract! product, :id, :seller_id, :buyer_id, :sold, :shipping_policy_id, :category_id, :title, :search_string, :subtitle, :sku, :condition, :condition_description, :auction, :ends_at, :starting_price, :bin_price, :quantity, :description, :created_at
+    json.extract! product, :id, :seller_id, :shipping_policy_id, :category_id, :title, :subtitle, :search_string, :sku, :condition, :condition_description, :auction, :ends_at, :starting_price, :bin_price, :quantity, :description
 
-    product_image_ids = []
-  
-    if product.photos || product.product_images
-      product.photos.each do |photo|
-        product_image_ids.push(photo.id)
-      end 
-      
-      product.product_images.each do |image|
-        product_image_ids.push(image.id)
-      end 
-
-      json.productImageIds product_image_ids
-    end 
-
-    if product.bids 
-      bid_ids = []
-      product.bids.each do |bid|
-        bid_ids.push(bid.id)
-      end 
-      json.bidIds bid_ids
-    end 
+    product_images = []
+    product.photos.each { |photo| product_images.push(url_for(photo)) }
+    product.product_images.each { |image| product_images.push(image.image_url) }
+    json.productImages product_images
   end 
 end
 
-if product.photos || product.product_images
-  json.productImages do
-    product.photos.each do |photo|
-      json.set! photo.id do
-        json.id  photo.id
-        json.imageUrl url_for(photo)
-      end 
-    end 
+# if product.photos || product.product_images
+#   json.productImages do
+#     product.photos.each do |photo|
+#       json.set! photo.id do
+#         json.id  photo.id
+#         json.imageUrl url_for(photo)
+#       end 
+#     end 
 
-    product.product_images.each do |image|
-      json.set! image.id do 
-        json.id image.id
-        json.imageUrl image.image_url
-      end 
-    end 
-  end 
-end 
+#     product.product_images.each do |image|
+#       json.set! image.id do 
+#         json.id image.id
+#         json.imageUrl image.image_url
+#       end 
+#     end 
+#   end 
+# end 
 
 if product.bids 
   json.bids do

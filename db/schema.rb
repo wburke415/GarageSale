@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_19_040326) do
+ActiveRecord::Schema.define(version: 2018_09_19_171904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,15 @@ ActiveRecord::Schema.define(version: 2018_09_19_040326) do
     t.index ["product_id"], name: "index_product_images_on_product_id"
   end
 
+  create_table "product_purchases", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "buyer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_product_purchases_on_buyer_id"
+    t.index ["product_id"], name: "index_product_purchases_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.integer "seller_id", null: false
     t.integer "category_id", null: false
@@ -84,11 +93,8 @@ ActiveRecord::Schema.define(version: 2018_09_19_040326) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description", null: false
-    t.boolean "sold", default: false, null: false
-    t.integer "buyer_id"
     t.string "search_string", null: false
     t.datetime "ends_at", null: false
-    t.index ["buyer_id"], name: "index_products_on_buyer_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["ends_at"], name: "index_products_on_ends_at"
     t.index ["payment_policy_id"], name: "index_products_on_payment_policy_id"
@@ -96,7 +102,6 @@ ActiveRecord::Schema.define(version: 2018_09_19_040326) do
     t.index ["search_string"], name: "index_products_on_search_string"
     t.index ["seller_id"], name: "index_products_on_seller_id"
     t.index ["shipping_policy_id"], name: "index_products_on_shipping_policy_id"
-    t.index ["sold"], name: "index_products_on_sold"
     t.index ["title"], name: "index_products_on_title"
   end
 

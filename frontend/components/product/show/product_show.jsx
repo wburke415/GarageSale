@@ -65,7 +65,7 @@ export default class ProductShow extends React.Component {
               <button onClick={this.handlePurchase} className="price-button">Buy It Now</button>
               {error}
               {/* <div></div>
-                            <button className="price-button">Add to cart</button> */}
+                <button className="price-button">Add to cart</button> */}
               <div></div>
               <button className="watch-list-button">Add to watch list</button>
               <div></div>
@@ -85,8 +85,8 @@ export default class ProductShow extends React.Component {
 
     let prevBid = this.props.product.startingPrice;
 
-    if (prevBid && Object.values(this.props.bids).length !== 0) {
-      prevBid = this.props.bids.slice(-1)[0].bid || this.props.product.startingPrice;
+    if (prevBid && this.props.bids.length !== 0) {
+      prevBid = Math.max(...this.props.bids) || this.props.product.startingPrice;
     }
 
     const highestBid = prevBid.toFixed(2);
@@ -114,15 +114,13 @@ export default class ProductShow extends React.Component {
         let bid = this.props.product.startingPrice;
 
         if (this.props.bids.length !== 0) {
-          bid = this.props.bids[0].bid || this.props.product.startingPrice;
+          bid = Math.max(...this.props.bids) || this.props.product.startingPrice;
         }
         const highestBid = bid.toFixed(2);
 
         let error;
 
         if (this.state.errors === "You can't bid on your own product." || this.state.errors === 'Your bid must be greater than the previous bid.') error = this.state.errors;
-
-
 
         return (
           <div className="product-price auction-field">
@@ -136,7 +134,7 @@ export default class ProductShow extends React.Component {
             </div>
 
             <div className="auction-buttons">
-              <div className="bid-count"><p>[</p><a>{this.props.product.bidIds.length} bids</a><p>]</p></div>
+              <div className="bid-count"><p>[</p><a>{this.props.bids.length} bids</a><p>]</p></div>
               <button onClick={this.submitBid} className="price-button">Place bid</button>
               <div></div>
               <div className="bid-error">{error}</div>
@@ -203,15 +201,8 @@ export default class ProductShow extends React.Component {
 
   itemSoldBanner() {
     let soldMessage;
-
     this.props.product.sold ? soldMessage = 'This listing has ended.' : '';
-
-    if (this.props.product.sold) {
-      return (
-        <div className="item-sold-banner-active">{soldMessage}</div>
-      );
-    }
-
+    if (this.props.product.sold) return <div className="item-sold-banner-active">{soldMessage}</div>;
     return <div className="item-sold-banner">{soldMessage}</div>;
   }
 
@@ -227,7 +218,7 @@ export default class ProductShow extends React.Component {
       <div className="product-show-page">
         {this.itemSoldBanner()}
         <div className="upper-show-page">
-          <ProductShowImages history={this.props.history} productImages={this.props.productImages} />
+          <ProductShowImages history={this.props.history} productImages={this.props.product.productImages} />
           <div className="show-page-content-container">
             <h1 className="product-show-title">{this.props.product.title}</h1>
             <h2 className="product-show-subtitle">{this.props.product.subtitle}</h2>

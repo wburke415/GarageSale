@@ -23,7 +23,7 @@ const mapStateToProps = (state, ownProps) => {
       products = Object.values(state.entities.products).filter(product => product.searchString.includes(parsedSearch));
     }
 
-    let bids = state.entities.bids;
+    let bids = Object.values(state.entities.bids);
     let productImages =  state.entities.productImages;
     let currentUser = state.session.id;
     let shippingPolicies = state.entities.shippingPolicies;

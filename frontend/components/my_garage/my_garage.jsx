@@ -45,11 +45,16 @@ export default class MyGarage extends React.Component {
   }
 
   outbidItems() {
+    let {biddedProducts, bids, currentUserId} = this.props;
+
     let outBid = [];
 
-    for (let i = 0; i < this.props.biddedProducts.length; i++) {
-      let product = this.props.biddedProducts[i];
-      if (this.props.bids[product.bidIds[0]].buyerId !== parseInt(this.props.currentUserId) && TimeUtil.timeStrings(this.props.biddedProducts[i]) !== "Ended") outBid.push(product);
+    for (let i = 0; i < biddedProducts.length; i++) {
+      let product = biddedProducts[i];
+      if (new Date() > new Date(product.endsAt)) continue;
+      
+      let highestBid = bids.filter(bid => bid.productId == product.id).sort(bid => bid.bid)[0];
+      if (highestBid.buyerId != currentUserId) outBid.push(product);
     }
 
     if (outBid.length > 0) {

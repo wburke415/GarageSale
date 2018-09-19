@@ -17,21 +17,15 @@ const mapStateToProps = (state, ownProps) => {
 
         if (product) {
             seller = state.entities.users[product.sellerId] || _nullSeller;
-            bids = product.bidIds.map(id => state.entities.bids[id]);
+            bids = Object.values(state.entities.bids).filter(bid => bid.productId === product.id).map(bid => bid.bid);
             shippingPolicy = state.entities.shippingPolicies[product.shippingPolicyId];
             location = state.entities.locations[shippingPolicy.locationId];
         }
     }
 
-    const _nullProductImage = null;
-    let productImages;
-    if (product && state.entities.productImages) {
-        productImages = product.productImageIds.map(id => state.entities.productImages[id]) || _nullProductImage;
-    }
-
     let currentUser = state.session.id;
 
-    return { product, seller, productImages, bids, currentUser, shippingPolicy, location };
+    return { product, seller, bids, currentUser, shippingPolicy, location };
 };
 
 const mapDispatchToProps = dispatch => ({

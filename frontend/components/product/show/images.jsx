@@ -28,24 +28,26 @@ export default class ProductShowImages extends React.Component {
     const { selected } = this.state;
     const { productImages } = this.props;
 
-    let mainImage = <img className='main-image' />;
+    let mainImage;
     let childImages = [];
     let childClass = 'child-image';
 
     if (productImages.length !== 0) {
-      mainImage = <img ref={this.myImg} className="main-image" src={productImages[currentMainImage].imageUrl} />;
+      mainImage = <img ref={this.myImg} className="main-image" src={productImages[currentMainImage]} />;
 
       childImages = productImages.map((image, idx) => {
         (idx == currentMainImage && selected) ? childClass = "child-image selected" : childClass = "child-image";
 
         return (
           <li key={idx}>
-            <img id={idx} onClick={this.switchCurrentMainImage} className={childClass} src={image.imageUrl} />
+            <img id={idx} 
+              onClick={this.switchCurrentMainImage} 
+              className={childClass} 
+              src={image} />
           </li>
         );
       });
     }
-
 
     return (
       <div className="product-images-wrapper">

@@ -20,10 +20,8 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  description           :text             not null
-#  sold                  :boolean          default(FALSE), not null
-#  buyer_id              :integer
 #  search_string         :string           not null
-#  ends_at               :date             not null
+#  ends_at               :datetime         not null
 #
 
 class Product < ApplicationRecord
@@ -61,6 +59,10 @@ class Product < ApplicationRecord
   has_one :location,
     through: :shipping_policy,
     source: :location
+
+  has_one :product_purchase,
+    foreign_key: :product_id,
+    class_name: :ProductPurchase
 
   has_many :product_images,
     foreign_key: :product_id,

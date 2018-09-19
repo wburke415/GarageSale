@@ -20,10 +20,8 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  description           :text             not null
-#  sold                  :boolean          default(FALSE), not null
-#  buyer_id              :integer
 #  search_string         :string           not null
-#  ends_at               :date             not null
+#  ends_at               :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
