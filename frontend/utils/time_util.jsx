@@ -1,9 +1,8 @@
 import React from 'react';
 
 export const timeStrings = (product) => {
-    let createdAt = new Date(product.createdAt);
     let currentDate = new Date();
-    let endDate = new Date(createdAt.setDate(createdAt.getDate() + product.duration));
+    let endDate = new Date(product.endsAt);
 
     let timeLeft = new Date(endDate - currentDate);
 
@@ -47,9 +46,8 @@ export const timeLeft = (timeStrings) => {
 };
 
 export const endTime = (product) => {
-    let createdAt = new Date(product.createdAt);
     let currentDate = new Date();
-    let endDate = new Date(createdAt.setDate(createdAt.getDate() + product.duration));
+    let endDate = new Date(product.endsAt);
 
     let day; 
 

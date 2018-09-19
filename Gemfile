@@ -32,6 +32,8 @@ gem 'sass', '~> 3.5.7'
 gem 'jquery-rails'
 gem 'rails_12factor'
 gem "aws-sdk-s3"
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
 #-----------------------------------
 
 # Use ActiveStorage variant

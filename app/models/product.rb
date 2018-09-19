@@ -14,10 +14,8 @@
 #  condition             :string           not null
 #  condition_description :string
 #  auction               :boolean          default(TRUE), not null
-#  duration              :integer          default(7), not null
-#  starting_price        :float            not null
+#  starting_price        :float
 #  bin_price             :float
-#  reserve_price         :float
 #  quantity              :integer          default(1), not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
@@ -25,17 +23,20 @@
 #  sold                  :boolean          default(FALSE), not null
 #  buyer_id              :integer
 #  search_string         :string           not null
+#  ends_at               :date             not null
 #
 
 class Product < ApplicationRecord
-  validates :title, :condition, :duration, :quantity, presence: true
+  validates :title, :condition, :quantity, :search_string, :ends_at, presence: true
   validates :auction, inclusion: { in: [true, false] }
+  validates :duration, numericality: { only_integer: true, allow_nil: true }
   validate :ensure_valid_price
 
   after_initialize :ensure_downcased_search_string
-  attr_accessor :daily_deal
 
   has_many_attached :photos
+
+  attr_reader :duration
 
   belongs_to :seller,
     foreign_key: :seller_id,
@@ -80,5 +81,10 @@ class Product < ApplicationRecord
       errors.add('Listing must have a price') unless self.bin_price
     end 
   end 
+
+  def duration=(duration)
+    @duration = duration
+    self.ends_at ||= DateTime.now + self.duration.days
+  end
 
 end
