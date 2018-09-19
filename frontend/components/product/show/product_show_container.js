@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import ProductShow from './product_show';
-import { fetchProduct, createBid, updateProduct } from '../../../actions/product_actions';
+import { fetchProduct, createBid, updateProduct, createProductWatch, deleteProductWatch } from '../../../actions/product_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const _nullProduct = null;
@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => {
   let shippingPolicy;
   let location;
   let ended;
+  let productWatches;
 
   if (state.entities.products) {
     product = state.entities.products[ownProps.match.params.id] || _nullProduct;
@@ -22,6 +23,7 @@ const mapStateToProps = (state, ownProps) => {
       bids = Object.values(state.entities.bids).filter(bid => bid.productId === product.id).map(bid => bid.bid);
       shippingPolicy = state.entities.shippingPolicies[product.shippingPolicyId];
       location = state.entities.locations[shippingPolicy.locationId];
+      productWatches = Object.values(state.entities.productWatches).filter(watch => watch.productId === product.id)
 
       if (new Date() >= new Date(product.endsAt) || product.buyerId) ended = true;
     }
@@ -29,13 +31,15 @@ const mapStateToProps = (state, ownProps) => {
 
   let currentUser = state.session.id;
 
-  return { product, seller, bids, currentUser, shippingPolicy, location, ended };
+  return { product, seller, bids, currentUser, shippingPolicy, location, productWatches, ended };
 };
 
 const mapDispatchToProps = dispatch => ({
     fetchProduct: id => dispatch(fetchProduct(id)),
     buyProduct: product => dispatch(updateProduct(product)),
-    createBid: bid => dispatch(createBid(bid))
+    createBid: bid => dispatch(createBid(bid)),
+    createProductWatch: productWatch => dispatch(createProductWatch(productWatch)),
+    deleteProductWatch: id => dispatch(deleteProductWatch(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductShow);

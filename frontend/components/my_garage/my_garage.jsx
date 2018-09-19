@@ -1,10 +1,16 @@
 import React from 'react';
 
 import * as TimeUtil from '../../utils/time_util';
+import ProductListItem from '../product/index/product_list_item';
+import MyGarageNav from './my_garage_nav';
 
 export default class MyGarage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      currentPage: 'Summary'
+    };
   }
 
   componentDidMount() {
@@ -34,11 +40,32 @@ export default class MyGarage extends React.Component {
     if (endingSoon.length > 0) {
       if (endingSoon.length === 1) {
         return <span>
-            <a href="">{endingSoon.length} product</a> I bid on is ending soon.
+            <a href="">{endingSoon.length} item</a> I bid on is ending soon.
           </span>;
       } else {
         return <span>
-            <a href="">{endingSoon.length} products</a> I bid on are ending soon.
+            <a href="">{endingSoon.length} items</a> I bid on are ending soon.
+          </span>;
+      }
+    }
+  }
+
+  watchesEndingSoon() {
+    let endingSoon = [];
+
+    for (let i = 0; i < this.props.watchedProducts.length; i++) {
+      let endTime = TimeUtil.endTime(this.props.watchedProducts[i]);
+      if (endTime.props.children.includes('Today') && TimeUtil.timeStrings(this.props.watchedProducts[i]) !== 'Ended') endingSoon.push(this.props.biddedProducts[i]);
+    }
+
+    if (endingSoon.length > 0) {
+      if (endingSoon.length === 1) {
+        return <span>
+            <a href="">{endingSoon.length} item</a> I'm watching is ending soon.
+          </span>;
+      } else {
+        return <span>
+            <a href="">{endingSoon.length} items</a> I'm watching are ending soon.
           </span>;
       }
     }
@@ -60,11 +87,11 @@ export default class MyGarage extends React.Component {
     if (outBid.length > 0) {
       if (outBid.length === 1) {
         return <span>
-            I've been outbid on <a href="">{outBid.length} product</a>.
+            I've been outbid on <a href="">{outBid.length} item</a>.
           </span>;
       } else {
         return <span>
-            I've been outbid on <a href="">{outBid.length} products</a>.
+            I've been outbid on <a href="">{outBid.length} items</a>.
           </span>;
       }
     }
@@ -115,28 +142,35 @@ export default class MyGarage extends React.Component {
   }
 
   buyingReminders() {
-    let bidsEndingSoon = this.bidsEndingSoon()
-    let outbidItems = this.outbidItems();
-    let wonAuctions = this.wonAuctions();
-    let purchasedItems = this.purchasedItems();
+    if (this.state.currentPage === 'Summary') {
+      let bidsEndingSoon = this.bidsEndingSoon()
+      let outbidItems = this.outbidItems();
+      let wonAuctions = this.wonAuctions();
+      let purchasedItems = this.purchasedItems();
+      let watchesEndingSoon = this.watchesEndingSoon();
 
-    let noReminders;
+      let noReminders;
 
-    !bidsEndingSoon && !outbidItems && !wonAuctions && !purchasedItems ? noReminders = 'There are currently no buying reminders to display.' : noReminders = null;
+      !bidsEndingSoon && !outbidItems && !wonAuctions && !purchasedItems ? noReminders = 'There are currently no buying reminders to display.' : noReminders = null;
 
-    return <div className="mygarage-section">
-        <h1 className="section-header">Buying Reminders</h1>
-        <div className="section-content">
-          <div className="last-31">(Last 31 days)</div>
-          <ul>
-            <div className="section-item">{bidsEndingSoon}</div>
-            <div className="section-item">{outbidItems}</div>
-            <div className="section-item">{wonAuctions}</div>
-            <div className="section-item">{purchasedItems}</div>
-            <div className="section-item">{noReminders}</div>
-          </ul>
+      return (
+        <div className="mygarage-section">
+          <h1 className="section-header">Buying Reminders</h1>
+          <div className="section-content">
+            <div className="last-31">(Last 31 days)</div>
+            <ul>
+              <div className="section-item">{bidsEndingSoon}</div>
+              <div className="section-item">{outbidItems}</div>
+              <div className="section-item">{wonAuctions}</div>
+              <div className="section-item">{purchasedItems}</div>
+              <div className="section-item">{watchesEndingSoon}</div>
+              <div className="section-item">{noReminders}</div>
+            </ul>
+          </div>
         </div>
-      </div>;
+      );
+    }
+
   }
 
   listingsEndingSoon() {
@@ -151,11 +185,11 @@ export default class MyGarage extends React.Component {
     if (endingSoon.length > 0) {
       if (endingSoon.length === 1) {
         return <span>
-          <a href="">{endingSoon.length} product</a> I'm selling is ending soon.
+          <a href="">{endingSoon.length} item</a> I'm selling is ending soon.
           </span>;
       } else {
         return <span>
-          <a href="">{endingSoon.length} products</a> I'm selling are ending soon.
+          <a href="">{endingSoon.length} items</a> I'm selling are ending soon.
           </span>;
       }
     }
@@ -175,44 +209,154 @@ export default class MyGarage extends React.Component {
     if (soldListings.length > 0) {
       if (soldListings.length === 1) {
         return <span>
-            <a href="">{soldListings.length} product</a> have sold and must be shipped.
+            <a href="">{soldListings.length} item</a> has sold and must be shipped.
           </span>;
       } else {
         return <span>
-            <a href="">{soldListings.length} products</a> have sold and must be shipped.
+            <a href="">{soldListings.length} items</a> have sold and must be shipped.
+          </span>;
+      }
+    }
+  }
+
+  watchedListings() {
+    let {listedProducts, productWatches} = this.props;
+    let watchedListings = [];
+
+    for (let i = 0; i < listedProducts.length; i++) {
+      let product = listedProducts[i];
+      if (productWatches.filter(watch => watch.productId == product.id).length > 0) {
+        watchedListings.push(product);
+      }
+    }
+
+    if (watchedListings.length > 0) {
+      if (watchedListings.length === 1) {
+        return <span>
+            <a href="">{watchedListings.length} item</a> I'm selling is being watched.
+          </span>;
+      } else {
+        return <span>
+            <a href="">{watchedListings.length} items</a> I'm selling are being watched.
           </span>;
       }
     }
   }
 
   sellingReminders() {
-    let listingsEndingSoon = this.listingsEndingSoon();
-    let soldListings = this.soldListings();
+    if (this.state.currentPage === 'Summary') {
+      let listingsEndingSoon = this.listingsEndingSoon();
+      let soldListings = this.soldListings();
+      let watchedListings = this.watchedListings();
+  
+      let noReminders;
+      !listingsEndingSoon ? (noReminders = "There are currently no selling reminders to display.") : (noReminders = null);
+  
+      return (
+        <div className="mygarage-section">
+          <h1 className="section-header">Selling Reminders</h1>
+          <div className="section-content">
+            <div className="last-31">(Last 31 days)</div>
+            <ul>
+              <div className="section-item">{listingsEndingSoon}</div>
+              <div className="section-item">{soldListings}</div>
+              <div className="section-item">{watchedListings}</div>
+              <div className="section-item">{noReminders}</div>
+            </ul>
+          </div>
+        </div>
+      );
+    }
+  }
 
-    let noReminders;
-    !listingsEndingSoon ? (noReminders = "There are currently no selling reminders to display.") : (noReminders = null);
+  watchedItemIndex() {
+    const { watchedProducts } = this.props;
+    const { bids } = this.props;
+    const { shippingPolicies } = this.props;
+
+    let indexItems = [];
+
+    for (let i = 0; i < watchedProducts.length; i++) {
+      let product = watchedProducts[i];
+
+      let productBids = bids
+        .filter(bid => bid.productId === product.id)
+        .map(bid => bid.bid);
+      let shippingPolicy = shippingPolicies[product.shippingPolicyId];
+
+      indexItems.push(<ProductListItem key={i} shippingPolicy={shippingPolicy} bids={productBids} product={product} />);
+    }
+
+    let noWatches;
+
+    indexItems.length == 0 ? noWatches = "You aren't currently watching any items." : noWatches = null;
 
     return (
       <div className="mygarage-section">
-        <h1 className="section-header">Selling Reminders</h1>
-        <div className="section-content">
-          <div className="last-31">(Last 31 days)</div>
+        <h1 className="section-header">Watching ( {indexItems.length} )</h1>
+        <div className="product-index-container">
           <ul>
-            <div className="section-item">{listingsEndingSoon}</div>
-            <div className="section-item">{soldListings}</div>
-            <div className="section-item">{noReminders}</div>
+            {indexItems.map(product => product)}
           </ul>
+          <div className="section-item">{noWatches}</div>
         </div>
+      </div>
+    );
+  }
+
+  buy() {
+    return (
+      <div className="nav-section buy-section">
+        <h1>Buy</h1>
+        <ul>
+          <li>All Buying</li>
+          <li>Watch</li>
+          <li>Active</li>
+          <li>Won</li>
+          <li>Didn't Win</li>
+        </ul>
+      </div>
+    );
+  }
+
+  sell() {
+    return (
+      <div className="nav-section sell-section">
+        <h1>Sell</h1>
+        <ul>
+          <li>All Selling</li>
+          <li>Active</li>
+          <li>Sold</li>
+          <li>Unsold</li>
+        </ul>
+      </div>
+    );
+  }
+
+  nav() {
+    return (
+      <div className="mygarage-nav">
+        <h1>Summary</h1>
+        <ul>
+          {this.buy()}
+          {this.sell()}
+        </ul>
       </div>
     );
   }
 
   render() {
     return (
-      <div>
+      <div className="mygarage-container">
         {this.header()}
-        {this.buyingReminders()}
-        {this.sellingReminders()}
+        <main>
+          {this.nav()}
+          <section>
+            {this.buyingReminders()}
+            {this.sellingReminders()}
+            {this.watchedItemIndex()}
+          </section>
+        </main>
       </div>
     );
   }

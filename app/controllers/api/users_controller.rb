@@ -15,7 +15,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:listed_products, :bidded_products, :purchased_products).find_by(id: params[:id])
+    @user = User.includes(:listed_products, :bidded_products, :purchased_products, :watched_products).find_by(id: params[:id])
   end
 
   def update

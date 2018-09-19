@@ -10,29 +10,21 @@ json.products do
   end 
 end
 
-# if product.photos || product.product_images
-#   json.productImages do
-#     product.photos.each do |photo|
-#       json.set! photo.id do
-#         json.id  photo.id
-#         json.imageUrl url_for(photo)
-#       end 
-#     end 
-
-#     product.product_images.each do |image|
-#       json.set! image.id do 
-#         json.id image.id
-#         json.imageUrl image.image_url
-#       end 
-#     end 
-#   end 
-# end 
-
 if product.bids 
   json.bids do
     product.bids.each do |bid|
       json.set! bid.id do
         json.extract! bid, :id, :product_id, :buyer_id, :bid
+      end 
+    end 
+  end 
+end 
+
+if product.product_watches 
+  json.product_watches do
+    product.product_watches.each do |watch|
+      json.set! watch.id do
+        json.extract! watch, :id, :product_id, :watcher_id
       end 
     end 
   end 

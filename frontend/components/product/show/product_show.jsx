@@ -16,6 +16,8 @@ export default class ProductShow extends React.Component {
     };
 
     this.submitBid = this.submitBid.bind(this);
+    this.watchProduct = this.watchProduct.bind(this);
+    this.unwatchProduct = this.unwatchProduct.bind(this);
     this.switchTabs = this.switchTabs.bind(this);
     this.handlePurchase = this.handlePurchase.bind(this);
   }
@@ -66,13 +68,33 @@ export default class ProductShow extends React.Component {
               {/* <div></div>
                 <button className="price-button">Add to cart</button> */}
               <div></div>
-              <button className="watch-list-button">Add to watch list</button>
+              {this.watchButton()}
               <div></div>
             </div>
           </div>
         );
       }
     }
+  }
+
+  watchButton() {
+    let productWatch = this.props.productWatches.filter(watch => watch.watcherId == this.props.currentUser);
+    if (productWatch.length === 0) {
+      return <button className="watch-list-button" onClick={this.watchProduct}>Add to watch list</button>;
+    } else {
+      return <button id={productWatch[0].id} className="watch-list-button" onClick={this.unwatchProduct}>Remove from watch list</button>;
+    }
+  } 
+
+  watchProduct(event) {
+    event.preventDefault();
+    let productWatch = {productId: this.props.product.id, watcherId: this.props.currentUser}
+    this.props.createProductWatch(productWatch);
+  }
+
+  unwatchProduct(event) {
+    event.preventDefault();
+    this.props.deleteProductWatch(event.target.id);
   }
     
   changeBid() {

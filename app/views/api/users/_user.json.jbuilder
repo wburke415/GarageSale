@@ -29,6 +29,15 @@ json.users do
 
       json.purchasedProducts purchased_products
     end 
+
+    if user.watched_products
+      watched_products = []
+      user.watched_products.each do |product|
+        watched_products.push(product.id)
+      end 
+
+      json.watchedProducts watched_products
+    end 
   end   
 end 
 
@@ -41,6 +50,10 @@ user.bidded_products.each do |product|
 end
 
 user.purchased_products.each do |product|
+  json.partial! "api/products/product.json.jbuilder", product: product
+end
+
+user.watched_products.each do |product|
   json.partial! "api/products/product.json.jbuilder", product: product
 end
 

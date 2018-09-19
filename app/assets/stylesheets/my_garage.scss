@@ -1,63 +1,117 @@
-.mygarage-header {
-  font-family: "Helvetica neue", Helvetica, Arial, Sans-serif;
-  display: flex;
-  align-items: baseline;
+.mygarage-container {
+  .mygarage-header {
+    font-family: "Helvetica neue", Helvetica, Arial, Sans-serif;
+    display: flex;
+    align-items: baseline;
+    margin-left: 20px;
+    margin-top: 30px;
 
-  h1 {
-    font-size: 32px;
-    color: #666;
-    padding-right: 15px;
-  }
-
-  .fa-star {
-    color: gold;
-  }
-
-  .feedback {
-    padding-left: 5px;
-  }
-}
-
-
-.mygarage-section {
-  font-family: "Helvetica neue", Helvetica, Arial, Sans-serif;
-  width: 70%;
-  margin: 0 auto;
-  margin-top: 20px;
-
-  .section-header {
-    font-size: 22px;
-    font-weight: 700;
-    color: #666;
-    background-color: rgb(246, 233, 156);
-    padding: 12px;
-    border: 2px solid yellow;
-    border-radius: 3px;
-  }
-
-  .section-content {
-    border: 1px solid #ddd;
-    border-top: none;
-    padding: 5px 10px;
-    background-color: white;
-
-    .last-31 {
-      font-size: 12px;
-      margin-bottom: 5px;
+    h1 {
+      font-size: 32px;
+      color: #666;
+      padding-right: 15px;
     }
 
-    .section-item {
-      font-size: 14px;
-      margin-bottom: 5px;
+    .fa-star {
+      color: gold;
     }
 
-    a {
-      color: blue;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
+    .feedback {
+      padding-left: 5px;
     }
   }
+
+  main {
+    display: flex;
+    width: 100%;
+
+    .mygarage-nav {
+      font-family: "Helvetica neue", Helvetica, Arial, Sans-serif;
+      width: 20%;
+      border-top: 1px solid #ccc;
+      border-left: 1px solid #ccc;
+      margin: 20px;
+      
+      h1 {
+        font-size: 20px;
+        margin: 10px 20px 15px 30px;
+      }
+
+      .nav-section {
+        border-top: 1px solid #ccc;
+
+        li {
+          margin: 10px 20px 10px 30px;
+          border-bottom: 1px solid #ccc;
+          padding-bottom: 3px;
+        }
+      }
+
+      .buy-section {
+        li:last-of-type {
+          border-bottom: none;
+        }
+      }
+    }
+
+    section {
+      width: 70%;
+
+      .mygarage-section {
+        font-family: "Helvetica neue", Helvetica, Arial, Sans-serif;
+        width: 100%;
+        margin: 0 auto;
+        margin-top: 20px;
+    
+        .product-index-container {
+          width: 100%;
+          margin-top: 0;
+          box-sizing: border-box;
+    
+          .section-item {
+            font-size: 14px;
+          }
+        }
+    
+        .section-header {
+          font-size: 22px;
+          font-weight: 700;
+          color: #666;
+          background-color: rgb(246, 233, 156);
+          padding: 12px;
+          border: 2px solid yellow;
+          border-radius: 3px;
+        }
+    
+        .section-content {
+          border: 1px solid #ddd;
+          border-top: none;
+          padding: 5px 10px;
+          background-color: white;
+    
+          .last-31 {
+            font-size: 12px;
+            margin-bottom: 5px;
+          }
+    
+          .section-item {
+            font-size: 14px;
+            margin-bottom: 5px;
+          }
+    
+          a {
+            color: blue;
+            text-decoration: none;
+          }
+    
+          a:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+  }
+
+
 }

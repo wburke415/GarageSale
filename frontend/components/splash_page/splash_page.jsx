@@ -35,7 +35,7 @@ export default class SplashPage extends React.Component {
               .filter(product => (product.startingPrice < 20 && product.startingPrice > 5))
               .slice(0, 5)
               .map(product => {
-                let price = product.startingPrice || product.binPrice;
+                let price = product.binPrice || product.startingPrice;
                 return (
                   <li className="splash-page-item" key={product.id}>
                     <a className="splash-img-container" href={`/#/products/${product.id}`}>
@@ -56,7 +56,7 @@ export default class SplashPage extends React.Component {
               .filter(product => product.categoryId === 1)
               .slice(0, 5)
               .map(product => {
-                let price = product.startingPrice || product.binPrice;
+                let price = product.binPrice || product.startingPrice;
                 return <li className="splash-page-item" key={product.id}>
                     <a className="splash-img-container" href={`/#/products/${product.id}`}>
                       <img src={product.productImages[0]} />
@@ -75,7 +75,7 @@ export default class SplashPage extends React.Component {
               .filter(product => product.categoryId === 2)
               .slice(0, 5)
               .map(product => {
-                let price = product.startingPrice || product.binPrice;
+                let price = product.binPrice || product.startingPrice;
                 return <li className="splash-page-item" key={product.id}>
                     <a className="splash-img-container" href={`/#/products/${product.id}`}>
                       <img src={product.productImages[0]} />

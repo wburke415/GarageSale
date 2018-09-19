@@ -8,9 +8,9 @@ export const CLEAR_PRODUCTS = "CLEAR_PRODUCTS";
 export const receiveProduct = payload => ({
   type: RECEIVE_PRODUCT,
   products: payload.products,
-  productImages: payload.productImages,
   bids: payload.bids,
   sellers: payload.sellers,
+  productWatches: payload.productWatches,
   shippingPolicies: payload.shippingPolicies,
   locations: payload.locations
 });
@@ -18,9 +18,9 @@ export const receiveProduct = payload => ({
 export const receiveProducts = payload => ({
   type: RECEIVE_PRODUCTS,
   products: payload.products,
-  productImages: payload.productImages,
   bids: payload.bids,
   sellers: payload.sellers,
+  productWatches: payload.productWatches,
   shippingPolicies: payload.shippingPolicies,
   locations: payload.locations
 });
@@ -67,5 +67,15 @@ export const createBid = bid => dispatch => (
 
 export const deleteBid = id => dispatch => (
   APIUtil.deleteBid(id)
+    .then(product => dispatch(receiveProduct(product)))
+);
+
+export const createProductWatch = productWatch => dispatch => (
+  APIUtil.createProductWatch(productWatch)
+    .then(product => dispatch(receiveProduct(product)))
+);
+
+export const deleteProductWatch = id => dispatch => (
+  APIUtil.deleteProductWatch(id)
     .then(product => dispatch(receiveProduct(product)))
 );

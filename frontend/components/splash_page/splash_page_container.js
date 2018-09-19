@@ -5,7 +5,7 @@ import { fetchProducts, clearProducts } from '../../actions/product_actions';
 
 const mapStateToProps = (state, ownProps) => ({
     products: state.entities.products,
-    productImages: state.entities.productImages,
+    bids: Object.values(state.entities.bids),
     sellers: Object.values(state.entities.users).filter(user => user.business)
 });
 

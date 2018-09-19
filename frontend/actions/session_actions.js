@@ -10,7 +10,7 @@ export const receiveCurrentUser = payload => ({
   type: RECEIVE_CURRENT_USER,
   user: payload.users,
   products: payload.products,
-  productImages: payload.productImages,
+  productWatches: payload.productWatches,
   bids: payload.bids,
   sellers: payload.sellers,
   shippingPolicies: payload.shippingPolicies,
