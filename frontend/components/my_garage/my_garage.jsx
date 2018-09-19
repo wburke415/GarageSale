@@ -143,6 +143,7 @@ export default class MyGarage extends React.Component {
     let endingSoon = [];
 
     for (let i = 0; i < this.props.listedProducts.length; i++) {
+      if (this.props.listedProducts[i].buyerId) continue;
       let endTime = TimeUtil.endTime(this.props.listedProducts[i]);
       if (endTime.props.children.includes("Today")) endingSoon.push(this.props.listedProducts[i]);
     }
@@ -160,11 +161,35 @@ export default class MyGarage extends React.Component {
     }
   }
 
+  soldListings() {
+    let {listedProducts, bids} = this.props;
+    let soldListings = [];
+
+    for (let i = 0; i < listedProducts.length; i++) {
+      let product = listedProducts[i];
+      if (product.buyerId || (new Date() > new Date(product.endsAt) && bids.filter(bid => bid.productId === product.id).length > 0)) {
+        soldListings.push(product);
+      }
+    }
+
+    if (soldListings.length > 0) {
+      if (soldListings.length === 1) {
+        return <span>
+            <a href="">{soldListings.length} product</a> have sold and must be shipped.
+          </span>;
+      } else {
+        return <span>
+            <a href="">{soldListings.length} products</a> have sold and must be shipped.
+          </span>;
+      }
+    }
+  }
+
   sellingReminders() {
     let listingsEndingSoon = this.listingsEndingSoon();
+    let soldListings = this.soldListings();
 
     let noReminders;
-
     !listingsEndingSoon ? (noReminders = "There are currently no selling reminders to display.") : (noReminders = null);
 
     return (
@@ -174,6 +199,7 @@ export default class MyGarage extends React.Component {
           <div className="last-31">(Last 31 days)</div>
           <ul>
             <div className="section-item">{listingsEndingSoon}</div>
+            <div className="section-item">{soldListings}</div>
             <div className="section-item">{noReminders}</div>
           </ul>
         </div>

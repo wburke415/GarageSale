@@ -1,7 +1,7 @@
 
 json.products do
   json.set! product.id do 
-    json.extract! product, :id, :seller_id, :shipping_policy_id, :category_id, :title, :subtitle, :search_string, :sku, :condition, :condition_description, :auction, :ends_at, :starting_price, :bin_price, :quantity, :description
+    json.extract! product, :id, :seller_id, :buyer_id, :shipping_policy_id, :category_id, :title, :subtitle, :search_string, :sku, :condition, :condition_description, :auction, :ends_at, :starting_price, :bin_price, :quantity, :description
 
     product_images = []
     product.photos.each { |photo| product_images.push(url_for(photo)) }

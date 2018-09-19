@@ -30,10 +30,6 @@ class User < ApplicationRecord
     foreign_key: :buyer_id,
     class_name: :Bid
 
-  has_many :product_purchases,
-    foreign_key: :buyer_id,
-    class_name: :ProductPurchase
-
   has_many :shipping_policies,
     foreign_key: :user_id,
     class_name: :ShippingPolicy
@@ -42,13 +38,21 @@ class User < ApplicationRecord
     foreign_key: :user_id,
     class_name: :Location
 
+  has_many :product_watches,
+    foreign_key: :watcher_id,
+    class_name: :ProductWatch
+
+  has_many :watched_products,
+    through: :product_watches,
+    source: :product
+
   has_many :listed_products,
     foreign_key: :seller_id,
     class_name: :Product
 
   has_many :purchased_products,
-    through: :product_purchases,
-    source: :product
+    foreign_key: :buyer_id,
+    class_name: :Product
 
   has_many :bidded_products,
     through: :bids,

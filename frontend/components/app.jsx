@@ -29,7 +29,7 @@ const App = () => (
 
     <Switch>
       <Route exact path="/products/:id" component={ProductShowContainer} />
-      <Route exact path="/mygarage" component={MyGarageContainer} />
+      <ProtectedRoute exact path="/mygarage" component={MyGarageContainer} />
       <Route exact path="/products" component={ProductIndexContainer} />
       <Route exact path="/" component={SplashPageContainer} />
     </Switch>

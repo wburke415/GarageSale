@@ -14,6 +14,7 @@ class Api::BidsController < ApplicationController
   def destroy
     @bid = Bid.find_by(id: params[:id])
     if @bid && @bid.destroy
+      @product = Product.find_by(id: @bid.product_id)
       render 'api/products/show'
     else
       render json: @bid.errors.full_messages, status: 404

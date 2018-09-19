@@ -39,12 +39,11 @@ export default class ProductShow extends React.Component {
     if (!this.props.currentUser) {
       this.props.history.push('/login');
     }
-    else if (this.props.currentUser === this.props.product.sellerId) {
+    else if (this.props.currentUser == this.props.product.sellerId) {
       this.setState({ errors: "You can't purchase your own product." });
     }
     else {
       let { product } = this.props;
-      product.sold = true;
       product.buyerId = this.props.currentUser;
 
       this.props.buyProduct(product);
@@ -53,7 +52,7 @@ export default class ProductShow extends React.Component {
     
   binPrice() {
     let error;
-    if (!this.props.product.sold) {
+    if (!this.props.ended) {
       if (this.state.errors === "You can't purchase your own product.") error = <div className="bin-error">{this.state.errors}</div>;
 
       if (this.props.product.binPrice) {
@@ -94,7 +93,7 @@ export default class ProductShow extends React.Component {
     if (!this.props.currentUser) {
       this.props.history.push('/login');
     }
-    else if (this.props.currentUser === this.props.product.sellerId) {
+    else if (this.props.currentUser == this.props.product.sellerId) {
       this.setState({ errors: "You can't bid on your own product." });
     }
     else if (parseFloat(this.state.bid) < parseFloat(highestBid)) {
@@ -109,7 +108,7 @@ export default class ProductShow extends React.Component {
     
   auctionPrice() {
 
-    if (!this.props.product.sold) {
+    if (!this.props.ended) {
       if (this.props.product.auction) {
         let bid = this.props.product.startingPrice;
 
@@ -201,8 +200,8 @@ export default class ProductShow extends React.Component {
 
   itemSoldBanner() {
     let soldMessage;
-    this.props.product.sold ? soldMessage = 'This listing has ended.' : '';
-    if (this.props.product.sold) return <div className="item-sold-banner-active">{soldMessage}</div>;
+    this.props.ended ? soldMessage = 'This listing has ended.' : '';
+    if (this.props.ended) return <div className="item-sold-banner-active">{soldMessage}</div>;
     return <div className="item-sold-banner">{soldMessage}</div>;
   }
 

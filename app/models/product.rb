@@ -40,6 +40,10 @@ class Product < ApplicationRecord
     foreign_key: :seller_id,
     class_name: :User
 
+  belongs_to :buyer,
+    foreign_key: :buyer_id,
+    class_name: :User
+
   # belongs_to :category,
 #     foreign_key: :category_id,
 #     class_name: :Category
@@ -60,10 +64,6 @@ class Product < ApplicationRecord
     through: :shipping_policy,
     source: :location
 
-  has_one :product_purchase,
-    foreign_key: :product_id,
-    class_name: :ProductPurchase
-
   has_many :product_images,
     foreign_key: :product_id,
     class_name: :ProductImage
@@ -71,6 +71,14 @@ class Product < ApplicationRecord
   has_many :bids,
     foreign_key: :product_id,
     class_name: :Bid
+
+  has_many :product_watches,
+    foreign_key: :product_id,
+    class_name: :ProductWatch
+
+  has_many :watchers,
+    through: :product_watches,
+    source: :watcher
 
   def ensure_downcased_search_string
     self.search_string ||= self.title.downcase
