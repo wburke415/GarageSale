@@ -224,7 +224,7 @@
 
             .product-price-labels {
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-start;
                 margin-bottom: 2px;
                             
               label {
@@ -233,7 +233,7 @@
               }
 
               .bin-price {
-                padding-left: 18px;
+                margin-left: 70px;
               }
 
               label:last-of-type {
@@ -243,7 +243,11 @@
 
             .product-price-inputs {
               display: flex;
-              justify-content: space-between;
+              justify-content: flex-start;
+
+              span:last-of-type {
+                margin-left: 30px;
+              }
 
               input {
                 height: 18px;
@@ -390,5 +394,11 @@
         }
       }
     }
+  }
+
+  .form-errors {
+    margin-left: 30px;
+    color: red;
+    font-weight: 400;
   }
 }

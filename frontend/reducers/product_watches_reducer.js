@@ -8,13 +8,13 @@ const productWatchesReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
       if (action.productWatches) return action.productWatches;
-      return {};
+      return state;
     case RECEIVE_PRODUCT:
       if (action.productWatches) return action.productWatches;
-      return {};
+      return state;
     case RECEIVE_PRODUCTS:
       if (action.productWatches) return action.productWatches;
-      return {};
+      return state;
 
     default:
       return state;

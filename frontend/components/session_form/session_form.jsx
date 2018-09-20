@@ -32,7 +32,7 @@ export default class SessionForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.action(this.state).then(() => this.props.history.push("/"));
+    this.props.action(this.state).then(() => this.props.history.push('/'));
   }
 
   businessButtons() {
@@ -163,7 +163,7 @@ export default class SessionForm extends React.Component {
     event.preventDefault();
     let randNum = Math.floor(Math.random() * 30) + 1;
     this.props.action({emailOrUsername: `guest${randNum}`, password: 'password'})
-    .then(() => this.props.history.push("/"));
+    .then(() => this.props.history.push('/'));
   }
 
   errors() {

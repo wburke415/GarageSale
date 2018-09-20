@@ -94,7 +94,7 @@ class Product < ApplicationRecord
 
   def duration=(duration)
     @duration = duration
-    self.ends_at ||= DateTime.now + self.duration.days
+    self.ends_at ||= DateTime.now + self.duration.to_i.days
   end
 
 end

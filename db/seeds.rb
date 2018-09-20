@@ -20,7 +20,7 @@ end
 
 # VIDEO GAME SEEDS 
 
-[VIDEO_GAME_SEEDS, BOOK_SEEDS, PET_TOY_SEEDS].each_with_index do |seed_file, category_id|
+[BOOK_SEEDS, VIDEO_GAME_SEEDS, PET_TOY_SEEDS].each_with_index do |seed_file, idx|
   seed_file.each do |seed|
     seller = User.find_by(id: rand(1..30))
 
@@ -31,7 +31,7 @@ end
     auction = [true, false].sample
     starting_price = auction ? ((seed[:bin_price] * 0.5) * 100).ceil / 100.00 : nil
 
-    product = Product.create!(seller_id: seller.id, category_id: category_id, payment_policy_id: 1, shipping_policy_id: shipping_policy.id, return_policy_id: 1, 
+    product = Product.create!(seller_id: seller.id, category_id: idx + 1, payment_policy_id: 1, shipping_policy_id: shipping_policy.id, return_policy_id: 1, 
       title: seed[:title],
       condition: seed[:condition],
       condition_description: seed[:condition_description],
@@ -40,15 +40,7 @@ end
       auction: auction,
       duration: rand(1..7),
       quantity: 1,
-      description: "Lorem ipsum dolor sit amet, in has assentior intellegat maiestatis, animal vituperata conclusionemque et eam. Nibh novum vix ex, cum id dolores invenire sensibus, integre urbanitas honestatis pro ad. Mel utroque fuisset adversarium id. Alia viris epicuri at mea, sed dico labitur ea. Ne vix convenire ocurreret. Pro prima similique reprimique ei, ea oblique incorrupte quaerendum mea, stet dolor ad cum.
-
-  Ex magna maluisset sit, cu elitr corpora officiis qui. Ius etiam putent aperiam an, cibo timeam ut est, eros etiam singulis pri in. Per oblique labores scribentur at, appareat omittantur et nec, ea noster voluptatum eam. Pro ei vide lobortis reprimique, sea sale epicuri vituperata ne. Pericula sadipscing eam an.
-
-  In has vocibus feugait, id mea munere dolorum. Movet interesset vis in, mea ex lobortis ocurreret moderatius. Pro ad tamquam prompta, eum ad nonumy quidam repudiare, eam magna aliquip invenire ea. Eum probo liberavisse et. Mea molestie convenire definitiones ne, te congue recusabo vituperatoribus est.
-
-  Sed iudico ullamcorper in, vel noster voluptua disputationi an, no quem sumo nibh his. Ea alii timeam placerat mei, pro at timeam latine. Utroque insolens id per, ius in quod sententiae. Movet nostro epicuri sit cu, ei maiorum tacimates pertinax eos, splendide forensibus intellegebat nec eu. No vix perfecto adolescens. Alterum probatus mediocritatem vel no, probatus vulputate liberavisse qui ut, primis semper option id quo.
-
-  Utroque ullamcorper ea nam, laoreet accusata contentiones quo no. Eos summo officiis cu. Vel odio stet fastidii et, offendit praesent assueverit duo eu. Sit summo iusto fuisset ad, ne quot regione explicari nam."
+      description: "This is a fantasic product that I promise you will enjoy. We only sell the best of the best here at GarageSale, the one stop shop for everything you could ever need."
     )
     
     if product.auction

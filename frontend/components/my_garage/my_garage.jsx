@@ -94,7 +94,7 @@ export default class MyGarage extends React.Component {
       if (new Date() > new Date(product.endsAt)) continue;
 
       let highestBid = bids.filter(bid => bid.productId == product.id).sort(bid => bid.bid)[0];
-      if (highestBid.buyerId != currentUserId) outBid.push(product);
+      if (highestBid && highestBid.buyerId != currentUserId) outBid.push(product);
     }
 
     return outBid;
@@ -162,7 +162,7 @@ export default class MyGarage extends React.Component {
 
       let noReminders;
 
-      !bidsEndingSoon && !outbidItems && !purchasedItems ? noReminders = 'There are currently no buying reminders to display.' : noReminders = null;
+      !bidsEndingSoon && !outbidItems && !purchasedItems && !watchesEndingSoon ? noReminders = 'There are currently no buying reminders to display.' : noReminders = null;
 
       return (
         <div className="mygarage-section">
@@ -291,7 +291,7 @@ export default class MyGarage extends React.Component {
       let watchedListings = this.watchedListings();
   
       let noReminders;
-      !listingsEndingSoon ? (noReminders = "There are currently no selling reminders to display.") : (noReminders = null);
+      !listingsEndingSoon && !soldListings && !watchedListings ? (noReminders = "There are currently no selling reminders to display.") : (noReminders = null);
   
       return (
         <div className="mygarage-section">
@@ -316,9 +316,18 @@ export default class MyGarage extends React.Component {
     }
   }
 
+  allBuyingList() {
+    let products = this.props.biddedProducts;
+    for (let i = 0; i < this.props.purchasedProducts.length; i++) {
+      if (!products.includes(this.props.purchasedProducts[i])) products.push(this.props.purchasedProducts[i]);
+    }
+
+    return products;
+  }
+
   allBuying() {
     if (this.state.currentPage === 'All Buying') {
-      return this.itemIndex(this.props.biddedProducts.concat(this.props.purchasedProducts), 'All Buying');
+      return this.itemIndex(this.allBuyingList(), 'All Buying');
     }
   }
 
@@ -447,7 +456,7 @@ export default class MyGarage extends React.Component {
       <div className="nav-section buy-section">
         <h1>Buy</h1>
         <ul>
-          <li id="All Buying" onClick={this.setCurrentPage}>All Buying ( {this.props.biddedProducts.length + this.props.purchasedProducts.length} )</li>
+          <li id="All Buying" onClick={this.setCurrentPage}>All Buying ( {this.allBuyingList().length} )</li>
           <li id="Watch" onClick={this.setCurrentPage}>Watch ( {this.props.watchedProducts.length} )</li>
           <li id="Active Buying" onClick={this.setCurrentPage}>Active ( {this.activeBuyingItems().length} )</li>
           <li id="Won" onClick={this.setCurrentPage}>Won ( {this.purchasedProductsList().length} )</li>

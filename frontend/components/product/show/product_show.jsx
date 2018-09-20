@@ -30,7 +30,6 @@ export default class ProductShow extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    window.scrollTo(0, 0);
     if (this.props.match.params.id !== nextProps.match.params.id) {
       this.props.fetchProduct(nextProps.match.params.id);
     }

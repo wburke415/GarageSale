@@ -83,6 +83,7 @@ class Api::ProductsController < ApplicationController
       :condition_description, 
       :auction, 
       :ends_at, 
+      :duration,
       :starting_price, 
       :bin_price, 
       :quantity,

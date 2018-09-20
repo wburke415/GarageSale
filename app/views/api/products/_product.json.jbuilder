@@ -20,12 +20,10 @@ if product.bids
   end 
 end 
 
-if product.product_watches 
-  json.product_watches do
-    product.product_watches.each do |watch|
-      json.set! watch.id do
-        json.extract! watch, :id, :product_id, :watcher_id
-      end 
+json.product_watches do
+  product.product_watches.each do |watch|
+    json.set! watch.id do
+      json.extract! watch, :id, :product_id, :watcher_id
     end 
   end 
 end 

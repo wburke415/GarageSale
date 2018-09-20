@@ -30,8 +30,8 @@ export default class CategoryDropdown extends React.Component {
       return (
         <div>
           <ul className="category-dropdown">
-            <li value={2} onClick={this.searchCategory}>Books</li>
-            <li value={1} onClick={this.searchCategory}>Video Games</li>
+            <li value={1} onClick={this.searchCategory}>Books</li>
+            <li value={2} onClick={this.searchCategory}>Video Games</li>
             <li value={3} onClick={this.searchCategory}>Pet Toys</li>
           </ul>
           <div className="rest-of-page" onClick={this.toggleCategories}></div>

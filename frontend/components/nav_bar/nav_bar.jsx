@@ -11,6 +11,7 @@ export default class NavBar extends React.Component {
 
       
     this.handleLogout = this.handleLogout.bind(this);
+    this.sendToSplash = this.sendToSplash.bind(this);
     this.directToDailyDeals = this.directToDailyDeals.bind(this);
     this.toggleSignoutButton = this.toggleSignoutButton.bind(this);
   }
@@ -56,8 +57,8 @@ export default class NavBar extends React.Component {
 
     handleLogout(e) {
       e.preventDefault();
-      this.props.history.push("/");
-      this.props.logout();
+      this.props.logout()
+        .then(() => this.props.history.push("/login"));
     }
 
   signOutButton() {
@@ -80,6 +81,10 @@ export default class NavBar extends React.Component {
     }
   }
 
+  sendToSplash() {
+    if (this.props.location.pathname !== '/') this.props.history.push("/")
+  }
+
   render() {
     return (
       <div className="navbar-container">
@@ -98,9 +103,7 @@ export default class NavBar extends React.Component {
         </header>
 
         <div className="lower-navbar">
-          <Link to="/">
-            <img src={window.logo} />
-          </Link>
+          <a className="garagesale-logo" onClick={this.sendToSplash}><img src={window.logo} /></a>
 
           <SearchBar
             fetchProductTitles={this.props.fetchProductTitles}

@@ -9,7 +9,7 @@ const searchBarReducer = (state = {}, action) => {
   
   switch (action.type) {
     case RECEIVE_PRODUCT_TITLES:
-      return merge({}, state, action.titles);
+      return action.titles;
 
     default:
       return state;
