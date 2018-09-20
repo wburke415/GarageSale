@@ -33,12 +33,7 @@
 
         a {
           padding: 0 2px 0 2px;
-          color: blue;
           text-decoration: none;
-        }
-
-        a:hover {
-          text-decoration: underline;
         }
       }
     }
@@ -66,7 +61,7 @@
       }
 
       div:hover {
-        text-decoration: underline;
+        text-decoration: line-through;
       }
     }
         
@@ -80,7 +75,7 @@
     }
     
     .contact-seller:hover {
-      text-decoration: underline;
+      text-decoration: line-through;
     }
 
     .see-other-items {
@@ -93,7 +88,7 @@
     }
     
     .see-other-items:hover {
-      text-decoration: underline;
+      text-decoration: line-through;
     }
   }
 }

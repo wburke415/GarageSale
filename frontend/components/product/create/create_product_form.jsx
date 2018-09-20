@@ -183,7 +183,7 @@ export default class CreateProductForm extends React.Component {
                     <Link to="/">
                         <img src={window.logo} />
                     </Link>
-                    <Link to="/placeholder">Send us your feedback</Link>
+                    <a>Send us your feedback</a>
                 </header>
 
                 <h1>Create your listing</h1>

@@ -2,7 +2,6 @@ import React from 'react';
 
 import * as TimeUtil from '../../utils/time_util';
 import ProductListItem from '../product/index/product_list_item';
-import MyGarageNav from './my_garage_nav';
 
 export default class MyGarage extends React.Component {
   constructor(props) {
@@ -11,6 +10,8 @@ export default class MyGarage extends React.Component {
     this.state = {
       currentPage: 'Summary'
     };
+
+    this.setCurrentPage = this.setCurrentPage.bind(this);
   }
 
   componentDidMount() {
@@ -97,36 +98,8 @@ export default class MyGarage extends React.Component {
     }
   }
 
-  wonAuctions() {
-    let wonAuctions = [];
-
-    for (let i = 0; i < this.props.biddedProducts.length; i++) {
-      let timeString = TimeUtil.timeStrings(this.props.biddedProducts[i]);
-      if (timeString === 'Ended') wonAuctions.push(this.props.biddedProducts[i]);
-    } 
-
-    if (wonAuctions.length !== 0) {
-      if (wonAuctions.length === 1) {
-        return <span>
-            You have won <a href="">{wonAuctions.length} auction</a>.
-          </span>;
-      } else {
-        return <span>
-            You have won <a href="">{wonAuctions.length} auctions</a>.
-          </span>;
-      }
-    }
-  }
-
   purchasedItems() {
-    let wonAuctions = [];
-
-    for (let i = 0; i < this.props.biddedProducts.length; i++) {
-      let timeString = TimeUtil.timeStrings(this.props.biddedProducts[i]);
-      if (timeString === 'Ended') wonAuctions.push(this.props.biddedProducts[i]);
-    }
-
-    let purchasedProducts = wonAuctions.concat(this.props.purchasedProducts)
+    let purchasedProducts = this.purchasedProductsList();
 
     if (purchasedProducts.length !== 0) {
       if (purchasedProducts.length === 1) {
@@ -141,17 +114,31 @@ export default class MyGarage extends React.Component {
     }
   }
 
+  purchasedProductsList() {
+    let wonAuctions = [];
+
+    for (let i = 0; i < this.props.biddedProducts.length; i++) {
+      let product = this.props.biddedProducts[i];
+      let timeString = TimeUtil.timeStrings(product);
+      if (timeString !== 'Ended') continue;
+
+      let bids = this.props.bids.filter(bid => bid.productId == product.id).sort(bid => bid.bid);
+      if (bids[0].buyerId == this.props.currentUserId) wonAuctions.push(product);
+    }
+
+    return wonAuctions.concat(this.props.purchasedProducts);
+  }
+
   buyingReminders() {
     if (this.state.currentPage === 'Summary') {
       let bidsEndingSoon = this.bidsEndingSoon()
       let outbidItems = this.outbidItems();
-      let wonAuctions = this.wonAuctions();
       let purchasedItems = this.purchasedItems();
       let watchesEndingSoon = this.watchesEndingSoon();
 
       let noReminders;
 
-      !bidsEndingSoon && !outbidItems && !wonAuctions && !purchasedItems ? noReminders = 'There are currently no buying reminders to display.' : noReminders = null;
+      !bidsEndingSoon && !outbidItems && !purchasedItems ? noReminders = 'There are currently no buying reminders to display.' : noReminders = null;
 
       return (
         <div className="mygarage-section">
@@ -161,7 +148,6 @@ export default class MyGarage extends React.Component {
             <ul>
               <div className="section-item">{bidsEndingSoon}</div>
               <div className="section-item">{outbidItems}</div>
-              <div className="section-item">{wonAuctions}</div>
               <div className="section-item">{purchasedItems}</div>
               <div className="section-item">{watchesEndingSoon}</div>
               <div className="section-item">{noReminders}</div>
@@ -195,25 +181,32 @@ export default class MyGarage extends React.Component {
     }
   }
 
-  soldListings() {
-    let {listedProducts, bids} = this.props;
-    let soldListings = [];
+  soldListingItems() {
+    let { listedProducts, bids } = this.props;
+    let soldItems = [];
 
     for (let i = 0; i < listedProducts.length; i++) {
       let product = listedProducts[i];
       if (product.buyerId || (new Date() > new Date(product.endsAt) && bids.filter(bid => bid.productId === product.id).length > 0)) {
-        soldListings.push(product);
+        soldItems.push(product);
       }
     }
 
-    if (soldListings.length > 0) {
-      if (soldListings.length === 1) {
+    return soldItems;
+  }
+
+  soldListings() {
+    let {listedProducts, bids} = this.props;
+    let soldItems = this.soldListingItems();
+
+    if (soldItems.length > 0) {
+      if (soldItems.length === 1) {
         return <span>
-            <a href="">{soldListings.length} item</a> has sold and must be shipped.
+            <a href="">{soldItems.length} item</a> has sold and must be shipped.
           </span>;
       } else {
         return <span>
-            <a href="">{soldListings.length} items</a> have sold and must be shipped.
+            <a href="">{soldItems.length} items</a> have sold and must be shipped.
           </span>;
       }
     }
@@ -270,14 +263,101 @@ export default class MyGarage extends React.Component {
   }
 
   watchedItemIndex() {
-    const { watchedProducts } = this.props;
+    if (this.state.currentPage === 'Summary' || this.state.currentPage === 'Watch') {
+      return this.itemIndex(this.props.watchedProducts, 'Watching');
+    }
+  }
+
+  allBuying() {
+    if (this.state.currentPage === 'All Buying') {
+      return this.itemIndex(this.props.biddedProducts.concat(this.props.purchasedProducts), 'All Buying');
+    }
+  }
+
+  allSelling() {
+    if (this.state.currentPage === 'All Selling') {
+      return this.itemIndex(this.props.listedProducts, 'All Selling');
+    }
+  }
+
+  activeBuying() {
+    if (this.state.currentPage === 'Active Buying') {
+      return this.itemIndex(this.activeBuyingItems(), 'Active Buying');
+    }
+  }
+
+  activeSelling() {
+    if (this.state.currentPage === "Active Selling") {
+      return this.itemIndex(this.activeSellingItems(), "Active Selling");
+    }
+  }
+
+  won() {
+    if (this.state.currentPage === "Won") {
+      return this.itemIndex(this.purchasedProductsList(), "Won");
+    }
+  }
+
+  sold() {
+    if (this.state.currentPage === "Sold") {
+      return this.itemIndex(this.soldListingItems(), "Sold");
+    }
+  }
+
+  unsold() {
+    if (this.state.currentPage === "Unsold") {
+      return this.itemIndex(this.didntSellList(), "Unsold");
+    }
+  }
+
+  didntWin() {
+    if (this.state.currentPage === "Didn't Win") {
+      return this.itemIndex(this.lostAuctionList(), "Didn't Win");
+    }
+  }
+
+  lostAuctionList() {
+    let lostAuctions = [];
+
+    for (let i = 0; i < this.props.biddedProducts.length; i++) {
+      let product = this.props.biddedProducts[i];
+      let timeString = TimeUtil.timeStrings(product);
+      if (timeString !== "Ended") continue;
+
+      let bids = this.props.bids
+        .filter(bid => bid.productId == product.id)
+        .sort(bid => bid.bid);
+
+      if (bids[0].buyerId != this.props.currentUserId) lostAuctions.push(product);
+    }
+
+    return lostAuctions;
+  }
+
+  didntSellList() {
+    let didntSell = [];
+
+    for (let i = 0; i < this.props.listedProducts.length; i++) {
+      let product = this.props.listedProducts[i];
+      let timeString = TimeUtil.timeStrings(product);
+      if (timeString !== "Ended") continue;
+
+      let bids = this.props.bids.filter(bid => bid.productId == product.id)
+
+      if (bids.length === 0 && !product.buyerId) didntSell.push(product);
+    }
+
+    return didntSell;
+  }
+
+  itemIndex(products, title) {
     const { bids } = this.props;
     const { shippingPolicies } = this.props;
 
     let indexItems = [];
 
-    for (let i = 0; i < watchedProducts.length; i++) {
-      let product = watchedProducts[i];
+    for (let i = 0; i < products.length; i++) {
+      let product = products[i];
 
       let productBids = bids
         .filter(bid => bid.productId === product.id)
@@ -289,11 +369,11 @@ export default class MyGarage extends React.Component {
 
     let noWatches;
 
-    indexItems.length == 0 ? noWatches = "You aren't currently watching any items." : noWatches = null;
+    indexItems.length == 0 ? noWatches = "There are currently no items in this list." : noWatches = null;
 
     return (
       <div className="mygarage-section">
-        <h1 className="section-header">Watching ( {indexItems.length} )</h1>
+        <h1 className="section-header">{title} ( {indexItems.length} )</h1>
         <div className="product-index-container">
           <ul>
             {indexItems.map(product => product)}
@@ -304,16 +384,26 @@ export default class MyGarage extends React.Component {
     );
   }
 
+  activeBuyingItems() {
+    let {biddedProducts} = this.props;
+    return biddedProducts.filter(product => (new Date() < new Date(product.endsAt) && !product.buyerId));
+  }
+
+  activeSellingItems() {
+    let {listedProducts} = this.props;
+    return listedProducts.filter(product => (new Date() < new Date(product.endsAt) && !product.buyerId));
+  }
+
   buy() {
     return (
       <div className="nav-section buy-section">
         <h1>Buy</h1>
         <ul>
-          <li>All Buying</li>
-          <li>Watch</li>
-          <li>Active</li>
-          <li>Won</li>
-          <li>Didn't Win</li>
+          <li id="All Buying" onClick={this.setCurrentPage}>All Buying ( {this.props.biddedProducts.length + this.props.purchasedProducts.length} )</li>
+          <li id="Watch" onClick={this.setCurrentPage}>Watch ( {this.props.watchedProducts.length} )</li>
+          <li id="Active Buying" onClick={this.setCurrentPage}>Active ( {this.activeBuyingItems().length} )</li>
+          <li id="Won" onClick={this.setCurrentPage}>Won ( {this.purchasedProductsList().length} )</li>
+          <li id="Didn't Win" onClick={this.setCurrentPage}>Didn't Win ( {this.lostAuctionList().length} )</li>
         </ul>
       </div>
     );
@@ -324,10 +414,10 @@ export default class MyGarage extends React.Component {
       <div className="nav-section sell-section">
         <h1>Sell</h1>
         <ul>
-          <li>All Selling</li>
-          <li>Active</li>
-          <li>Sold</li>
-          <li>Unsold</li>
+          <li id="All Selling" onClick={this.setCurrentPage}>All Selling ( {this.props.listedProducts.length} )</li>
+          <li id="Active Selling" onClick={this.setCurrentPage}>Active ( {this.activeSellingItems().length} )</li>
+          <li id="Sold" onClick={this.setCurrentPage}>Sold ( {this.soldListingItems().length} )</li>
+          <li id="Unsold" onClick={this.setCurrentPage}>Unsold ( {this.didntSellList().length} )</li>
         </ul>
       </div>
     );
@@ -336,13 +426,18 @@ export default class MyGarage extends React.Component {
   nav() {
     return (
       <div className="mygarage-nav">
-        <h1>Summary</h1>
+        <h1 id="Summary" onClick={this.setCurrentPage}>Summary</h1>
         <ul>
           {this.buy()}
           {this.sell()}
         </ul>
       </div>
     );
+  }
+
+  setCurrentPage(event) {
+    event.preventDefault();
+    this.setState({currentPage: event.target.id});
   }
 
   render() {
@@ -355,6 +450,14 @@ export default class MyGarage extends React.Component {
             {this.buyingReminders()}
             {this.sellingReminders()}
             {this.watchedItemIndex()}
+            {this.allBuying()}
+            {this.activeBuying()}
+            {this.won()}
+            {this.didntWin()}
+            {this.allSelling()}
+            {this.activeSelling()}
+            {this.sold()}
+            {this.unsold()}
           </section>
         </main>
       </div>
