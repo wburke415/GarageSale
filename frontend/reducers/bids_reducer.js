@@ -13,7 +13,7 @@ const bidsReducer = (state = {}, action) => {
     case RECEIVE_PRODUCT:
       return merge({}, state, action.bids);
     case RECEIVE_PRODUCTS:
-      if (action.bids) return merge({}, state, action.bids);
+      if (action.bids) return action.bids;
       return state;
 
     default:

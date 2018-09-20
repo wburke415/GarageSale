@@ -16,7 +16,7 @@ const productsReducer = (state = {}, action) => {
       if (action.products) return merge({}, state, action.products);
       return state;
     case RECEIVE_PRODUCTS:
-      if (action.products) return merge({}, state, action.products);
+      if (action.products) return action.products;
       return state;
     case RECEIVE_CURRENT_USER:
       if (action.products) return merge({}, state, action.products);

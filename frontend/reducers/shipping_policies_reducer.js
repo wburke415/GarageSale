@@ -9,7 +9,7 @@ const shippingPoliciesReducer = (state = {}, action) => {
     case RECEIVE_PRODUCT:
       return merge({}, state, action.shippingPolicies);
     case RECEIVE_PRODUCTS:
-      if (action.shippingPolicies) return merge({}, state, action.shippingPolicies);
+      if (action.shippingPolicies) return action.shippingPolicies;
       return state;
     case RECEIVE_CURRENT_USER:
       if (action.shippingPolicies) return merge({}, state, action.shippingPolicies);
