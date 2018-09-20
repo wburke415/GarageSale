@@ -60,7 +60,7 @@ end
       next if !images[i]
 
       img_tag = images[i].split('/')[-2..-1].join("/")
-      next if uploaded_images.include?(img_tag)
+      next if uploaded_images.include?(img_tag) || img_tag.include?('$_35.JPG')
 
       ProductImage.create!(product_id: product.id, image_url: images[i])
       uploaded_images.push(img_tag)
