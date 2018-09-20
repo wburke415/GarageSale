@@ -40,9 +40,9 @@ class Product < ApplicationRecord
     foreign_key: :seller_id,
     class_name: :User
 
-  belongs_to :buyer,
-    foreign_key: :buyer_id,
-    class_name: :User
+  # belongs_to :buyer,
+  #   foreign_key: :buyer_id,
+  #   class_name: :User
 
   # belongs_to :category,
 #     foreign_key: :category_id,
