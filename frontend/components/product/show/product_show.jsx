@@ -170,7 +170,7 @@ export default class ProductShow extends React.Component {
   }
 
   policies() {
-    const { shippingPolicy, location } = this.props;
+    const { shippingPolicy, productLocation } = this.props;
     let currentDate = new Date();
     let deliveryDate = new Date(currentDate.setDate(currentDate.getDate() + 5)).toUTCString();
     let deliveryString = deliveryDate.slice(0, 3) + ". " + deliveryDate.slice(8, 11) + ". " + deliveryDate.slice(5, 7);
@@ -183,7 +183,7 @@ export default class ProductShow extends React.Component {
             <span>${shippingPolicy.shippingCost.toFixed(2)}</span>
             <div>{shippingPolicy.service} | <a>See details</a></div>
           </div>
-          <div className="item-location">Item location: {location.city}, {location.state}, {location.country}</div>
+          <div className="item-location">Item location: {productLocation.city}, {productLocation.state}, {productLocation.country}</div>
           <div className="ships-to">Ships to: United States</div>
         </span>
 

@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
   let seller;
   let bids;
   let shippingPolicy;
-  let location;
+  let productLocation;
   let ended;
   let productWatches;
 
@@ -22,7 +22,7 @@ const mapStateToProps = (state, ownProps) => {
       seller = state.entities.users[product.sellerId] || _nullSeller;
       bids = Object.values(state.entities.bids).filter(bid => bid.productId === product.id).map(bid => bid.bid);
       shippingPolicy = state.entities.shippingPolicies[product.shippingPolicyId];
-      location = state.entities.locations[shippingPolicy.locationId];
+      productLocation = state.entities.locations[shippingPolicy.locationId];
       productWatches = Object.values(state.entities.productWatches).filter(watch => watch.productId === product.id)
 
       if (new Date() >= new Date(product.endsAt) || product.buyerId) ended = true;
@@ -31,7 +31,7 @@ const mapStateToProps = (state, ownProps) => {
 
   let currentUser = state.session.id;
 
-  return { product, seller, bids, currentUser, shippingPolicy, location, productWatches, ended };
+  return { product, seller, bids, currentUser, shippingPolicy, productLocation, productWatches, ended };
 };
 
 const mapDispatchToProps = dispatch => ({
