@@ -97,7 +97,28 @@
           border-top: none;
           padding: 5px 10px;
           background-color: white;
-    
+
+           i {
+            color: mediumblue;
+            padding-right: 8px;
+            font-size: 16px;
+
+          }
+          
+          .fa-times {
+            padding-left: 2px;
+            padding-right: 11px;
+          }
+
+          .fa-dollar-sign {
+            padding-left: 3px;
+            padding-right: 11px;
+          }
+
+          .fa-eye {
+            padding-right: 5px;
+          }
+
           .last-31 {
             font-size: 12px;
             margin-bottom: 5px;
@@ -115,6 +136,7 @@
     
           a:hover {
             text-decoration: underline;
+            cursor: pointer;
           }
         }
       }

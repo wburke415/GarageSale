@@ -30,24 +30,36 @@ export default class MyGarage extends React.Component {
     )
   }
 
-  bidsEndingSoon() {
+  bidsEndingSoonList() {
     let endingSoon = [];
 
     for (let i = 0; i < this.props.biddedProducts.length; i++) {
       let endTime = TimeUtil.endTime(this.props.biddedProducts[i]);
-      if (endTime.props.children.includes('Today') && TimeUtil.timeStrings(this.props.biddedProducts[i]) !== 'Ended') endingSoon.push(this.props.biddedProducts[i]);
+      if (endTime.props.children.includes("Today") && TimeUtil.timeStrings(this.props.biddedProducts[i]) !== "Ended") endingSoon.push(this.props.biddedProducts[i]);
     }
+
+    return endingSoon;
+  }
+
+  bidsEndingSoon() {
+    let endingSoon = this.bidsEndingSoonList();
 
     if (endingSoon.length > 0) {
       if (endingSoon.length === 1) {
-        return <span>
-            <a href="">{endingSoon.length} item</a> I bid on is ending soon.
+        return <span><i className="far fa-clock"></i>
+          <a id="Bids Ending Soon">{endingSoon.length} item</a> I bid on is ending soon.
           </span>;
       } else {
-        return <span>
-            <a href="">{endingSoon.length} items</a> I bid on are ending soon.
+        return <span><i className="far fa-clock"></i>
+          <a id="Bids Ending Soon">{endingSoon.length} items</a> I bid on are ending soon.
           </span>;
       }
+    }
+  }
+
+  bidsEndingSoonIndex() {
+    if (this.state.currentPage === "Bids Ending Soon") {
+      return this.itemIndex(this.bidsEndingSoonList(), "Bids Ending Soon");
     }
   }
 
@@ -61,38 +73,50 @@ export default class MyGarage extends React.Component {
 
     if (endingSoon.length > 0) {
       if (endingSoon.length === 1) {
-        return <span>
-            <a href="">{endingSoon.length} item</a> I'm watching is ending soon.
+        return <span><i className="far fa-clock"></i>
+          <a id="Watched Items Ending Soon">{endingSoon.length} item</a> I'm watching is ending soon.
           </span>;
       } else {
-        return <span>
-            <a href="">{endingSoon.length} items</a> I'm watching are ending soon.
+        return <span><i className="far fa-clock"></i>
+          <a id="Watched Items Ending Soon">{endingSoon.length} items</a> I'm watching are ending soon.
           </span>;
       }
     }
   }
 
-  outbidItems() {
-    let {biddedProducts, bids, currentUserId} = this.props;
+  outbidItemsList() {
+    let { biddedProducts, bids, currentUserId } = this.props;
 
     let outBid = [];
 
     for (let i = 0; i < biddedProducts.length; i++) {
       let product = biddedProducts[i];
       if (new Date() > new Date(product.endsAt)) continue;
-      
+
       let highestBid = bids.filter(bid => bid.productId == product.id).sort(bid => bid.bid)[0];
       if (highestBid.buyerId != currentUserId) outBid.push(product);
     }
 
+    return outBid;
+  }
+
+  outbidItemsIndex() {
+    if (this.state.currentPage === "Outbid Items") {
+      return this.itemIndex(this.outbidItemsList(), "Outbid Items");
+    }
+  }
+
+  outbidItems() {
+    let outBid = this.outbidItemsList();
+
     if (outBid.length > 0) {
       if (outBid.length === 1) {
-        return <span>
-            I've been outbid on <a href="">{outBid.length} item</a>.
+        return <span><i className="fas fa-times"></i>
+            I've been outbid on <a id="Outbid Items">{outBid.length} item</a>.
           </span>;
       } else {
-        return <span>
-            I've been outbid on <a href="">{outBid.length} items</a>.
+        return <span><i className="fas fa-times"></i>
+          I've been outbid on <a id="Outbid Items">{outBid.length} items</a>.
           </span>;
       }
     }
@@ -103,12 +127,12 @@ export default class MyGarage extends React.Component {
 
     if (purchasedProducts.length !== 0) {
       if (purchasedProducts.length === 1) {
-        return <span>
-            <a href="">{purchasedProducts.length} item</a> I purchased is awaiting shipment.
+        return <span><i className="fas fa-box"></i>
+            <a id="Won">{purchasedProducts.length} item</a> I purchased is awaiting shipment.
           </span>;
       } else {
-        return <span>
-            <a href="">{purchasedProducts.length} items</a> I purchased are awaiting shipment.
+        return <span><i className="fas fa-box"></i>
+          <a id="Won">{purchasedProducts.length} items</a> I purchased are awaiting shipment.
           </span>;
       }
     }
@@ -146,11 +170,11 @@ export default class MyGarage extends React.Component {
           <div className="section-content">
             <div className="last-31">(Last 31 days)</div>
             <ul>
-              <div className="section-item">{bidsEndingSoon}</div>
-              <div className="section-item">{outbidItems}</div>
-              <div className="section-item">{purchasedItems}</div>
-              <div className="section-item">{watchesEndingSoon}</div>
-              <div className="section-item">{noReminders}</div>
+              <div className="section-item" onClick={this.setCurrentPage}>{bidsEndingSoon}</div>
+              <div className="section-item" onClick={this.setCurrentPage}>{outbidItems}</div>
+              <div className="section-item" onClick={this.setCurrentPage}>{purchasedItems}</div>
+              <div className="section-item" onClick={this.setCurrentPage}>{watchesEndingSoon}</div>
+              <div className="section-item" onClick={this.setCurrentPage}>{noReminders}</div>
             </ul>
           </div>
         </div>
@@ -159,7 +183,7 @@ export default class MyGarage extends React.Component {
 
   }
 
-  listingsEndingSoon() {
+  listingsEndingSoonList() {
     let endingSoon = [];
 
     for (let i = 0; i < this.props.listedProducts.length; i++) {
@@ -168,14 +192,26 @@ export default class MyGarage extends React.Component {
       if (endTime.props.children.includes("Today")) endingSoon.push(this.props.listedProducts[i]);
     }
 
+    return endingSoon;
+  }
+
+  listingsEndingSoonIndex() {
+    if (this.state.currentPage === "Listings Ending Soon") {
+      return this.itemIndex(this.listingsEndingSoonList(), "Listings Ending Soon");
+    }
+  }
+
+  listingsEndingSoon() {
+    let endingSoon = this.listingsEndingSoonList();
+
     if (endingSoon.length > 0) {
       if (endingSoon.length === 1) {
-        return <span>
-          <a href="">{endingSoon.length} item</a> I'm selling is ending soon.
+        return <span><i className="far fa-clock"></i>
+          <a id="Listings Ending Soon">{endingSoon.length} item</a> I'm selling is ending soon.
           </span>;
       } else {
-        return <span>
-          <a href="">{endingSoon.length} items</a> I'm selling are ending soon.
+        return <span><i className="far fa-clock"></i>
+          <a id="Listings Ending Soon">{endingSoon.length} items</a> I'm selling are ending soon.
           </span>;
       }
     }
@@ -201,19 +237,19 @@ export default class MyGarage extends React.Component {
 
     if (soldItems.length > 0) {
       if (soldItems.length === 1) {
-        return <span>
-            <a href="">{soldItems.length} item</a> has sold and must be shipped.
+        return <span><i className="fas fa-dollar-sign"></i>
+            <a id="Sold">{soldItems.length} item</a> has sold and must be shipped.
           </span>;
       } else {
-        return <span>
-            <a href="">{soldItems.length} items</a> have sold and must be shipped.
+        return <span><i className="fas fa-dollar-sign"></i>
+            <a id="Sold">{soldItems.length} items</a> have sold and must be shipped.
           </span>;
       }
     }
   }
 
-  watchedListings() {
-    let {listedProducts, productWatches} = this.props;
+  watchedListingsList() {
+    let { listedProducts, productWatches } = this.props;
     let watchedListings = [];
 
     for (let i = 0; i < listedProducts.length; i++) {
@@ -223,14 +259,26 @@ export default class MyGarage extends React.Component {
       }
     }
 
+    return watchedListings;
+  }
+
+  watchedListingsIndex() {
+    if (this.state.currentPage === "Watched Listings") {
+      return this.itemIndex(this.watchedListingsList(), "Watched Listings");
+    }
+  }
+
+  watchedListings() {
+    let watchedListings = this.watchedListingsList();
+
     if (watchedListings.length > 0) {
       if (watchedListings.length === 1) {
-        return <span>
-            <a href="">{watchedListings.length} item</a> I'm selling is being watched.
+        return <span><i className="far fa-eye"></i>
+            <a id="Watched Listings">{watchedListings.length} item</a> I'm selling is being watched.
           </span>;
       } else {
-        return <span>
-            <a href="">{watchedListings.length} items</a> I'm selling are being watched.
+        return <span><i className="far fa-eye"></i>
+            <a id="Watched Listings">{watchedListings.length} items</a> I'm selling are being watched.
           </span>;
       }
     }
@@ -251,10 +299,10 @@ export default class MyGarage extends React.Component {
           <div className="section-content">
             <div className="last-31">(Last 31 days)</div>
             <ul>
-              <div className="section-item">{listingsEndingSoon}</div>
-              <div className="section-item">{soldListings}</div>
-              <div className="section-item">{watchedListings}</div>
-              <div className="section-item">{noReminders}</div>
+              <div className="section-item" onClick={this.setCurrentPage}>{listingsEndingSoon}</div>
+              <div className="section-item" onClick={this.setCurrentPage}>{soldListings}</div>
+              <div className="section-item" onClick={this.setCurrentPage}>{watchedListings}</div>
+              <div className="section-item" onClick={this.setCurrentPage}>{noReminders}</div>
             </ul>
           </div>
         </div>
@@ -458,6 +506,10 @@ export default class MyGarage extends React.Component {
             {this.activeSelling()}
             {this.sold()}
             {this.unsold()}
+            {this.bidsEndingSoonIndex()}
+            {this.outbidItemsIndex()}
+            {this.watchedListingsIndex()}
+            {this.listingsEndingSoonIndex()}
           </section>
         </main>
       </div>
