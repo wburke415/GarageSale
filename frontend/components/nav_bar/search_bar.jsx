@@ -30,13 +30,15 @@ export default class SearchBar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let searchBar = document.getElementsByClassName('searchbar')[0];
-    searchBar.blur();
-    this.setState({ search: '' });
-    this.props.history.push({
-      pathname: '/products',
-      search: `?${this.state.search}`
-    })
+    if (this.state.search !== '') {
+      let searchBar = document.getElementsByClassName('searchbar')[0];
+      searchBar.blur();
+      this.setState({ search: '' });
+      this.props.history.push({
+        pathname: '/products',
+        search: `?${this.state.search}`
+      });
+    }
   }
 
   setSearch(e) {
