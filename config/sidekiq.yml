@@ -1,4 +1,0 @@
-:schedule:
-  product_watcher:
-    cron: '0 * * * * *'   # Runs once per minute
-    class: ProductWatcherWorker
