@@ -8,12 +8,12 @@ const bidsReducer = (state = {}, action) => {
   switch (action.type) {
 
     case RECEIVE_CURRENT_USER:
-      if (action.bids) return action.bids;
+      if (action.bids) return merge({}, state, action.bids);
       return state;
     case RECEIVE_PRODUCT:
       return merge({}, state, action.bids);
     case RECEIVE_PRODUCTS:
-      if (action.bids) return action.bids;
+      if (action.bids) return merge({}, state, action.bids);
       return state;
 
     default:

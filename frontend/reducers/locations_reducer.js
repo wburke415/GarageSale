@@ -9,10 +9,10 @@ const locationsReducer = (state = {}, action) => {
     case RECEIVE_PRODUCT:
       return merge({}, state, action.locations);
     case RECEIVE_PRODUCTS:
-      if (action.locations) return action.locations;
+      if (action.locations) merge({}, state, action.locations);
       return state;
     case RECEIVE_CURRENT_USER:
-      if (action.locations) return action.locations;
+      if (action.locations) merge({}, state, action.locations);
       return state;
 
     default:
