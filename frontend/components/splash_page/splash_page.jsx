@@ -53,7 +53,7 @@ export default class SplashPage extends React.Component {
           <h1>Video Games you may be interested in</h1>
           <ul>
             {Object.values(this.props.products)
-              .filter(product => product.categoryId === 1)
+              .filter(product => product.categoryId === 2)
               .slice(0, 5)
               .map(product => {
                 let price = product.binPrice || product.startingPrice;
@@ -72,7 +72,7 @@ export default class SplashPage extends React.Component {
           <h1>Books you may be interested in</h1>
           <ul>
             {Object.values(this.props.products)
-              .filter(product => product.categoryId === 2)
+              .filter(product => product.categoryId === 1)
               .slice(0, 5)
               .map(product => {
                 let price = product.binPrice || product.startingPrice;
