@@ -87,8 +87,13 @@ export default class ProductShow extends React.Component {
 
   watchProduct(event) {
     event.preventDefault();
-    let productWatch = {productId: this.props.product.id, watcherId: this.props.currentUser}
-    this.props.createProductWatch(productWatch);
+    if (this.props.currentUser) {
+      let productWatch = {productId: this.props.product.id, watcherId: this.props.currentUser}
+      this.props.createProductWatch(productWatch);
+    } else {
+      this.props.history.push("/login");
+    }
+
   }
 
   unwatchProduct(event) {
