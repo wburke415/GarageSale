@@ -13,7 +13,7 @@ const productWatchesReducer = (state = {}, action) => {
       if (action.productWatches) return merge({}, state, action.productWatches);
       return state;
     case RECEIVE_PRODUCTS:
-      if (action.productWatches) return action.productWatches;
+      if (action.productWatches) return merge({}, state, action.productWatches);
       return state;
 
     default:
