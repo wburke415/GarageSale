@@ -7,13 +7,14 @@ const productWatchesReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      if (action.productWatches) return merge({}, state, action.productWatches);
-      return state;
+      if (action.productWatches) return action.productWatches;
+
     case RECEIVE_PRODUCT:
       if (action.productWatches) return merge({}, state, action.productWatches);
       return state;
+
     case RECEIVE_PRODUCTS:
-      if (action.productWatches) return merge({}, state, action.productWatches);
+      if (action.productWatches) return action.productWatches;
       return state;
 
     default:

@@ -19,8 +19,8 @@ export default class ProductIndex extends React.Component {
   }
     
   componentWillReceiveProps(nextProps) {
-    window.scrollTo(0, 0);
     if (this.props.location.search !== nextProps.location.search) {
+      window.scrollTo(0, 0);
       this.setState({currentPage: 1});
       this.props.fetchProducts(nextProps.location.search);
     }

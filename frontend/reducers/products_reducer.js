@@ -13,14 +13,11 @@ const productsReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_PRODUCT:
-      if (action.products) return merge({}, state, action.products);
-      return state;
+      return merge({}, state, action.products);
     case RECEIVE_PRODUCTS:
-      if (action.products) return merge({}, state, action.products);
-      return state;
+      return action.products;
     case RECEIVE_CURRENT_USER:
-      if (action.products) return merge({}, state, action.products);
-      return state;
+      return action.products;
     case CLEAR_PRODUCTS:
       return {};
 
