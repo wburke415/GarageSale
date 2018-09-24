@@ -86,19 +86,21 @@ export default class CreateProductForm extends React.Component {
   }
 
   imagePreview(e) {
-    const reader = new FileReader();
-    const file = e.currentTarget.files[0];
-    let that = this;
-
-    reader.onloadend = () => {
-      let newState = Object.assign(that.state.images);
-      newState.imageUrl = newState.imageUrl.concat(reader.result);
-      newState.imageFile = newState.imageFile.concat(file);
-
-      that.setState({ images: newState });
-    };
-
-    if (file) reader.readAsDataURL(file);
+    if (this.state.images.imageUrl.length <= 6) {
+      const reader = new FileReader();
+      const file = e.currentTarget.files[0];
+      let that = this;
+  
+      if (file) reader.readAsDataURL(file);
+  
+      reader.onloadend = () => {
+        let newState = Object.assign(that.state.images);
+        newState.imageUrl = newState.imageUrl.concat(reader.result);
+        newState.imageFile = newState.imageFile.concat(file);
+  
+        that.setState({ images: newState });
+      };
+    }
   }
 
   handleChange(property) {
