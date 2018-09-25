@@ -42,17 +42,23 @@ end
       quantity: 1,
       description: "This is a fantasic product that I promise you will enjoy. We only sell the best of the best here at GarageSale, the one stop shop for everything you could ever need."
     )
-    
-    if product.auction
-      rand(0..7).times do |i|
-        break if product.starting_price + i >= product.bin_price
-        while true
-          buyer_id = rand(1..30)
-          break if buyer_id != seller.id
-        end
-        Bid.create!(product_id: product.id, buyer_id: buyer_id, bid: starting_price + i)
-        ProductWatch.create!(product_id: product.id, watcher_id: buyer_id)
-      end 
+
+    bid_and_watch = [1,2].sample
+
+    if bid_and_watch == 1
+      if product.auction
+        rand(0..7).times do |i|
+          break if product.starting_price + i >= product.bin_price
+          while true
+            buyer_id = rand(1..30)
+            break if buyer_id != seller.id
+          end
+          Bid.create!(product_id: product.id, buyer_id: buyer_id, bid: starting_price + i)
+        end 
+      end
+      
+      watcher_id = rand(1..30)
+      ProductWatch.create!(product_id: product.id, watcher_id: watcher_id)
     end
 
     images = seed[:images].split(";")
