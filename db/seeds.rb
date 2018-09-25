@@ -51,6 +51,7 @@ end
           break if buyer_id != seller.id
         end
         Bid.create!(product_id: product.id, buyer_id: buyer_id, bid: starting_price + i)
+        ProductWatch.create!(product_id: product.id, watcher_id: buyer_id)
       end 
     end
 
