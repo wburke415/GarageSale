@@ -8,6 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+#
 
 class ProductImage < ApplicationRecord
   validates :image_url, presence: true
