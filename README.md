@@ -17,7 +17,7 @@ The project was designed and built during a 10 day timeframe, and I plan to make
 
 # Image preview & upload
 
-![preview_snippet](/app/assets/images/preview_snippet.png)
+![preview_snippet](/app/assets/images/preview_snippet.jpg)
 
 ```javascript
 imagePreview(e) {
