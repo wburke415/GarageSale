@@ -1,6 +1,6 @@
 # GarageSale
 
-[Live Site](https://thegaragesale.herokuapp.com/#/)
+[Live Site](http://thegaragesale.co/#/)
 
 GarageSale is an eCommerce website, inspired by eBay, where users can list, bid on, purchase products, as well as watch any products that the are interested in. All of this can be easily tracked through the MyGarage page which allows users to easily check on any products that they have listed, bid on, purchased, or watched. It was build using Rails & PostgreSQL for the backend, React.js & Redux for the frontend, and has been been integrated with AWS S3 for uploading and storing product images.
 
