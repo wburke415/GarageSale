@@ -38,7 +38,7 @@ end
       bin_price: seed[:bin_price],
       starting_price: starting_price,
       auction: auction,
-      duration: rand(1..7),
+      duration: 100000,
       quantity: 1,
       description: "This is a fantasic product that I promise you will enjoy. We only sell the best of the best here at GarageSale, the one stop shop for everything you could ever need."
     )
@@ -94,7 +94,7 @@ end
 #     bin_price: book[:bin_price],
 #     starting_price: starting_price,
 #     auction: auction,
-#     duration: rand(1..7),
+#     duration: 100000,
 #     quantity: 1,
 #     description: "Lorem ipsum dolor sit amet, in has assentior intellegat maiestatis, animal vituperata conclusionemque et eam. Nibh novum vix ex, cum id dolores invenire sensibus, integre urbanitas honestatis pro ad. Mel utroque fuisset adversarium id. Alia viris epicuri at mea, sed dico labitur ea. Ne vix convenire ocurreret. Pro prima similique reprimique ei, ea oblique incorrupte quaerendum mea, stet dolor ad cum.
 
@@ -146,7 +146,7 @@ end
 #     bin_price: toy[:bin_price],
 #     starting_price: starting_price,
 #     auction: auction,
-#     duration: rand(1..7),
+#     duration: 100000,
 #     quantity: 1,
 #     description: "Lorem ipsum dolor sit amet, in has assentior intellegat maiestatis, animal vituperata conclusionemque et eam. Nibh novum vix ex, cum id dolores invenire sensibus, integre urbanitas honestatis pro ad. Mel utroque fuisset adversarium id. Alia viris epicuri at mea, sed dico labitur ea. Ne vix convenire ocurreret. Pro prima similique reprimique ei, ea oblique incorrupte quaerendum mea, stet dolor ad cum.
 
