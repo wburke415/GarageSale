@@ -23,7 +23,10 @@ default: &default
 
 development:
   <<: *default
-  database: GarageSale_development
+  host: <%= ENV['POSTGRES_HOST'] %>
+  database: <%= ENV['POSTGRES_DATABASE'] %>
+  username: <%= ENV['POSTGRES_USERNAME'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +60,10 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: GarageSale_test
+  host: <%= ENV['TEST_POSTGRES_HOST'] %>
+  database: <%= ENV['TEST_POSTGRES_DATABASE'] %>
+  username: <%= ENV['TEST_POSTGRES_USERNAME'] %>
+  password: <%= ENV['TEST_POSTGRES_PASSWORD'] %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +86,7 @@ test:
 #
 production:
   <<: *default
-  database: GarageSale_production
-  username: GarageSale
-  password: <%= ENV['GARAGESALE_DATABASE_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+  database: <%= ENV['POSTGRES_DATABASE'] %>
+  username: <%= ENV['POSTGRES_USERNAME'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>

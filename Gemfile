@@ -33,6 +33,7 @@ gem 'jquery-rails'
 gem 'rails_12factor'
 gem "aws-sdk-s3"
 gem 'dynopoker'
+gem 'dotenv-rails'
 #-----------------------------------
 
 # Use ActiveStorage variant
