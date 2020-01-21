@@ -1,0 +1,48 @@
+version: '3'
+networks:
+  redis-network:
+
+services:
+  # Assumption that there is already a .env existing
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    command: puma --bind tcp://0.0.0.0:4050 --environment production
+    volumes:
+      - ./:/app
+    environment:
+      - SIDEKIQ_REDIS=redis://:secret123@redis:6379/2
+      - RAILS_ENV=production
+      - RAILS_LOG_TO_STDOUT=true
+      - SECRET_KEY_BASE=foo
+    ports:
+      - "4050:4050"
+    networks:
+      - redis-network
+
+  redis:
+    image: 'redis:4.0.11-alpine'
+    command: redis-server --requirepass secret123
+    ports:
+      - "6379:6379"
+    networks:
+      - redis-network
+    volumes:
+      - '.redis:/data'
+
+  sidekiq:
+    depends_on:
+      - 'redis'
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    command: sidekiq -C config/sidekiq.yml
+    volumes:
+      - '.:/app'
+    environment:
+      - SIDEKIQ_REDIS=redis://:secret123@redis:6379/2
+      - RAILS_ENV=production
+      - RAILS_LOG_TO_STDOUT=true
+    networks:
+      - redis-network

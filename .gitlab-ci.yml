@@ -1,0 +1,75 @@
+stages:
+  - build
+  - test
+  - release
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+
+# build_dev_docker:
+#   stage: build
+#   image: docker:git
+#   services:
+#     - docker:dind
+#   variables:
+#     DOCKER_HOST: tcp://docker:2375
+#   script:
+#     - ./util/gitlab_ci/build.sh dev
+#   only:
+#   - tags
+#   - merge_requests
+
+# Run both rspec and rubocop to avoid pulling image twice
+# test_and_rubocop:
+#   stage: test
+#   image: docker:git
+#   services:
+#     - docker:dind
+#   variables:
+#     RAILS_ENV: test
+
+#     POSTGRES_HOST: postgres
+#     POSTGRES_USER: dev_plat
+#     POSTGRES_PASSWORD: dev_plat
+
+#     POLICY_IMPORT_DATABASE: sl_policy_import_dev
+#     CONFIG_DATA_DATABASE: config_data_test
+
+#     TEST_POSTGRES_HOST: postgres
+#     TEST_POSTGRES_USERNAME: dev_plat
+#     TEST_POSTGRES_PASSWORD: dev_plat
+
+#     TEST_POLICY_IMPORT_DATABASE: sl_policy_import_dev
+#     TEST_CONFIG_DATA_DATABASE: config_data_test
+
+#     S3_ACCESS_KEY_ID: AKIAJN26AVAXXMHWHVIA
+#     S3_SECRET_ACCESS_KEY: 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
+#     S3_BUCKET: policy-import-storage-test
+#     S3_REGION: us-east-1
+
+#     SL_GEO_SERVICES_API: http://sl-geo-services-api-dev-plat.plat.streetline.com
+#     RABBITMQ: amqp://streetline:248hares@10.128.64.18:5672
+
+#     DOCKER_HOST: tcp://docker:2375
+#   script:
+#     # Setup postgres and mysql and run rspec
+#     - docker run -d -e POSTGRES_USER -e POSTGRES_PASSWORD -e POLICY_IMPORT_DATABASE -e CONFIG_DATA_DATABASE --name postgres postgres:9.6
+#     - docker pull $CI_REGISTRY_IMAGE/dev:${CI_COMMIT_TAG:-latest}
+#     - docker run -e RAILS_ENV -e RABBITMQ -e SL_GEO_SERVICES_API -e S3_BUCKET -e S3_ACCESS_KEY_ID -e S3_SECRET_ACCESS_KEY -e S3_REGION -e TEST_POSTGRES_HOST -e TEST_POSTGRES_USERNAME -e TEST_POSTGRES_PASSWORD -e TEST_POLICY_IMPORT_DATABASE -e TEST_CONFIG_DATA_DATABASE --link postgres $CI_REGISTRY_IMAGE/dev:${CI_COMMIT_TAG:-latest} ./util/gitlab_ci/run_rspec.sh
+#     # Run rubocop
+#     - docker run $CI_REGISTRY_IMAGE/dev:${CI_COMMIT_TAG:-latest} rubocop
+#   only:
+#   - tags
+#   - merge_requests
+
+build_and_push_prod_docker:
+  stage: release
+  image: docker:git
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+  script:
+    - ./util/gitlab_ci/build.sh
+  only:
+  - tags

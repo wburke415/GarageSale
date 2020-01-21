@@ -1,0 +1,30 @@
+FROM ruby:2.6.3-stretch
+
+# For adding Yarn
+ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
+RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
+RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash && \
+  apt-get update && apt-get install -y \
+  build-essential graphviz nodejs yarn imagemagick
+
+RUN mkdir -p /app
+WORKDIR /app
+
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler \
+  && bundle config --global frozen 1 \
+  && bundle install --jobs 20 --retry 5 \
+  # Remove unneeded files (cached *.gem, *.o, *.c)
+  && rm -rf /usr/local/bundle/cache/*.gem \
+  && find /usr/local/bundle/gems/ -name "*.c" -delete \
+  && find /usr/local/bundle/gems/ -name "*.o" -delete
+
+COPY package.json yarn.lock ./
+RUN yarn install
+
+COPY . ./
+
+EXPOSE 3000
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
